@@ -1,0 +1,37 @@
+extends ../layout
+include _issues.jade
+
+block paths
+	- var content_title= 'ВЫПУСКИ'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/add.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/' + __app_name + '/lists.js' + version)
+
+block sub_menu
+	a.sub_item.back_link(href='/admin') Назад
+	span.sub_item.toggle_rm Удалить
+	.sub_right_block
+
+		.sub_drop.status(style='z-index: 1;')
+			.drop_title Статус
+			.drop_inner
+				.drop_item(class='all').select Все
+				.drop_item(class='default') Обычный
+				.drop_item(class='hidden') Скрытый
+
+		input.sub_search(type='text', placeholder='Поиск...')
+
+block content
+	.title= content_title
+	br
+	a.add(href='/admin/issues/add') добавить работу
+	br
+	br
+	.lists_block
+		.list_items
+			+items(issues)
+		.list_counter
+			+counters(count)

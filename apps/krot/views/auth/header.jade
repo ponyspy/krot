@@ -1,0 +1,16 @@
+- var version = '?ver=1.0'
+
+meta(charset="utf-8")
+
+if content_title
+	title= 'STARTGAZER | ' + content_title
+if content_description
+	meta(name='description', content=content_description)
+
+link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/fonts.css' + version)
+link(rel='stylesheet', type='text/css', href='/libs/css/txtbirds.css' + version)
+block content_style
+
+script(type='text/javascript', src='/libs/js/jquery-2.2.4.min.js' + version)
+script(type='text/javascript', src='/build/js/' + __app_name + '/auth.js' + version)
+block content_scripts

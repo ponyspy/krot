@@ -1,0 +1,24 @@
+extends layout
+
+block paths
+	- var content_title= 'РЕГИСТРАЦИЯ'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/add.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/login.css' + version)
+
+block content
+	//- img.logo(src='/stuff/' + __app_name + '/icons/logo/ru_w.svg')
+	.form_login
+		.title= content_title
+		form(action='/auth/registr', method='post')
+			.form_title Логин:
+			input(type='text', name='login', placeholder='pony')
+			.form_title Email:
+			input(type='text', name='email', placeholder='up@kuku.com')
+			.form_title Пароль:
+			input(type='password', name='password', placeholder='формат: AZaz09, >7 симв.')
+			br
+			br
+			input(type='submit', value='Отправить')
+			input(type='button', value='Вход', onclick="location.href='/auth/login';")

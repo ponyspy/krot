@@ -1,0 +1,42 @@
+extends ../layout
+include ../_forms.jade
+
+block paths
+	- var content_title= 'ДОБАВИТЬ РАБОТУ'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/libs/css/pickmeup.min.css' + version)
+	link(rel='stylesheet', type='text/css', href='/libs/css/font-awesome.css' + version)
+	link(rel='stylesheet', type='text/css', href='/libs/css/wysiwyg-editor.min.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/add.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/libs/js/jquery.pickmeup.min.js' + version)
+	script(type='text/javascript', src='/libs/js/wysiwyg.min.js' + version)
+	script(type='text/javascript', src='/libs/js/wysiwyg-editor.min.js' + version)
+	script(type='text/javascript', src='/libs/js/jquery-ui.min.js' + version)
+	script(type='text/javascript', src='/libs/js/jquery.filedrop.js' + version)
+	script(type='text/javascript', src='/build/js/' + __app_name + '/upload.js' + version)
+	script(type='text/javascript', src='/build/js/' + __app_name + '/editor.js' + version)
+	script(type='text/javascript', src='/build/js/' + __app_name + '/add.js' + version)
+	script(type='text/javascript', src='/build/js/' + __app_name + '/a_events.js' + version)
+
+block sub_menu
+	a.sub_item.back_link(href='/admin/issues') Назад
+
+block content
+	.form_block
+		.title= content_title
+		form(action="", method="post")
+			.form_title Название:
+			+form_text_single('title')
+			.form_title Изображения:
+			+form_images_upload()
+			.form_title Видимость:
+			input(type='checkbox', name='status', value='hidden')
+			!= ' скрыть'
+			.form_title Дата публикации:
+			+form_date('date')
+			br
+			br
+			input(type='submit', value='отправить')

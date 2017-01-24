@@ -1,0 +1,31 @@
+extends ../layout
+
+block paths
+	- var content_title= 'ДОБАВИТЬ ПОЛЬЗОВАТЕЛЯ'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/add.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/' + __app_name + '/add.js' + version)
+
+block sub_menu
+	a.sub_item.back_link(href='/admin/users') Назад
+
+block content
+	.form_block
+		.title= content_title
+		form(action="", method="post")
+			.form_title Логин:
+			input(type='text', name='login')
+			.form_title E-mail:
+			input(type='text', name='email')
+			.form_title Пароль:
+			input(type='password', name='password')
+			.form_title Роль:
+			select(name='status')
+				option(value='User') Пользователь
+				option(value='Admin') Администратор
+			br
+			br
+			input(type='submit', value='отправить')

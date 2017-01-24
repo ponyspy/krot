@@ -1,0 +1,14 @@
+- var version = '?ver=1.0'
+
+meta(charset="utf-8")
+
+if content_title
+	title= content_title
+if content_description
+	meta(name='description', content=content_description)
+
+link(rel='stylesheet', type='text/css', href='/libs/css/fonts.css' + version)
+block content_style
+
+script(type='text/javascript', src='/libs/js/jquery-2.2.4.min.js' + version)
+block content_scripts

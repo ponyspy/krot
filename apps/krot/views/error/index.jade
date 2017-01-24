@@ -1,0 +1,11 @@
+extends layout
+
+block paths
+	- var content_title= 'Error' + ' / ' + status
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/admin/error.css' + version)
+
+block content
+	.error_title= 'Error' + ' ' + status
+	.error_message: pre(style='font-size: 11pt; line-height: 14pt;')= stack ? stack : message

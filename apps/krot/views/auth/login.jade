@@ -1,0 +1,22 @@
+extends layout
+
+block paths
+	- var content_title= 'АВТОРИЗАЦИЯ'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/add.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/login.css' + version)
+
+block content
+	//- img.logo(src='/stuff/' + __app_name + '/icons/logo/ru_w.svg')
+	.form_login
+		.title= content_title
+		form(action='/auth/login', method='post')
+			.form_title Логин / Email:
+			input(type='text', name='login',)
+			.form_title Пароль:
+			input(type='password', name='password',)
+			br
+			br
+			input(type='submit', value='Вход')
+			input(type='button', value='Регистрация', onclick="location.href='/auth/registr';")

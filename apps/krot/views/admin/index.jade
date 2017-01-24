@@ -1,0 +1,19 @@
+extends layout
+
+block paths
+	- var content_title= 'KROT'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/add.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/stargazer.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/' + __app_name + '/stargazer.js' + version)
+
+block sub_menu
+	a.sub_item.back_link(href='/auth/logout') Выход
+	span.separator |
+	a.sub_item(href='admin/users/edit/' + session.user_id)= session.login
+
+block content
+	pre.ascii(data-font=font)!=data

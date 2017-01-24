@@ -1,0 +1,14 @@
+extends layout
+
+block paths
+	- var content_title= 'krot / about'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/about.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/' + __app_name + '/about.js' + version)
+
+block content
+	h1 about!
+	!= html

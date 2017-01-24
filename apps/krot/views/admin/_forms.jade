@@ -1,0 +1,111 @@
+//- Calendar form
+
+mixin form_date(path, date)
+	- var date = date || new Date()
+	- var dd = date && (date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2)  + '-' + ('0' + date.getDate()).slice(-2))
+	- var hh = date && (date.getHours())
+	- var mm = date && (date.getMinutes())
+	span.date_form(class=attributes.class)
+		input.date(type="text", name=path + '[date]', value=dd)
+		select.hours(name=path + '[time][hours]')
+			each hours, i in new Array(24)
+				- var format = ('0' + i).slice(-2)
+				option(value=format, selected=i == hh)= format
+		span= ' :'
+		select.minutes(name=path + '[time][minutes]')
+			each hours, i in new Array(12)
+				- var format = ('0' + (i*5)).slice(-2)
+				option(value=format, selected=(i*5) <= mm)= format
+
+//- Single Text Form
+
+mixin form_text_single(path, object)
+	input.input(type="text", name=path, value=object && object[path])
+
+//- Multiple Text Form
+
+mixin form_text_multi(path, object)
+	textarea.input.editor(name=path)= object && object[path]
+
+//- Single Select Form
+
+mixin form_single_select(path, options, select_option)
+	if (!select_option)
+		select(name=path)
+			option(value='none') нет
+			each option in options
+				option(value=option._id)= option['title'] || '!!! ПУСТОЕ ПОЛЕ !!!'
+	else
+		select(name=path)
+			option(value='none') нет
+			each option in options
+				option(value=option._id, selected=select_option == option._id.toString())= option['title'] || '!!! ПУСТОЕ ПОЛЕ !!!'
+
+
+//- Multiple Select Form
+
+mixin form_multiple_select(path, options, select_options)
+	- var field = attributes.field || 'title'
+	- var disable = attributes.disable
+	- var none = attributes.none
+	.snake_outer
+		if (!select_options || select_options.length == 0)
+			.snake
+				input.back(type="button", value="-", disabled=disable)
+				select(name=path + '[]', disabled=disable)
+					unless none
+						option(value='') нет
+					each option in options
+						option(value=option._id)= option[field] || '!!! ПУСТОЕ ПОЛЕ !!!'
+		else
+			each select_option in select_options
+				.snake
+					input.back(type="button", value="-", disabled=disable)
+					select(name=path + '[]', disabled=disable)
+						unless none
+							option(value='') нет
+						each option in options
+							option(value=option._id, selected=option._id.toString() == select_option)= option[field] || '!!! ПУСТОЕ ПОЛЕ !!!'
+							if (disable && (option._id.toString() == select_option))
+								input(type='hidden', name=path + '[]', value=option._id)
+		unless disable
+			input.forward(type="button", value="+", disabled=disable)
+
+//- Multiple Input Form
+
+mixin form_multiple_input(path, options)
+	.snake_outer
+		if (!options || !options[path] || !options[path].length > 0)
+			span.snake
+				input.back(type="button", value="-")
+				input.input(type='text', name=path + '[]')
+		else
+			each option in options[path]
+				span.snake
+					input.back(type="button", value="-")
+					input.input(type='text', name=path + '[]', value=option)
+		input.forward(type="button", value="+")
+
+//- Images Upload Form
+
+mixin form_images_upload(images)
+	if !images
+		.form_images_upload
+			input#upload_fallback(type='file')
+			.images_upload_preview
+	else
+		.form_images_upload
+			input#upload_fallback(type='file')
+			.images_upload_preview
+				each image, i in images
+					.image_upload_preview(style='background-image:url(' + image.thumb + ')')
+						input.image_upload_form(type='hidden', name='images[path][]', value=images_preview[i])
+						.image_delete ×
+						.image_position
+							span.label= (image.position == 'left') ? 'слева' : 'справа'
+							input.position_form(type='hidden', name='images[position][]', value=image.position)
+						.image_marquee
+							span.label= (image.marquee == 'run') ? 'бежит' : 'стоит'
+							input.marquee_form(type='hidden', name='images[marquee][]', value=image.marquee)
+						.image_description
+							textarea.image_description_input(name='images[description][]', placeholder='Описание')= image.description

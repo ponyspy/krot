@@ -1,0 +1,25 @@
+mixin items(issues)
+	each issue in issues
+		.list_item
+			a.item_rm.issue(href='#', id=issue._id) удалить
+			a.item_title(href='/admin/issues/edit/' + issue._id, class=issue.status =='hidden' ? 'hidden': '')= issue.title || '!!! ПУСТОЕ ПОЛЕ !!!'
+			span= ' | '
+			span.item_images= issue.images.length
+
+mixin counters(count, skip)
+	a.list_back(href='#'): b назад
+	span= ' - '
+	select.list_select
+		- var i = 0;
+		while i < count
+			option(value=i selected= (i == skip / 10) )= i+1
+			- i++
+	span= ' - '
+	a.list_next(href='#'): b вперед
+
+
+if load_list
+	.list_items
+		+items(issues)
+	.list_counter
+		+counters(count, skip)

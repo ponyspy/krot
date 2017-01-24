@@ -1,0 +1,16 @@
+{
+	"apps": [
+		{
+			"name": "krot",
+			"script": "./apps/krot/app.js",
+			"exec_mode": "fork",
+			"watch": ["apps/krot/app.js", "apps/krot/models", "apps/krot/routes"],
+			"autorestart": false,
+			"kill_timeout": 1600,
+			"env": {
+				"PORT": 3000,
+				"NODE_ENV": "development"
+			}
+		}
+	]
+}

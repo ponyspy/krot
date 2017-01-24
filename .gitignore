@@ -1,0 +1,8 @@
+/node_modules*
+/db*
+/maket*
+/subl*
+/public/build*
+/public/stuff*
+/public/cdn*
+.DS_Store
