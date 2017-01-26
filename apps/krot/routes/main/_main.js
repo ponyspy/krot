@@ -5,8 +5,8 @@ var Model = require(__app_root + '/models/main.js');
 var main = {
 	index: require('./index.js')(Model),
 	content: require('./content.js'),
-	issues: require('./issues/_issues.js'),
-	articles: require('./articles/_articles.js')
+	issues: require('./issues/_issues.js')(Model),
+	articles: require('./articles/_articles.js')(Model)
 };
 
 module.exports = (function() {

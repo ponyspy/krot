@@ -18,7 +18,7 @@ var userSchema = new Schema({
 	password: String,
 	email: String,
 	status: String,
-	date: {type: Date, default: Date.now},
+	date: { type: Date, default: Date.now },
 });
 
 var issueSchema = new Schema({
@@ -52,7 +52,7 @@ var issueSchema = new Schema({
 
 	status: String,	// hidden
 	_short_id: { type: String, unique: true, index: true, sparse: true },
-	date: { type: Date, default: Date.now },
+	date: { type: Date, default: Date.now, index: true },
 });
 
 var articleSchema = new Schema({
@@ -75,7 +75,7 @@ var articleSchema = new Schema({
 	status: String,	// hidden
 	sym: { type: String, trim: true, index: true, unique: true, sparse: true },
 	_short_id: { type: String, unique: true, index: true, sparse: true },
-	date: { type: Date, default: Date.now },
+	date: { type: Date, default: Date.now, index: true },
 });
 
 var categorySchema = new Schema({
@@ -83,7 +83,7 @@ var categorySchema = new Schema({
 	type: String, // theme, country, author
 	status: String,	// hidden
 	_short_id: { type: String, unique: true, index: true, sparse: true },
-	date: {type: Date, default: Date.now},
+	date: { type: Date, default: Date.now, index: true },
 });
 
 
