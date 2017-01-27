@@ -22,8 +22,7 @@ var userSchema = new Schema({
 });
 
 var issueSchema = new Schema({
-	title: { type: String, trim: true },
-	description: { type: String, trim: true },
+	numb: { type: Number, index: true },
 	style: {
 		background: {
 			position: String,

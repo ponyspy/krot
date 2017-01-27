@@ -4,7 +4,7 @@ var Model = require(__app_root + '/models/main.js');
 
 var issues = {
 	index: require('./index.js')(Model),
-	issue: require('./issue.js')(Model),
+	issue: require('./issue.js')(Model)
 };
 
 module.exports = (function() {

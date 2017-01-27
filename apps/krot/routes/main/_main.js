@@ -5,8 +5,8 @@ var Model = require(__app_root + '/models/main.js');
 var main = {
 	index: require('./index.js')(Model),
 	content: require('./content.js'),
-	issues: require('./issues/_issues.js')(Model),
-	articles: require('./articles/_articles.js')(Model)
+	issues: require('./issues/_issues.js'),
+	articles: require('./articles/_articles.js')
 };
 
 module.exports = (function() {
@@ -15,11 +15,9 @@ module.exports = (function() {
 	router.route('/')
 		.get(main.index.index);
 
-	router.route('/issues')
-		.use(main.issues);
+	router.use('/issues', main.issues);
 
-	router.route('/articles')
-		.use(main.articles);
+	router.use('/articles', main.articles);
 
 	router.route('/about')
 		.get(main.content.about);

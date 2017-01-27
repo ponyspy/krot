@@ -5,7 +5,7 @@ module.exports = function(Model) {
 
 	module.index = function(req, res) {
 		Issue.where('status').ne('hidden').sort('-date').skip(0).limit(1).exec(function(err, issue) {
-			res.redirect('/issues/' + issue.sym || issue._short_id);
+			res.redirect('/issues/' + issue.numb || issue._short_id);
 		});
 	};
 

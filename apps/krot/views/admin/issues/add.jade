@@ -2,7 +2,7 @@ extends ../layout
 include ../_forms.jade
 
 block paths
-	- var content_title= 'ДОБАВИТЬ РАБОТУ'
+	- var content_title= 'ДОБАВИТЬ НОМЕР'
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/libs/css/pickmeup.min.css' + version)
@@ -28,10 +28,40 @@ block content
 	.form_block
 		.title= content_title
 		form(action="", method="post")
-			.form_title Название:
+			.form_title Номер:
 			+form_text_single('title')
-			.form_title Изображения:
-			+form_images_upload()
+			.form_title Логотип:
+			input(type='file', name='logo')
+			.form_title Фон:
+			input(type='file', name='background')
+			.form_title Стиль фона:
+
+			span Позиция:
+			select(name='style[background][position]')
+				option(value='top') Сверху
+				option(value='center') По центру
+				option(value='bottom') Снизу
+			br
+
+			span Размер:
+			select(name='style[background][size]')
+				option(value='none') Изображение
+				option(value='cover') Вылет
+				option(value='contain') В край
+			br
+
+			span Фиксация:
+			select(name='style[background][attachment]')
+				option(value='scroll') Выкл.
+				option(value='fixed') Вкл.
+			br
+
+			span Повторение:
+			select(name='style[background][repeat]')
+				option(value='no-repeat') Выкл.
+				option(value='repeat') Вкл.
+			br
+
 			.form_title Видимость:
 			input(type='checkbox', name='status', value='hidden')
 			!= ' скрыть'
