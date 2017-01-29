@@ -26,10 +26,8 @@ module.exports = (function() {
 		.get(checkAuth, admin.about.edit)
 		.post(checkAuth, admin.about.edit_form);
 
-	router.use('/issues', checkAuth, admin.issues);
+	router.use('/issues', checkAuth, upload.single('logo'), admin.issues);
 	router.use('/users', checkAuth, admin.users);
-
-	router.post('/preview', checkAuth, upload.single('image'), admin.options.preview);
 
 	return router;
 })();

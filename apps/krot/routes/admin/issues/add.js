@@ -6,7 +6,7 @@ module.exports = function(Model, Params) {
 
 	var Issue = Model.Issue;
 
-	var uploadImages = Params.upload.images;
+	// var uploadImages = Params.upload.images;
 
 
 	module.index = function(req, res, next) {
@@ -16,22 +16,20 @@ module.exports = function(Model, Params) {
 
 	module.form = function(req, res, next) {
 		var post = req.body;
+		console.log(post);
 
 		var issue = new Issue();
 
 		issue._short_id = shortid.generate();
 		issue.status = post.status;
 		issue.date = moment(post.date.date + 'T' + post.date.time.hours + ':' + post.date.time.minutes);
-		issue.title = post.title;
+		issue.numb = post.numb;
+		issue.style = post.style;
 
-		uploadImages(issue, 'issues', post.images, function(err, issue) {
+		issue.save(function(err, issue) {
 			if (err) return next(err);
 
-			issue.save(function(err, issue) {
-				if (err) return next(err);
-
-				res.redirect('/admin/issues');
-			});
+			res.redirect('/admin/issues');
 		});
 	};
 

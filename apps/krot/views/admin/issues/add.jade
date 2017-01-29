@@ -1,5 +1,6 @@
 extends ../layout
 include ../_forms.jade
+include _forms.jade
 
 block paths
 	- var content_title= 'ДОБАВИТЬ НОМЕР'
@@ -27,41 +28,25 @@ block sub_menu
 block content
 	.form_block
 		.title= content_title
-		form(action="", method="post")
+		form(action="", method="post", enctype="multipart/form-data")
 			.form_title Номер:
-			+form_text_single('title')
+			+form_text_single('numb')
 			.form_title Логотип:
 			input(type='file', name='logo')
 			.form_title Фон:
 			input(type='file', name='background')
 			.form_title Стиль фона:
-
 			span Позиция:
-			select(name='style[background][position]')
-				option(value='top') Сверху
-				option(value='center') По центру
-				option(value='bottom') Снизу
-			br
-
+			+form_style(['background', 'position'], {'top': 'Сверху', 'center': 'По центру', 'bottom': 'Снизу' })
+			span= ' | '
 			span Размер:
-			select(name='style[background][size]')
-				option(value='none') Изображение
-				option(value='cover') Вылет
-				option(value='contain') В край
-			br
-
+			+form_style(['background', 'size'], {'none': 'Фактический', 'cover': 'Вылет', 'contain': 'В край' })
+			span= ' | '
 			span Фиксация:
-			select(name='style[background][attachment]')
-				option(value='scroll') Выкл.
-				option(value='fixed') Вкл.
-			br
-
+			+form_style(['background', 'attachment'], {'scroll': 'Выкл.', 'fixed': 'Вкл.' })
+			span= ' | '
 			span Повторение:
-			select(name='style[background][repeat]')
-				option(value='no-repeat') Выкл.
-				option(value='repeat') Вкл.
-			br
-
+			+form_style(['background', 'repeat'], {'no-repeat': 'Выкл.', 'repeat': 'Вкл.' })
 			.form_title Видимость:
 			input(type='checkbox', name='status', value='hidden')
 			!= ' скрыть'

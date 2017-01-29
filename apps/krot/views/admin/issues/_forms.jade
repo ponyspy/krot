@@ -1,0 +1,5 @@
+mixin form_style(path, props, select_option)
+	select(name='style' + path.map(function(item) { return '[' + item + ']' }).join('') )
+		each prop in props
+			- var key = Object.keys(props).filter(function(key) { return props[key] == prop })[0]
+			option(value=key, selected=select_option && key == select_option)= prop

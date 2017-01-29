@@ -1,5 +1,6 @@
 extends ../layout
 include ../_forms.jade
+include _forms.jade
 
 block paths
 	- var content_title= 'РЕДАКТИРОВАТЬ НОМЕР'
@@ -27,11 +28,25 @@ block sub_menu
 block content
 	.form_block
 		.title= content_title
-		form(action="", method="post")
-			.form_title Название:
-			+form_text_single('title', issue)
-			.form_title Изображения:
-			+form_images_upload(issue.images)
+		form(action="", method="post", enctype="multipart/form-data")
+			.form_title Номер:
+			+form_text_single('numb', issue)
+			.form_title Логотип:
+			input(type='file', name='logo')
+			.form_title Фон:
+			input(type='file', name='background')
+			.form_title Стиль фона:
+			span Позиция:
+			+form_style(['background', 'position'], {'top': 'Сверху', 'center': 'По центру', 'bottom': 'Снизу' }, issue.style.background.position)
+			span= ' | '
+			span Размер:
+			+form_style(['background', 'size'], {'none': 'Фактический', 'cover': 'Вылет', 'contain': 'В край' }, issue.style.background.size)
+			span= ' | '
+			span Фиксация:
+			+form_style(['background', 'attachment'], {'scroll': 'Выкл.', 'fixed': 'Вкл.' }, issue.style.background.attachment)
+			span= ' | '
+			span Повторение:
+			+form_style(['background', 'repeat'], {'no-repeat': 'Выкл.', 'repeat': 'Вкл.' }, issue.style.background.repeat)
 			.form_title Видимость:
 			input(type='checkbox', name='status', value='hidden', checked=issue.status == 'hidden')
 			!= ' скрыть'
