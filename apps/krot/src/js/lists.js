@@ -172,6 +172,6 @@ $(function() {
 
 	$(document)
 		.on('click', '.item_rm.user', {path:'/admin/users/remove', description: 'Удалить пользователя?'}, remove)
-		.on('click', '.item_rm.issue', {path:'/admin/works/remove', description: 'Удалить выпуск?'}, remove);
+		.on('click', '.item_rm.issue', {path:'/admin/issues/remove', description: 'Удалить номер?'}, remove);
 
 });
