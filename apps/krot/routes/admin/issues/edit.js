@@ -6,6 +6,7 @@ module.exports = function(Model, Params) {
 	var Issue = Model.Issue;
 
 	// var uploadImages = Params.upload.images;
+	var uploadImage = Params.upload.image;
 
 
 	module.index = function(req, res, next) {
@@ -21,6 +22,7 @@ module.exports = function(Model, Params) {
 
 	module.form = function(req, res, next) {
 		var post = req.body;
+		var files = req.files;
 		var id = req.params.issue_id;
 
 		Issue.findById(id).exec(function(err, issue) {
@@ -31,11 +33,18 @@ module.exports = function(Model, Params) {
 			issue.numb = post.numb;
 			issue.style = post.style;
 
-
-			issue.save(function(err, issue) {
+			uploadImage(issue, 'issues', 'logo', files.logo && files.logo[0], post.logo_del, function(err, work) {
 				if (err) return next(err);
 
-				res.redirect('/admin/issues');
+				uploadImage(issue, 'issues', 'background', files.background && files.background[0], post.background_del, function(err, work) {
+					if (err) return next(err);
+
+					issue.save(function(err, issue) {
+						if (err) return next(err);
+
+						res.redirect('/admin/issues');
+					});
+				});
 			});
 		});
 	};

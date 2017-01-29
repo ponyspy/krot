@@ -26,7 +26,7 @@ module.exports = (function() {
 		.get(checkAuth, admin.about.edit)
 		.post(checkAuth, admin.about.edit_form);
 
-	router.use('/issues', checkAuth, upload.single('logo'), admin.issues);
+	router.use('/issues', checkAuth, upload.fields([ { name: 'logo' }, { name: 'background' } ]), admin.issues);
 	router.use('/users', checkAuth, admin.users);
 
 	return router;

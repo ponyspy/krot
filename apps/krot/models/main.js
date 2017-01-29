@@ -23,6 +23,8 @@ var userSchema = new Schema({
 
 var issueSchema = new Schema({
 	numb: { type: Number, index: true },
+	logo: String,
+	background: String,
 	style: {
 		background: {
 			position: String,
@@ -30,10 +32,6 @@ var issueSchema = new Schema({
 			attachment: String,
 			repeat: String
 		}
-	},
-	images: {
-		logo: String,
-		background: String
 	},
 	articles: [{ type: ObjectId, ref: 'Article' }],
 
