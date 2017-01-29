@@ -35,7 +35,7 @@ var issueSchema = new Schema({
 		logo: String,
 		background: String
 	},
-	articles: [[{ type: ObjectId, ref: 'Article' }]],
+	articles: [{ type: ObjectId, ref: 'Article' }],
 
 	// articles: {
 	// 	one: [{ type: ObjectId, ref: 'Article' }],
