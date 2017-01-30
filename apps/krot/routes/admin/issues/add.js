@@ -27,10 +27,10 @@ module.exports = function(Model, Params) {
 		issue.numb = post.numb;
 		issue.style = post.style;
 
-		uploadImage(issue, 'issues', 'logo', files.logo[0], null, function(err, work) {
+		uploadImage(issue, 'issues', 'logo', files.logo && files.logo[0], null, function(err, work) {
 			if (err) return next(err);
 
-			uploadImage(issue, 'issues', 'background', files.background[0], null, function(err, work) {
+			uploadImage(issue, 'issues', 'background', files.background && files.background[0], null, function(err, work) {
 				if (err) return next(err);
 
 				issue.save(function(err, issue) {

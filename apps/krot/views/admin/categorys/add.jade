@@ -1,0 +1,40 @@
+extends ../layout
+include ../_forms.jade
+
+block paths
+	- var content_title= 'ДОБАВИТЬ КАТЕГОРИЮ'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/libs/css/font-awesome.css' + version)
+	link(rel='stylesheet', type='text/css', href='/libs/css/wysiwyg-editor.min.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/add.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/libs/js/wysiwyg.min.js' + version)
+	script(type='text/javascript', src='/libs/js/wysiwyg-editor.min.js' + version)
+	script(type='text/javascript', src='/build/js/' + __app_name + '/editor.js' + version)
+	script(type='text/javascript', src='/build/js/' + __app_name + '/add.js' + version)
+
+block sub_menu
+	a.sub_item.back_link(href='/admin/categorys') Назад
+
+
+block content
+	.form_block
+		.title= content_title
+		form(action="", method="post")
+			.form_title Название:
+			+form_text_single('title')
+			.form_title Описание:
+			+form_text_multi('description')
+			.form_title Тип:
+			select(name='type')
+				option(value='theme') Тема
+				option(value='country') Страна
+				option(value='author') Автор
+			.form_title Видимость:
+			input(type='checkbox', name='status', value='hidden')
+			!= ' скрыть'
+			br
+			br
+			input(type='submit', value='отправить')

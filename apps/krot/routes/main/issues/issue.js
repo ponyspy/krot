@@ -8,8 +8,9 @@ module.exports = function(Model) {
 	module.index = function(req, res) {
 		var id = req.params.issue_id;
 
-		Issue.findOne({ $or: [ { '_short_id': id }, { 'sym': id } ] }).exec(function(err, issue) {
-			res.render('main/issues/issue.jade', { issue: issue });
+		Issue.find({ $or: [ { '_short_id': id }, { 'numb': id } ] }).exec(function(err, issue) {
+			if (!issue || !issue.length) return next(err);
+			res.render('main/issues/issue.jade', { issue: issue[0] });
 		});
 	};
 

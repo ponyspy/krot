@@ -77,6 +77,7 @@ var articleSchema = new Schema({
 
 var categorySchema = new Schema({
 	title: { type: String, trim: true },
+	description: { type: String, trim: true },
 	type: String, // theme, country, author
 	status: String,	// hidden
 	_short_id: { type: String, unique: true, index: true, sparse: true },
@@ -89,8 +90,9 @@ var categorySchema = new Schema({
 // ------------------------
 
 
+issueSchema.index({'numb': 'text'}, { default_language: 'russian' });
 articleSchema.index({'title': 'text', 'intro': 'text', 'description': 'text'}, { default_language: 'russian', weights: { title: 3, intro: 2, description: 1 } });
-
+categorySchema.index({'title': 'text', 'description': 'text'}, { default_language: 'russian', weights: { title: 3, description: 1 } });
 
 // ------------------------
 // *** Plugins Block ***

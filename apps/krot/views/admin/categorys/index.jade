@@ -1,0 +1,45 @@
+extends ../layout
+include _categorys.jade
+
+block paths
+	- var content_title= 'КАТЕГОРИИ'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/add.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/' + __app_name + '/lists.js' + version)
+
+block sub_menu
+	a.sub_item.back_link(href='/') Назад
+	span.sub_item.toggle_rm Удалить
+	.sub_right_block
+
+		.sub_drop.status(style='z-index: 2;')
+			.drop_title Статус
+			.drop_inner
+				.drop_item(class='all').select Все
+				.drop_item(class='default') Обычный
+				.drop_item(class='hidden') Скрытый
+
+		.sub_drop.type(style='z-index: 1;')
+			.drop_title Тип
+			.drop_inner
+				.drop_item(class='all').select Все
+				.drop_item(class='author') Автор
+				.drop_item(class='theme') Тема
+				.drop_item(class='country') Страна
+
+		input.sub_search(type='text', placeholder='Поиск...')
+
+block content
+	.title= content_title
+	br
+	a.add(href='/admin/categorys/add') добавить категорию
+	br
+	br
+	.lists_block
+		.list_items
+			+items(categorys)
+		.list_counter
+			+counters(count)

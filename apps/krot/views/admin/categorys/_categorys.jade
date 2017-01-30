@@ -1,8 +1,9 @@
-mixin items(issues)
-	each issue in issues
+mixin items(categorys)
+	each category in categorys
 		.list_item
-			a.item_rm.issue(href='#', id=issue._id) удалить
-			a.item_title(href='/admin/issues/edit/' + issue._id, class=issue.status =='hidden' ? 'hidden': '')= issue.numb ? ('Номер ' + issue.numb) : '!!! ПУСТОЕ ПОЛЕ !!!'
+			a.item_rm.category(href='#', id=category._id) удалить
+			a.item_title(href='/admin/categorys/edit/' + category._id, class=category.status =='hidden' ? 'hidden': '')= (category.title || '!!! ПУСТОЕ ПОЛЕ !!!')
+
 
 mixin counters(count, skip)
 	a.list_back(href='#'): b назад
@@ -18,6 +19,6 @@ mixin counters(count, skip)
 
 if load_list
 	.list_items
-		+items(issues)
+		+items(categorys)
 	.list_counter
 		+counters(count, skip)
