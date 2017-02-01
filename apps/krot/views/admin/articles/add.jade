@@ -1,0 +1,45 @@
+extends ../layout
+include ../_forms.jade
+
+block paths
+	- var content_title= 'ДОБАВИТЬ МАТЕРИАЛ'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/libs/css/pickmeup.min.css' + version)
+	link(rel='stylesheet', type='text/css', href='/libs/css/font-awesome.css' + version)
+	link(rel='stylesheet', type='text/css', href='/libs/css/wysiwyg-editor.min.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/add.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/libs/js/jquery.pickmeup.min.js' + version)
+	script(type='text/javascript', src='/libs/js/wysiwyg.min.js' + version)
+	script(type='text/javascript', src='/libs/js/wysiwyg-editor.min.js' + version)
+	script(type='text/javascript', src='/build/js/' + __app_name + '/editor.js' + version)
+	script(type='text/javascript', src='/build/js/' + __app_name + '/add.js' + version)
+	script(type='text/javascript', src='/build/js/' + __app_name + '/a_events.js' + version)
+
+block sub_menu
+	a.sub_item.back_link(href='/admin/articles') Назад
+
+block content
+	.form_block
+		.title= content_title
+		form(action="", method="post", enctype="multipart/form-data")
+			.form_title Логотип:
+			input(type='file', name='logo')
+			.form_title Фон:
+			input(type='file', name='background')
+			.form_title Название:
+			+form_text_single('title')
+			.form_title Вступление:
+			+form_text_multi('intro')
+			.form_title Описание:
+			+form_text_multi('description')
+			.form_title Видимость:
+			input(type='checkbox', name='status', value='hidden')
+			!= ' скрыть'
+			.form_title Дата публикации:
+			+form_date('date')
+			br
+			br
+			input(type='submit', value='отправить')

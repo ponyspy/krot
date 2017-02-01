@@ -1,0 +1,23 @@
+mixin items(articles)
+	each article in articles
+		.list_item
+			a.item_rm.article(href='#', id=article._id) удалить
+			a.item_title(href='/admin/articles/edit/' + article._id, class=article.status =='hidden' ? 'hidden': '')= article.title ? article.title : '!!! ПУСТОЕ ПОЛЕ !!!'
+
+mixin counters(count, skip)
+	a.list_back(href='#'): b назад
+	span= ' - '
+	select.list_select
+		- var i = 0;
+		while i < count
+			option(value=i selected= (i == skip / 10) )= i+1
+			- i++
+	span= ' - '
+	a.list_next(href='#'): b вперед
+
+
+if load_list
+	.list_items
+		+items(articles)
+	.list_counter
+		+counters(count, skip)

@@ -6,6 +6,7 @@ var upload = multer({ dest: __glob_root + '/uploads/' });
 var admin = {
 	main: require('./main.js'),
 	issues: require('./issues/_issues.js'),
+	articles: require('./articles/_articles.js'),
 	categorys: require('./categorys/_categorys.js'),
 	about: require('./about.js'),
 	users: require('./users/_users.js'),
@@ -28,6 +29,7 @@ module.exports = (function() {
 		.post(checkAuth, admin.about.edit_form);
 
 	router.use('/issues', checkAuth, upload.fields([ { name: 'logo' }, { name: 'background' } ]), admin.issues);
+	router.use('/articles', checkAuth, upload.fields([ { name: 'logo' }, { name: 'background' } ]), admin.articles);
 	router.use('/categorys', checkAuth, admin.categorys);
 	router.use('/users', checkAuth, admin.users);
 
