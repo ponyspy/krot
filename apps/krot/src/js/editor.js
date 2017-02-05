@@ -11,28 +11,32 @@ $(function() {
 				classes: 'editor',
 				toolbar: 'top-selection',
 				buttons: {
-				insertlink: {
+					insertimage: {
+						title: 'Insert image',
+						image: '\uf030'
+					},
+					insertlink: {
 						title: 'Insert link',
 						image: '\uf08e',
-				},
-				 bold: {
-							title: 'Bold (Ctrl+B)',
-							image: '\uf032',
-							hotkey: 'b'
+					},
+					bold: {
+						title: 'Bold (Ctrl+B)',
+						image: '\uf032',
+						hotkey: 'b'
 					},
 					italic: {
-							title: 'Italic (Ctrl+I)',
-							image: '\uf033',
-							hotkey: 'i'
+						title: 'Italic (Ctrl+I)',
+						image: '\uf033',
+						hotkey: 'i'
 					},
 					underline: {
-							title: 'Underline (Ctrl+U)',
-							image: '\uf0cd',
-							hotkey: 'u'
+						title: 'Underline (Ctrl+U)',
+						image: '\uf0cd',
+						hotkey: 'u'
 					},
 					removeformat: {
-							title: 'Remove format',
-							image: '\uf12d'
+						title: 'Remove format',
+						image: '\uf12d'
 					},
 				},
 				submit: {
@@ -40,7 +44,28 @@ $(function() {
 						image: '\uf00c'
 				},
 				// placeholder: 'Type your text here...',
+				selectImage: 'Click or drop image',
 				placeholderUrl: 'www.example.com',
+				maxImageSize: [600, 400],
+				forceImageUpload: true,
+				onImageUpload: function(insert_image) {
+					var form_data = new FormData();
+					var image = this.files[0];
+
+					form_data.append('image', image);
+
+					$.ajax({
+						url: '/admin/preview',
+						data: form_data,
+						cache: false,
+						contentType: false,
+						processData: false,
+						type: 'POST',
+						success: function(path){
+							insert_image(path);
+						}
+					});
+				}
 		});
 	});
 });
