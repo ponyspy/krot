@@ -15,6 +15,10 @@ $(function() {
 						title: 'Insert image',
 						image: '\uf030'
 					},
+					insertvideo: index === 0 ? false : {
+						title: 'Insert video',
+						image: '\uf03d',
+					},
 					insertlink: {
 						title: 'Insert link',
 						image: '\uf08e',
@@ -34,6 +38,26 @@ $(function() {
 						image: '\uf0cd',
 						hotkey: 'u'
 					},
+					alignleft: index === 0 ? false : {
+						title: 'Left',
+						image: '\uf036',
+					},
+					aligncenter: index === 0 ? false : {
+						title: 'Center',
+						image: '\uf037',
+					},
+					alignright: index === 0 ? false : {
+						title: 'Right',
+						image: '\uf038',
+					},
+					orderedList: index === 0 ? false : {
+						title: 'Ordered list',
+						image: '\uf0cb',
+					},
+					unorderedList: index === 0 ? false : {
+						title: 'Unordered list',
+						image: '\uf0ca',
+					},
 					removeformat: {
 						title: 'Remove format',
 						image: '\uf12d'
@@ -46,6 +70,7 @@ $(function() {
 				// placeholder: 'Type your text here...',
 				selectImage: 'Click or drop image',
 				placeholderUrl: 'www.example.com',
+				placeholderEmbed: '<embed/>',
 				// maxImageSize: [600, 400],
 				forceImageUpload: true,
 				onImageUpload: function(insert_image) {
