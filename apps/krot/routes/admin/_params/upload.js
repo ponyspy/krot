@@ -5,6 +5,7 @@ var gm = require('gm').subClass({ imageMagick: true });
 var fs = require('fs');
 var path = require('path');
 var mime = require('mime');
+var jsdom = require('jsdom');
 
 var public_path = __glob_root + '/public';
 var preview_path = __glob_root + '/public/preview/';
@@ -27,4 +28,33 @@ module.exports.image = function(obj, base_path, field_name, file, del_file, call
 		});
 	});
 
+};
+
+module.exports.image_article = function(article, post, callback) {
+	var jquery = fs.readFileSync(__glob_root + '/public/libs/js/jquery-2.2.4.min.js', 'utf-8');
+
+	jsdom.env(post.description, { src: [jquery] }, function(err, window) {
+		var $ = window.$;
+		var images = $('.image_upload').toArray();
+
+		async.forEach(images, function(image, callback) {
+			var $this = $(image);
+
+			$this.removeAttr('class').removeAttr('width').removeAttr('height');
+
+			var dir_name = '/cdn/' + __app_name + '/images/articles/' + article._id.toString();
+			var file_name = $this.attr('src').split('/')[2];
+
+			$this.attr('src', dir_name + '/' + file_name);
+
+			mkdirp(public_path + dir_name, function() {
+				fs.createReadStream(preview_path + file_name).pipe(fs.createWriteStream(public_path + dir_name + '/' + file_name));
+				callback();
+			});
+		}, function() {
+				article.description = $('body').html();
+				callback(null, article);
+		});
+
+	});
 };

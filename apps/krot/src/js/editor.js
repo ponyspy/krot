@@ -6,12 +6,12 @@ $(function() {
 		window.document.execCommand('insertText', false, text);
 	});
 
-	$('.editor').each( function(index, element) {
+	$('.editor').each(function(index, element) {
 		$(element).wysiwyg({
 				classes: 'editor',
 				toolbar: 'top-selection',
 				buttons: {
-					insertimage: {
+					insertimage: index === 0 ? false : {
 						title: 'Insert image',
 						image: '\uf030'
 					},
@@ -46,7 +46,7 @@ $(function() {
 				// placeholder: 'Type your text here...',
 				selectImage: 'Click or drop image',
 				placeholderUrl: 'www.example.com',
-				maxImageSize: [600, 400],
+				// maxImageSize: [600, 400],
 				forceImageUpload: true,
 				onImageUpload: function(insert_image) {
 					var form_data = new FormData();
@@ -68,4 +68,6 @@ $(function() {
 				}
 		});
 	});
+
+	$('.editor').find('img').addClass('image_upload');
 });

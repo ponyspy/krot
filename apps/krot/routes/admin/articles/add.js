@@ -6,7 +6,7 @@ module.exports = function(Model, Params) {
 
 	var Article = Model.Article;
 
-	// var uploadImages = Params.upload.images;
+	var uploadImagesArticle = Params.upload.image_article;
 	var uploadImage = Params.upload.image;
 
 
@@ -34,10 +34,14 @@ module.exports = function(Model, Params) {
 			uploadImage(article, 'articles', 'background', files.background && files.background[0], null, function(err, work) {
 				if (err) return next(err);
 
-				article.save(function(err, article) {
+				uploadImagesArticle(article, post, function(err, article) {
 					if (err) return next(err);
 
-					res.redirect('/admin/articles');
+					article.save(function(err, article) {
+						if (err) return next(err);
+
+						res.redirect('/admin/articles');
+					});
 				});
 			});
 		});
