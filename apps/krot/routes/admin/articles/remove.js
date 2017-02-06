@@ -12,7 +12,7 @@ module.exports = function(Model) {
 		Article.findByIdAndRemove(id).exec(function(err) {
 			if (err) return next(err);
 
-			rimraf(__app_root + '/public/cdn/images/articles/' + id, { glob: false }, function(err) {
+			rimraf(__glob_root + '/public/cdn/' + __app_name + '/images/articles/' + id, { glob: false }, function(err) {
 				if (err) return next(err);
 
 				res.send('ok');
