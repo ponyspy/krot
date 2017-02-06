@@ -5,7 +5,8 @@ module.exports = function(Model, Params) {
 
 	var Article = Model.Article;
 
-	// var uploadImages = Params.upload.images;
+	var uploadImagesArticlePreview = Params.upload.image_article_preview;
+	var uploadImagesArticle = Params.upload.image_article;
 	var uploadImage = Params.upload.image;
 
 
@@ -15,7 +16,11 @@ module.exports = function(Model, Params) {
 		Article.findById(id).exec(function(err, article) {
 			if (err) return next(err);
 
-			res.render('admin/articles/edit.jade', { article: article });
+			uploadImagesArticlePreview(article, function(err, article) {
+				if (err) return next(err);
+
+				res.render('admin/articles/edit.jade', { article: article });
+			});
 		});
 	};
 
@@ -40,10 +45,14 @@ module.exports = function(Model, Params) {
 				uploadImage(article, 'articles', 'background', files.background && files.background[0], post.background_del, function(err, work) {
 					if (err) return next(err);
 
-					article.save(function(err, article) {
+					uploadImagesArticle(article, post, function(err, article) {
 						if (err) return next(err);
 
-						res.redirect('/admin/articles');
+						article.save(function(err, article) {
+							if (err) return next(err);
+
+							res.redirect('/admin/articles');
+						});
 					});
 				});
 			});

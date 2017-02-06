@@ -32,29 +32,54 @@ module.exports.image = function(obj, base_path, field_name, file, del_file, call
 
 module.exports.image_article = function(article, post, callback) {
 	var jquery = fs.readFileSync(__glob_root + '/public/libs/js/jquery-2.2.4.min.js', 'utf-8');
+	var dir_name = '/cdn/' + __app_name + '/images/articles/' + article._id.toString();
 
-	jsdom.env(post.description, { src: [jquery] }, function(err, window) {
+	rimraf(dir_name + '/**/!(cover.js|background.js)', { glob: true }, function(file_path) {
+		jsdom.env(post.description, { src: [jquery] }, function(err, window) {
+			var $ = window.$;
+			var images = $('img').toArray();
+
+			async.forEach(images, function(image, callback) {
+				var $this = $(image);
+				var file_name = path.basename($this.attr('src'));
+
+				$this.removeAttr('class').removeAttr('width').removeAttr('height').removeAttr('alt');
+				$this.attr('src', dir_name + '/' + file_name);
+
+				mkdirp(public_path + dir_name, function() {
+					fs.createReadStream(preview_path + file_name).pipe(fs.createWriteStream(public_path + dir_name + '/' + file_name));
+					callback();
+				});
+			}, function() {
+					article.description = $('body').html();
+					callback(null, article);
+			});
+		});
+	});
+};
+
+
+module.exports.image_article_preview = function(article, callback) {
+	var jquery = fs.readFileSync(__glob_root + '/public/libs/js/jquery-2.2.4.min.js', 'utf-8');
+
+	jsdom.env(article.description, { src: [jquery] }, function(err, window) {
 		var $ = window.$;
-		var images = $('.image_upload').toArray();
+		var images = $('img').toArray();
 
 		async.forEach(images, function(image, callback) {
 			var $this = $(image);
 
-			$this.removeAttr('class').removeAttr('width').removeAttr('height');
+			var file_path = $this.attr('src');
+			var file_name = path.basename(file_path);
 
-			var dir_name = '/cdn/' + __app_name + '/images/articles/' + article._id.toString();
-			var file_name = $this.attr('src').split('/')[2];
+			fs.createReadStream(public_path + file_path).pipe(fs.createWriteStream(preview_path + file_name));
 
-			$this.attr('src', dir_name + '/' + file_name);
+			$this.attr('src', '/preview/' + file_name);
 
-			mkdirp(public_path + dir_name, function() {
-				fs.createReadStream(preview_path + file_name).pipe(fs.createWriteStream(public_path + dir_name + '/' + file_name));
-				callback();
-			});
+			callback();
 		}, function() {
 				article.description = $('body').html();
 				callback(null, article);
 		});
-
 	});
 };

@@ -68,6 +68,4 @@ $(function() {
 				}
 		});
 	});
-
-	$('.editor').find('img').addClass('image_upload');
 });
