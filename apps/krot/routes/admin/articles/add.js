@@ -5,13 +5,18 @@ module.exports = function(Model, Params) {
 	var module = {};
 
 	var Article = Model.Article;
+	var Category = Model.Category;
 
 	var uploadImagesArticle = Params.upload.image_article;
 	var uploadImage = Params.upload.image;
 
 
 	module.index = function(req, res, next) {
-		res.render('admin/articles/add.jade');
+		Category.find().exec(function(err, categorys) {
+			if (err) return next(err);
+
+			res.render('admin/articles/add.jade', {categorys: categorys});
+		});
 	};
 
 
@@ -23,6 +28,7 @@ module.exports = function(Model, Params) {
 
 		article._short_id = shortid.generate();
 		article.status = post.status;
+		article.categorys = post.categorys == '' ? [] : post.categorys;
 		article.date = moment(post.date.date + 'T' + post.date.time.hours + ':' + post.date.time.minutes);
 		article.title = post.title;
 		article.intro = post.intro;

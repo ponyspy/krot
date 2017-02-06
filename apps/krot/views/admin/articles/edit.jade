@@ -45,10 +45,12 @@ block content
 				span= ' | удалить'
 			.form_title Название:
 			+form_text_single('title', article)
-			.form_title Интро:
+			.form_title Вступление:
 			+form_text_multi('intro', article)
 			.form_title Описание:
 			+form_text_multi('description', article)
+			.form_title Категории:
+			+form_multiple_select('categorys', categorys, article.categorys)
 			.form_title Видимость:
 			input(type='checkbox', name='status', value='hidden', checked=article.status == 'hidden')
 			!= ' скрыть'

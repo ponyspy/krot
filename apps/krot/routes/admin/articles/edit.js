@@ -4,6 +4,7 @@ module.exports = function(Model, Params) {
 	var module = {};
 
 	var Article = Model.Article;
+	var Category = Model.Category;
 
 	var uploadImagesArticlePreview = Params.upload.image_article_preview;
 	var uploadImagesArticle = Params.upload.image_article;
@@ -16,10 +17,14 @@ module.exports = function(Model, Params) {
 		Article.findById(id).exec(function(err, article) {
 			if (err) return next(err);
 
-			uploadImagesArticlePreview(article, function(err, article) {
+			Category.find().exec(function(err, categorys) {
 				if (err) return next(err);
 
-				res.render('admin/articles/edit.jade', { article: article });
+				uploadImagesArticlePreview(article, function(err, article) {
+					if (err) return next(err);
+
+					res.render('admin/articles/edit.jade', { article: article, categorys: categorys });
+				});
 			});
 		});
 	};
@@ -34,6 +39,7 @@ module.exports = function(Model, Params) {
 			if (err) return next(err);
 
 			article.status = post.status;
+			article.categorys = post.categorys == '' ? [] : post.categorys;
 			article.date = moment(post.date.date + 'T' + post.date.time.hours + ':' + post.date.time.minutes);
 			article.title = post.title;
 			article.intro = post.intro;
