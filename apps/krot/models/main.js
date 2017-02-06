@@ -56,14 +56,9 @@ var articleSchema = new Schema({
 	title: { type: String, trim: true },
 	intro: { type: String, trim: true },
 	description: { type: String, trim: true },
-	// type: String,	// base, important
-	images: {
-		main: String,
-		small: {
-			base: String,
-			hover: String
-		}
-	},
+	cover: String,
+	base: String,
+	hover: String,
 	files: [{
 		path: String,
 		desc: String

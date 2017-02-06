@@ -32,12 +32,12 @@ block content
 			input(type='file', name='logo')
 			if (issue.logo)
 				input(type='checkbox', name='logo_del')
-				span= ' | удалить логотип'
+				span= ' | удалить'
 			.form_title Фон:
 			input(type='file', name='background')
 			if (issue.background)
 				input(type='checkbox', name='background_del')
-				span= ' | удалить фон'
+				span= ' | удалить'
 			.form_title Стиль фона:
 			span Позиция:
 			+form_style(['background', 'position'], {'top': 'Сверху', 'center': 'По центру', 'bottom': 'Снизу' }, issue.style.background.position)

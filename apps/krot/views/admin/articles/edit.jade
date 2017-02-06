@@ -25,16 +25,24 @@ block content
 	.form_block
 		.title= content_title
 		form(action="", method="post", enctype="multipart/form-data")
-			.form_title Логотип:
-			input(type='file', name='logo')
-			if (article.logo)
-				input(type='checkbox', name='logo_del')
-				span= ' | удалить логотип'
-			.form_title Фон:
-			input(type='file', name='background')
-			if (article.background)
-				input(type='checkbox', name='background_del')
-				span= ' | удалить фон'
+			.form_title Шапка:
+			input(type='file', name='cover')
+			if (article.cover)
+				input(type='checkbox', name='cover_del')
+				span= ' | удалить'
+			.form_title Обложка:
+			span Базовая:
+			input(type='file', name='base')
+			if (article.base)
+				input(type='checkbox', name='base_del')
+				span= ' | удалить'
+			br
+			br
+			span Наведение:
+			input(type='file', name='hover')
+			if (article.hover)
+				input(type='checkbox', name='hover_del')
+				span= ' | удалить'
 			.form_title Название:
 			+form_text_single('title', article)
 			.form_title Интро:

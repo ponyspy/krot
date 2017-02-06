@@ -28,19 +28,23 @@ module.exports = function(Model, Params) {
 		article.intro = post.intro;
 		article.description = post.description;
 
-		uploadImage(article, 'articles', 'logo', files.logo && files.logo[0], null, function(err, work) {
+		uploadImage(article, 'articles', 'cover', files.cover && files.cover[0], null, function(err, work) {
 			if (err) return next(err);
 
-			uploadImage(article, 'articles', 'background', files.background && files.background[0], null, function(err, work) {
+			uploadImage(article, 'articles', 'base', files.base && files.base[0], null, function(err, work) {
 				if (err) return next(err);
 
-				uploadImagesArticle(article, post, function(err, article) {
+				uploadImage(article, 'articles', 'hover', files.hover && files.hover[0], null, function(err, work) {
 					if (err) return next(err);
 
-					article.save(function(err, article) {
+					uploadImagesArticle(article, post, function(err, article) {
 						if (err) return next(err);
 
-						res.redirect('/admin/articles');
+						article.save(function(err, article) {
+							if (err) return next(err);
+
+							res.redirect('/admin/articles');
+						});
 					});
 				});
 			});

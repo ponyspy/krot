@@ -29,7 +29,7 @@ module.exports = (function() {
 		.post(checkAuth, admin.about.edit_form);
 
 	router.use('/issues', checkAuth, upload.fields([ { name: 'logo' }, { name: 'background' } ]), admin.issues);
-	router.use('/articles', checkAuth, upload.fields([ { name: 'logo' }, { name: 'background' } ]), admin.articles);
+	router.use('/articles', checkAuth, upload.fields([ { name: 'cover' }, { name: 'base' }, { name: 'hover' } ]), admin.articles);
 	router.use('/categorys', checkAuth, admin.categorys);
 	router.use('/users', checkAuth, admin.users);
 
