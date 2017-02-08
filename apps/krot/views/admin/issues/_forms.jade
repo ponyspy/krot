@@ -3,3 +3,24 @@ mixin form_style(path, props, select_option)
 		each prop in props
 			- var key = Object.keys(props).filter(function(key) { return props[key] == prop })[0]
 			option(value=key, selected=select_option && key == select_option)= prop
+
+mixin form_map(columns)
+	.issue_map
+		.issue_colums
+			each column in columns || new Array(1)
+				.issue_column
+					.column_options
+						.delete_item.column
+					.column_articles
+						if column
+							each article in column.articles
+								.issue_article(id=article._id)
+									.delete_item.article
+									!= article.title
+						.add_item.article
+			.add_item.column
+		.articles_list
+			input.list_search(type='text', placeholder='поиск...')
+			.list_items
+				each item, i in new Array(0)
+					.list_item= i+1

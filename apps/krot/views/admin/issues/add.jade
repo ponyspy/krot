@@ -48,27 +48,7 @@ block content
 			span Повторение:
 			+form_style(['background', 'repeat'], {'no-repeat': 'Выкл.', 'repeat': 'Вкл.' })
 			.form_title Карта обложки:
-
-			.issue_map
-				.issue_colums
-					each column in new Array(1)
-						.issue_column
-							.column_options
-								.delete_item.column
-							.column_articles
-								each article, i in new Array(0)
-									.issue_article(id=article._id)
-										.delete_item.article
-										!= i+1
-								.add_item.article
-					.add_item.column
-				.articles_list
-					input.list_search(type='text', placeholder='поиск...')
-					.list_items
-						each item, i in new Array(0)
-							.list_item= i+1
-
-
+			+form_map()
 			.form_title Видимость:
 			input(type='checkbox', name='status', value='hidden')
 			!= ' скрыть'
