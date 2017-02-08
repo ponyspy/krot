@@ -63,9 +63,9 @@ block content
 								.add_item.article
 					.add_item.column
 				.articles_list
-					input.list_search(type='text')
+					input.list_search(type='text', placeholder='поиск...')
 					.list_items
-						each item, i in new Array(16)
+						each item, i in new Array(0)
 							.list_item= i+1
 
 

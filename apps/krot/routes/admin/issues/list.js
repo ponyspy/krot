@@ -4,6 +4,7 @@ module.exports = function(Model) {
 	var module = {};
 
 	var Issue = Model.Issue;
+	var Article = Model.Article;
 
 
 	module.index = function(req, res, next) {
@@ -46,6 +47,30 @@ module.exports = function(Model) {
 					res.send('end');
 				}
 			});
+		});
+	};
+
+
+	module.get_articles = function(req, res, next) {
+		var post = req.body;
+
+		var Query = (post.context.text && post.context.text !== '')
+			? Article.find({ $text : { $search : post.context.text } } )
+			: Article.find();
+
+		Query.sort('-date').lean().exec(function(err, articles) {
+			if (err) return next(err);
+
+			if (articles.length > 0) {
+				var opts = {
+					articles: articles,
+					compileDebug: false, debug: false, cache: true, pretty: false
+				};
+
+				res.send(jade.renderFile(__app_root + '/views/admin/issues/_get_articles.jade', opts));
+			} else {
+				res.send('end');
+			}
 		});
 	};
 

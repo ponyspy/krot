@@ -20,6 +20,9 @@ module.exports = (function() {
 		.get(issues.list.index)
 		.post(issues.list.get_list);
 
+	router.route('/get_articles')
+		.post(issues.list.get_articles);
+
 	router.route('/add')
 		.get(issues.add.index)
 		.post(issues.add.form);
