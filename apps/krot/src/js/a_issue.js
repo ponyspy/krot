@@ -4,19 +4,22 @@ $(function() {
 		cancel: '.add_item',
 		connectWith: '.column_articles',
 		sort: function(e) {
-			$('.articles_list').removeClass('show');
+			$('.articles_list').removeAttr('index').removeClass('show');
+			$('.add_item').removeClass('select');
+		}
+	};
+
+	var columns_sort = {
+		placeholder: 'placeholder',
+		cancel: '.add_item',
+		sort: function(e) {
+			$('.articles_list').removeAttr('index').removeClass('show');
+			$('.add_item').removeClass('select');
 		}
 	};
 
 	$('.column_articles').sortable(articles_sort);
-
-	$('.issue_colums').sortable({
-		placeholder: 'placeholder',
-		cancel: '.add_item',
-		sort: function(e) {
-			$('.articles_list').removeClass('show');
-		}
-	});
+	$('.issue_colums').sortable(columns_sort);
 
 	$(document)
 
