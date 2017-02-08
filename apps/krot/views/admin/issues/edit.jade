@@ -27,7 +27,7 @@ block content
 		.title= content_title
 		form(action="", method="post", enctype="multipart/form-data")
 			.form_title Номер:
-			+form_text_single('numb', issue)
+			input(type='number', name='numb', min='1', value=issue.numb)
 			.form_title Логотип:
 			input(type='file', name='logo')
 			if (issue.logo)

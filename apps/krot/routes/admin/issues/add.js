@@ -11,7 +11,9 @@ module.exports = function(Model, Params) {
 
 
 	module.index = function(req, res, next) {
-		res.render('admin/issues/add.jade');
+		Issue.count(function(err, count) {
+			res.render('admin/issues/add.jade', { count: count });
+		});
 	};
 
 
