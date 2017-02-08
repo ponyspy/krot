@@ -6,13 +6,14 @@ module.exports = function(Model, Params) {
 
 	var Issue = Model.Issue;
 
-	// var uploadImages = Params.upload.images;
 	var uploadImage = Params.upload.image;
 
 
 	module.index = function(req, res, next) {
-		Issue.count(function(err, count) {
-			res.render('admin/issues/add.jade', { count: count });
+		Issue.find().sort('-date').skip(0).limit(1).exec(function(err, issue) {
+			Issue.count(function(err, count) {
+				res.render('admin/issues/add.jade', { count: (issue && issue.length && issue[0].numb) || count });
+			});
 		});
 	};
 

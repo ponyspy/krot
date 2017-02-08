@@ -5,7 +5,6 @@ module.exports = function(Model, Params) {
 
 	var Issue = Model.Issue;
 
-	// var uploadImages = Params.upload.images;
 	var uploadImage = Params.upload.image;
 
 
