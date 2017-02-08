@@ -28,7 +28,7 @@ $(function() {
 		$('.issue_column').toArray().forEach(function(column, i) {
 			$(column).find('.issue_article').toArray().forEach(function(article, j) {
 				$('<input />').attr('type', 'hidden')
-											.attr('name', 'columns' + '[' + i + ']' + '[' + j + ']')
+											.attr('name', 'columns' + '[' + i + ']' + '[articles][' + j + ']')
 											.attr('value', $(article).attr('id'))
 											.appendTo('form');
 			});

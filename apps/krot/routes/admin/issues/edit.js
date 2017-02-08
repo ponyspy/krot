@@ -11,7 +11,7 @@ module.exports = function(Model, Params) {
 	module.index = function(req, res, next) {
 		var id = req.params.issue_id;
 
-		Issue.findById(id).exec(function(err, issue) {
+		Issue.findById(id).populate('columns.articles').exec(function(err, issue) {
 			if (err) return next(err);
 
 			res.render('admin/issues/edit.jade', { issue: issue });
@@ -31,6 +31,7 @@ module.exports = function(Model, Params) {
 			issue.date = moment(post.date.date + 'T' + post.date.time.hours + ':' + post.date.time.minutes);
 			issue.numb = post.numb;
 			issue.style = post.style;
+			issue.columns = post.columns;
 
 			uploadImage(issue, 'issues', 'logo', files.logo && files.logo[0], post.logo_del, function(err, work) {
 				if (err) return next(err);

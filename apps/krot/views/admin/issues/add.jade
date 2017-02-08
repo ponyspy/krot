@@ -57,7 +57,7 @@ block content
 								.delete_item.column
 							.column_articles
 								each article, i in new Array(0)
-									.issue_article
+									.issue_article(id=article._id)
 										.delete_item.article
 										!= i+1
 								.add_item.article
