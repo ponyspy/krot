@@ -33,20 +33,7 @@ var issueSchema = new Schema({
 			repeat: String
 		}
 	},
-	articles: [{ type: ObjectId, ref: 'Article' }],
-
-	// articles: {
-	// 	one: [{ type: ObjectId, ref: 'Article' }],
-	// 	two: [{ type: ObjectId, ref: 'Article' }],
-	// 	three: [{ type: ObjectId, ref: 'Article' }]
-	// },
-
-	// articles: [{
-	// 	article: { type: ObjectId, ref: 'Article' },
-	// 	column: Number,
-	// 	position: Number
-	// }],
-
+	articles: [[{ type: ObjectId, ref: 'Article' }]],
 	status: String,	// hidden
 	_short_id: { type: String, unique: true, index: true, sparse: true },
 	date: { type: Date, default: Date.now, index: true },

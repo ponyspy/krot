@@ -21,6 +21,22 @@ $(function() {
 	$('.column_articles').sortable(articles_sort);
 	$('.issue_colums').sortable(columns_sort);
 
+
+	$('form').on('submit', function(e) {
+		e.preventDefault();
+
+		$('.issue_column').toArray().forEach(function(column, i) {
+			$(column).find('.issue_article').toArray().forEach(function(article, j) {
+				$('<input />').attr('type', 'hidden')
+											.attr('name', 'columns' + '[' + i + ']' + '[' + j + ']')
+											.attr('value', $(article).attr('id'))
+											.appendTo('form');
+			});
+		});
+
+		this.submit();
+	});
+
 	$(document)
 
 		.on('click', '.add_item.article', function(e) {

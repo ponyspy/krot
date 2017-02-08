@@ -29,6 +29,7 @@ module.exports = function(Model, Params) {
 		issue.date = moment(post.date.date + 'T' + post.date.time.hours + ':' + post.date.time.minutes);
 		issue.numb = post.numb;
 		issue.style = post.style;
+		issue.articles = post.columns;
 
 		uploadImage(issue, 'issues', 'logo', files.logo && files.logo[0], null, function(err, work) {
 			if (err) return next(err);
