@@ -22,7 +22,7 @@ var userSchema = new Schema({
 });
 
 var issueSchema = new Schema({
-	numb: { type: Number, index: true },
+	numb: { type: Number, index: true, unique: true },
 	logo: String,
 	background: String,
 	style: {
@@ -74,9 +74,9 @@ var categorySchema = new Schema({
 // ------------------------
 
 
-issueSchema.index({'numb': 'text'}, { default_language: 'russian' });
 articleSchema.index({'title': 'text', 'intro': 'text', 'description': 'text'}, { default_language: 'russian', weights: { title: 3, intro: 2, description: 1 } });
-categorySchema.index({'title': 'text', 'description': 'text'}, { default_language: 'russian', weights: { title: 3, description: 1 } });
+categorySchema.index({'title': 'text', 'description': 'text'}, { default_language: 'russian', weights: { title: 2, description: 1 } });
+
 
 // ------------------------
 // *** Plugins Block ***

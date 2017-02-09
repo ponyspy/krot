@@ -31,6 +31,7 @@ module.exports = function(Model, Params) {
 		article.categorys = post.categorys == '' ? [] : post.categorys;
 		article.date = moment(post.date.date + 'T' + post.date.time.hours + ':' + post.date.time.minutes);
 		article.title = post.title;
+		article.sym = post.sym;
 		article.intro = post.intro;
 		article.description = post.description;
 
