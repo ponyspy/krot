@@ -7,16 +7,15 @@ mixin form_style(path, props, select_option)
 mixin form_map(columns)
 	.issue_map
 		.issue_colums
-			each column in columns || new Array(1)
+			each column in (columns && columns.length) ? columns : new Array(1)
 				.issue_column
 					.column_options
 						.delete_item.column
 					.column_articles
-						if column
-							each article in column.articles
-								.issue_article(id=article._id)
-									.delete_item.article
-									!= article.title
+						each article in column ? column.articles : new Array(0)
+							.issue_article(id=article._id)
+								.delete_item.article
+								!= article.title
 						.add_item.article
 			.add_item.column
 		.articles_list

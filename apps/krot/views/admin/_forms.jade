@@ -20,7 +20,7 @@ mixin form_date(path, date)
 //- Single Text Form
 
 mixin form_text_single(path, object)
-	input.input(type="text", name=path, value=object && object[path])
+	input.input(type="text", name=path, value=object && object[path], placeholder=attributes.placeholder)
 
 //- Multiple Text Form
 
