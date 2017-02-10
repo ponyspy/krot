@@ -38,6 +38,7 @@ module.exports = function(Model, Params) {
 				if (err) return next(err);
 
 				issue.save(function(err, issue) {
+					if (err.code == 11000) return res.send(post.numb + ' is dublicate number!');
 					if (err) return next(err);
 
 					res.redirect('/admin/issues');
