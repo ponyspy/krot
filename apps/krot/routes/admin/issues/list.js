@@ -28,7 +28,12 @@ module.exports = function(Model) {
 			Query: function(callback) {
 				if (post.context.text && post.context.text !== '') {
 					Article.find({ $text : { $search : post.context.text } } ).distinct('_id').exec(function(err, ids) {
-						callback(null, Issue.find({ 'columns.articles': { '$in': ids } }));
+						var numb = post.context.text.replace(/Номер|номер/g, '').trim();
+						var arr_search = Number.isInteger(+numb)
+							? [ { 'numb': numb }, { 'columns.articles': { '$in': ids } } ]
+							: [ { 'columns.articles': { '$in': ids } } ];
+
+						callback(null, Issue.find({ '$or': arr_search }));
 					});
 				} else callback(null, Issue.find());
 			}
