@@ -1,4 +1,5 @@
 var jade = require('jade');
+var async = require('async');
 
 module.exports = function(Model) {
 	var module = {};
@@ -23,29 +24,37 @@ module.exports = function(Model) {
 	module.get_list = function(req, res, next) {
 		var post = req.body;
 
-		var Query = (post.context.text && post.context.text !== '')
-			? Issue.find({ $text : { $search : post.context.text } } )
-			: Issue.find();
+		async.series({
+			Query: function(callback) {
+				if (post.context.text && post.context.text !== '') {
+					Article.find({ $text : { $search : post.context.text } } ).distinct('_id').exec(function(err, ids) {
+						callback(null, Issue.find({ 'columns.articles': { '$in': ids } }));
+					});
+				} else callback(null, Issue.find());
+			}
+		}, function(err, results) {
+			var Query = results.Query;
 
-		Query.count(function(err, count) {
-			if (err) return next(err);
-
-			Query.find().sort('-date').skip(+post.context.skip).limit(+post.context.limit).exec(function(err, issues) {
+			Query.count(function(err, count) {
 				if (err) return next(err);
 
-				if (issues.length > 0) {
-					var opts = {
-						issues: issues,
-						load_list: true,
-						count: Math.ceil(count / 10),
-						skip: +post.context.skip,
-						compileDebug: false, debug: false, cache: true, pretty: false
-					};
+				Query.find().sort('-date').skip(+post.context.skip).limit(+post.context.limit).exec(function(err, issues) {
+					if (err) return next(err);
 
-					res.send(jade.renderFile(__app_root + '/views/admin/issues/_issues.jade', opts));
-				} else {
-					res.send('end');
-				}
+					if (issues.length > 0) {
+						var opts = {
+							issues: issues,
+							load_list: true,
+							count: Math.ceil(count / 10),
+							skip: +post.context.skip,
+							compileDebug: false, debug: false, cache: true, pretty: false
+						};
+
+						res.send(jade.renderFile(__app_root + '/views/admin/issues/_issues.jade', opts));
+					} else {
+						res.send('end');
+					}
+				});
 			});
 		});
 	};
