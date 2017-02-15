@@ -42,6 +42,8 @@ block content
 			+form_text_multi('intro')
 			.form_title Описание:
 			+form_text_multi('description')
+			.form_title Файлы PDF:
+			+form_multiple_files('attach', 'attach_desc[]')
 			.form_title Категории:
 			+form_multiple_select('categorys', categorys)
 			.form_title Видимость:

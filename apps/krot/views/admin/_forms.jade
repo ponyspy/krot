@@ -86,26 +86,22 @@ mixin form_multiple_input(path, options)
 					input.input(type='text', name=path + '[]', value=option)
 		input.forward(type="button", value="+")
 
-//- Images Upload Form
+//- Multiple Files Form
 
-mixin form_images_upload(images)
-	if !images
-		.form_images_upload
-			input#upload_fallback(type='file')
-			.images_upload_preview
-	else
-		.form_images_upload
-			input#upload_fallback(type='file')
-			.images_upload_preview
-				each image, i in images
-					.image_upload_preview(style='background-image:url(' + image.thumb + ')')
-						input.image_upload_form(type='hidden', name='images[path][]', value=images_preview[i])
-						.image_delete ×
-						.image_position
-							span.label= (image.position == 'left') ? 'слева' : 'справа'
-							input.position_form(type='hidden', name='images[position][]', value=image.position)
-						.image_marquee
-							span.label= (image.marquee == 'run') ? 'бежит' : 'стоит'
-							input.marquee_form(type='hidden', name='images[marquee][]', value=image.marquee)
-						.image_description
-							textarea.image_description_input(name='images[description][]', placeholder='Описание')= image.description
+mixin form_multiple_files(path, path_desc, object)
+	if object.files.length > 0
+		each file, i in object.files
+			span!= 'удалить | '
+			input(type='checkbox', name='files_delete[]', value=file.path)
+			span!='&nbsp;&nbsp;&nbsp;'
+			a(href=file.path, target='_blank')=file.desc || 'файл ' + i
+			br
+		br
+	.snake_outer
+		.snake
+			input(type="button", value='-').back
+			input(type='file', name=path)
+			input(type='text', name=path_desc, placeholder='описание')
+		//- br
+		input(type="button", value='+').forward
+		br

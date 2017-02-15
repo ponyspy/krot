@@ -60,7 +60,6 @@ module.exports.image_article = function(article, post, callback) {
 	});
 };
 
-
 module.exports.image_article_preview = function(article, callback) {
 	var jquery = fs.readFileSync(__glob_root + '/public/libs/js/jquery-2.2.4.min.js', 'utf-8');
 
@@ -84,4 +83,44 @@ module.exports.image_article_preview = function(article, callback) {
 				callback(null, article);
 		});
 	});
+};
+
+module.exports.files_article_upload = function(article, post, files, callback) {
+	if (files.attach && files.attach.length > 0) {
+		async.forEachOfSeries(files.attach, function(file, i, callback) {
+			var dir_path = '/cdn/' + __app_name + '/files/articles/' + article._id;
+			var file_name = Date.now() + '.' + mime.extension(file.mimetype);
+
+			mkdirp(public_path + dir_path, function() {
+				fs.rename(file.path, public_path + dir_path + '/' + file_name, function() {
+					article.files.push({
+						path: dir_path + '/' + file_name,
+						desc: post.attach_desc[i] || ''
+					});
+					callback();
+				});
+			});
+		}, function() {
+			callback(null, 'files_upload');
+		});
+	} else {
+		callback(null, false);
+	}
+};
+
+module.exports.files_article_delete = function(article, post, files, callback) {
+	if (post.files_delete && post.files_delete.length > 0) {
+		async.eachSeries(post.files_delete, function(path, callback) {
+			rimraf(public_path + path, { glob: false }, function() {
+				var num = article.files.map(function(e) { return e.path; }).indexOf(path);
+				article.files.splice(num, 1);
+				article.markModified('files');
+				callback();
+			});
+		}, function() {
+			callback(null, 'files_delete');
+		});
+	} else {
+		callback(null, false);
+	}
 };

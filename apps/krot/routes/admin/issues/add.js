@@ -32,13 +32,9 @@ module.exports = function(Model, Params) {
 		issue.style = post.style;
 		issue.columns = post.columns;
 
-		async.parallel([
-			function(callback) {
-				uploadImage(issue, 'issues', 'logo', 1200, files.logo && files.logo[0], null, callback);
-			},
-			function(callback) {
-				uploadImage(issue, 'issues', 'background', 1600, files.background && files.background[0], null, callback);
-			},
+		async.series([
+			async.apply(uploadImage, issue, 'issues', 'logo', 1200, files.logo && files.logo[0], null),
+			async.apply(uploadImage, issue, 'issues', 'background', 1600, files.background && files.background[0], null)
 		], function(err, results) {
 			issue.save(function(err, issue) {
 				if (err && err.code == 11000) return res.send(post.numb + ' is dublicate number!');
