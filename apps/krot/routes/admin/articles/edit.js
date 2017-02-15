@@ -1,4 +1,5 @@
 var moment = require('moment');
+var async = require('async');
 
 module.exports = function(Model, Params) {
 	var module = {};
@@ -46,25 +47,26 @@ module.exports = function(Model, Params) {
 			article.intro = post.intro;
 			article.description = post.description;
 
-		uploadImage(article, 'articles', 'cover', files.cover && files.cover[0], post.cover_del, function(err, work) {
-			if (err) return next(err);
-
-			uploadImage(article, 'articles', 'base', files.base && files.base[0], post.base_del, function(err, work) {
+			async.parallel([
+				function(callback) {
+					uploadImage(article, 'articles', 'cover', files.cover && files.cover[0], post.cover_del, callback);
+				},
+				function(callback) {
+					uploadImage(article, 'articles', 'base', files.base && files.base[0], post.base_del, callback);
+				},
+				function(callback) {
+					uploadImage(article, 'articles', 'hover', files.hover && files.hover[0], post.hover_del, callback);
+				},
+				function(callback) {
+					uploadImagesArticle(article, post, callback);
+				}
+			], function(err, results) {
 				if (err) return next(err);
 
-				uploadImage(article, 'articles', 'hover', files.hover && files.hover[0], post.hover_del, function(err, work) {
+				article.save(function(err, article) {
 					if (err) return next(err);
 
-						uploadImagesArticle(article, post, function(err, article) {
-							if (err) return next(err);
-
-							article.save(function(err, article) {
-								if (err) return next(err);
-
-								res.redirect('/admin/articles');
-							});
-						});
-					});
+					res.redirect('/admin/articles');
 				});
 			});
 		});
