@@ -89,7 +89,7 @@ mixin form_multiple_input(path, options)
 //- Multiple Files Form
 
 mixin form_multiple_files(path, path_desc, object)
-	if object.files.length > 0
+	if (object && object.files.length > 0)
 		each file, i in object.files
 			span!= 'удалить | '
 			input(type='checkbox', name='files_delete[]', value=file.path)
