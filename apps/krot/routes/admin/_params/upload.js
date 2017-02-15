@@ -10,7 +10,7 @@ var jsdom = require('jsdom');
 var public_path = __glob_root + '/public';
 var preview_path = __glob_root + '/public/preview/';
 
-module.exports.image = function(obj, base_path, field_name, file, del_file, callback) {
+module.exports.image = function(obj, base_path, field_name, file_size, file, del_file, callback) {
 	if (del_file && obj[field_name]) {
 		rimraf.sync(public_path + obj[field_name]);
 		obj[field_name] = undefined;
@@ -23,7 +23,7 @@ module.exports.image = function(obj, base_path, field_name, file, del_file, call
 
 	mkdirp(public_path + dir_path, function() {
 		gm(file.path).size({ bufferStream: true }, function(err, size) {
-			this.resize(size.width > 1200 ? 1200 : false, false);
+			this.resize(size.width > file_size ? file_size : false, false);
 			this.write(public_path + dir_path + '/' + file_name, function(err) {
 				obj[field_name] = dir_path + '/' + file_name;
 				callback.call(null, null, obj);

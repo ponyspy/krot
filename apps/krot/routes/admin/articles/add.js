@@ -38,13 +38,13 @@ module.exports = function(Model, Params) {
 
 		async.parallel([
 			function(callback) {
-				uploadImage(article, 'articles', 'cover', files.cover && files.cover[0], null, callback);
+				uploadImage(article, 'articles', 'cover', 1200, files.cover && files.cover[0], null, callback);
 			},
 			function(callback) {
-				uploadImage(article, 'articles', 'base', files.base && files.base[0], null, callback);
+				uploadImage(article, 'articles', 'base', 600, files.base && files.base[0], null, callback);
 			},
 			function(callback) {
-				uploadImage(article, 'articles', 'hover', files.hover && files.hover[0], null, callback);
+				uploadImage(article, 'articles', 'hover', 600, files.hover && files.hover[0], null, callback);
 			},
 			function(callback) {
 				uploadImagesArticle(article, post, callback);

@@ -1,4 +1,5 @@
 var moment = require('moment');
+var async = require('async');
 
 module.exports = function(Model, Params) {
 	var module = {};
@@ -33,18 +34,19 @@ module.exports = function(Model, Params) {
 			issue.style = post.style;
 			issue.columns = post.columns;
 
-			uploadImage(issue, 'issues', 'logo', files.logo && files.logo[0], post.logo_del, function(err, work) {
-				if (err) return next(err);
+			async.parallel([
+				function(callback) {
+					uploadImage(issue, 'issues', 'logo', 1200, files.logo && files.logo[0], post.logo_del, callback);
+				},
+				function(callback) {
+					uploadImage(issue, 'issues', 'background', 1600, files.background && files.background[0], post.background_del, callback);
+				},
+			], function(err, results) {
+				issue.save(function(err, issue) {
+					if (err && err.code == 11000) return res.send(post.numb + ' is dublicate number!');
+					else if (err) return next(err);
 
-				uploadImage(issue, 'issues', 'background', files.background && files.background[0], post.background_del, function(err, work) {
-					if (err) return next(err);
-
-					issue.save(function(err, issue) {
-						if (err && err.code == 11000) return res.send(post.numb + ' is dublicate number!');
-						else if (err) return next(err);
-
-						res.redirect('/admin/issues');
-					});
+					res.redirect('/admin/issues');
 				});
 			});
 		});
