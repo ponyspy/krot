@@ -31,9 +31,9 @@ module.exports.image = function(obj, base_path, field_name, file, del_file, call
 
 module.exports.image_article = function(article, post, callback) {
 	var jquery = fs.readFileSync(__glob_root + '/public/libs/js/jquery-2.2.4.min.js', 'utf-8');
-	var dir_name = '/cdn/' + __app_name + '/images/articles/' + article._id.toString();
+	var dir_name = '/cdn/' + __app_name + '/images/articles/' + article._id.toString() + '/content';
 
-	rimraf(dir_name + '/**/!(cover.jpg|base.jpg|hover.jpg)', { glob: true }, function(file_path) {
+	rimraf(dir_name, { glob: true }, function(file_path) {
 		jsdom.env(post.description, { src: [jquery] }, function(err, window) {
 			var $ = window.$;
 			var images = $('img').toArray();
