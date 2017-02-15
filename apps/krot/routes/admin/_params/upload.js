@@ -15,18 +15,21 @@ module.exports.image = function(obj, base_path, field_name, file, del_file, call
 		rimraf.sync(public_path + obj[field_name]);
 		obj[field_name] = undefined;
 	}
+
 	if (!file) return callback.call(null, null, obj);
 
 	var dir_path = '/cdn/' + __app_name + '/images/' + base_path + '/' + obj._id;
 	var file_name = field_name + '.' + mime.extension(file.mimetype);
 
 	mkdirp(public_path + dir_path, function() {
-		fs.rename(file.path, public_path + dir_path + '/' + file_name, function(err) {
-			obj[field_name] = dir_path + '/' + file_name;
-			callback.call(null, null, obj);
+		gm(file.path).size({ bufferStream: true }, function(err, size) {
+			this.resize(size.width > 1200 ? 1200 : false, false);
+			this.write(public_path + dir_path + '/' + file_name, function(err) {
+				obj[field_name] = dir_path + '/' + file_name;
+				callback.call(null, null, obj);
+			});
 		});
 	});
-
 };
 
 module.exports.image_article = function(article, post, callback) {
