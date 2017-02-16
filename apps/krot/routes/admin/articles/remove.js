@@ -15,7 +15,11 @@ module.exports = function(Model) {
 			rimraf(__glob_root + '/public/cdn/' + __app_name + '/images/articles/' + id, { glob: false }, function(err) {
 				if (err) return next(err);
 
-				res.send('ok');
+				rimraf(__glob_root + '/public/cdn/' + __app_name + '/files/articles/' + id, { glob: false }, function(err) {
+					if (err) return next(err);
+
+					res.send('ok');
+				});
 			});
 		});
 
