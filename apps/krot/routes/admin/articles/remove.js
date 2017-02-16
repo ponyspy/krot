@@ -1,4 +1,5 @@
 var rimraf = require('rimraf');
+var async = require('async');
 
 module.exports = function(Model) {
 	var module = {};
@@ -10,24 +11,20 @@ module.exports = function(Model) {
 	module.index = function(req, res, next) {
 		var id = req.body.id;
 
-		Issue.update({'columns.$.articles': id}, { $pull: { 'columns.articles': id } }, { multi: true }).exec(function(err) {
-			if (err) return next(err);
-
-			Article.findByIdAndRemove(id).exec(function(err) {
-				if (err) return next(err);
-
-				rimraf(__glob_root + '/public/cdn/' + __app_name + '/images/articles/' + id, { glob: false }, function(err) {
-					if (err) return next(err);
-
-					rimraf(__glob_root + '/public/cdn/' + __app_name + '/files/articles/' + id, { glob: false }, function(err) {
-						if (err) return next(err);
-
-						res.send('ok');
-					});
-				});
-			});
-		});
-
+		async.parallel([
+			function(callback) {
+				Issue.update({'columns.$.articles': id}, { $pull: { 'columns.articles': id } }, { multi: true }).exec(callback);
+			},
+			function(callback) {
+				Article.findByIdAndRemove(id).exec(callback);
+			},
+			function(callback) {
+				rimraf(__glob_root + '/public/cdn/' + __app_name + '/images/articles/' + id, { glob: false }, callback);
+			},
+			function(callback) {
+				rimraf(__glob_root + '/public/cdn/' + __app_name + '/files/articles/' + id, { glob: false }, callback);
+			}
+		]);
 	};
 
 
