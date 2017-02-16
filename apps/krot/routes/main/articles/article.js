@@ -6,8 +6,10 @@ module.exports = function(Model) {
 	module.index = function(req, res) {
 		var id = req.params.article_id;
 
-		Article.findById(id).exec(function(err, article) {
-			res.render('main/articles/article.jade', { article: article });
+		Article.find({ $or: [ { '_short_id': id }, { 'sym': id } ] }).exec(function(err, article) {
+			if (!issue || !issue.length) return next(err);
+
+			res.render('main/articles/article.jade', { article: article[0] });
 		});
 	};
 
