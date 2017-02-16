@@ -24,7 +24,11 @@ module.exports = function(Model) {
 			function(callback) {
 				rimraf(__glob_root + '/public/cdn/' + __app_name + '/files/articles/' + id, { glob: false }, callback);
 			}
-		]);
+		], function(err, results) {
+			if (err) return next(err);
+
+			res.send('ok');
+		});
 	};
 
 
