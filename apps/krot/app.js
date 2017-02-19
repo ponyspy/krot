@@ -5,16 +5,16 @@ global.__app_root = __dirname;
 var express = require('express'),
 		bodyParser = require('body-parser'),
 		cookieParser = require('cookie-parser'),
-		session = require('express-session'),
-			app = express();
+		session = require('express-session');
 
+var app = express();
 var MongoStore = require('connect-mongo')(session);
 
 app.set('x-powered-by', false);
 app.set('views', __app_root + '/views');
 app.set('view engine', 'jade');
 
-// app.use(express.static(__glob_root + '/public'));  // remove
+
 if (process.env.NODE_ENV != 'production') {
 	app.use(express.static(__glob_root + '/public'));
 	app.locals.pretty = true;
