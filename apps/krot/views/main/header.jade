@@ -1,6 +1,6 @@
 - var version = '?ver=1.0'
 
-meta(charset="utf-8")
+meta(charset='utf-8')
 meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
 
 if content_title
@@ -9,6 +9,7 @@ if content_description
 	meta(name='description', content=content_description)
 
 link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/fonts.css' + version)
+link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/global.css' + version)
 block content_style
 
 script(type='text/javascript', src='/libs/js/jquery-2.2.4.min.js' + version)

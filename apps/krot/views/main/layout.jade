@@ -4,6 +4,15 @@ html
 		block paths
 		include header
 	body
-		.content_block
-			block content
-		.footer_block
+		.outer_block
+			.logo_block
+				block logo
+
+			.content_block
+				block content
+
+			.footer_block
+				a(href='/'): img(src='/stuff/' + __app_name + '/icons/logo/krot_footer.png')
+				a(href='/issues') Архив
+				a(href='/about') О нас
+				a(href='mailto:krot@krot.me') krot@krot.me

@@ -1,7 +1,7 @@
 extends ../layout
 
 block paths
-	- var content_title= 'krot / issues / issue'
+	- var content_title= 'КРОТ | №' + issue.numb
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/issue.css' + version)
@@ -9,5 +9,20 @@ block content_style
 block content_scripts
 	script(type='text/javascript', src='/build/js/' + __app_name + '/issue.js' + version)
 
+block logo
+	img(src=issue.logo || '/stuff/' + __app_name + '/icons/logo/krot_main.png')
+
 block content
-	h1= 'Issue number - ' + issue.numb
+	br
+	.issue_columns
+		each column in issue.columns
+			.column_item
+				each article in column.articles
+					.article_item
+						.article_cover
+							img.cover_base(src=article.base)
+							img.cover_hover(src=article.hover)
+						.article_categorys
+							each category in article.categorys
+								a.category_item(href='#' + category._short_id)= category.title
+						//- p: b= article
