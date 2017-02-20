@@ -1,35 +1,43 @@
 .issue_columns
 	overflow hidden
 	.column_item
-		width 280px
-		// border 2px solid red
+		width 300px
 		float left
+		margin-right 15px
+		// border 1px solid red
 		.article_item
 			position relative
 			display block
-			text-decoration none
+			margin-bottom 10px
+			&:last-child
+				margin-bottom 0
 			.article_categorys
 				position absolute
-				bottom 0
+				left 10px
+				bottom 10px
 				overflow hidden
 				.category_item
-					display block
-					float left
+					display inline-block
+					vertical-align bottom
 					padding 6px
 					background-color black
 					color white
 					text-decoration none
 					text-transform uppercase
+					margin-right 10px
+					font-size 10pt
+					&:last-child
+						margin-right 0
 					&:hover
 						background-color rgb(255, 237, 52)
 			.article_cover
 				display block
 				text-decoration none
-				img
-					width 280px
 				.cover_base
+					width 100%
 					display block
 				.cover_hover
+					width 100%
 					display none
 			&:hover
 				.cover_base

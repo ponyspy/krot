@@ -19,9 +19,9 @@ block content
 			.column_item
 				each article in column.articles
 					.article_item
-						a.article_cover(href='/articles/' + article._short_id)
+						a.article_cover(href='/articles/' + (article.sym || article._short_id))
 							img.cover_base(src=article.base)
 							img.cover_hover(src=article.hover)
 						.article_categorys
 							each category in article.categorys
-								a.category_item(href='#' + category._short_id)= category.title
+								a.category_item(href='#' + category._short_id)!= category.title

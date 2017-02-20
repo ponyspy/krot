@@ -12,7 +12,9 @@ html
 				block content
 
 			.footer_block
-				a(href='/'): img(src='/stuff/' + __app_name + '/icons/logo/krot_footer.png')
-				a(href='/issues') Архив
-				a(href='/about') О нас
-				a(href='mailto:krot@krot.me') krot@krot.me
+				a.footer_logo(href='/'): img(src='/stuff/' + __app_name + '/icons/logo/krot_footer.png')
+				.footer_links
+					a(href='/issues') Архив
+					a(href='/about') О нас
+					a.mail(href='mailto:krot@krot.me') krot@krot.me
+				a.footer_back(href='/') Крот выпуск №1

@@ -10,7 +10,7 @@ module.exports = function(Model) {
 
 		Issue.find({ $or: [ { '_short_id': id }, { 'numb': id } ] }).populate({
 			path: 'columns.articles',
-			select: 'base hover categorys _short_id',
+			select: 'base hover sym categorys _short_id',
 			populate: {
 				path: 'categorys',
 				select: 'title _short_id'
