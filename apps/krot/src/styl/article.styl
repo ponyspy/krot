@@ -1,3 +1,7 @@
+.logo_block .cover
+	border 15px solid black
+	box-sizing border-box
+
 .article_header
 	margin-top 20px
 	margin-bottom 20px
@@ -11,11 +15,29 @@
 			display none
 
 .article_body
-	width 600px
+	max-width 600px
 	margin 0 auto
+	hyphens auto
 	.article_intro
 		font-weight bold
 		margin-bottom 20px
+	.article_description
+		overflow hidden
+		div
+			display inline-block
+			margin-bottom 20px
+		img
+			width 100%
+			display inline-block
+			position relative
+			// margin-right -180px
+			// float right
+			&.left
+				float left
+				left -180px
+			&.right
+				float right
+				right -180px
 	.article_files
 		margin-bottom 20px
 		.file_item
