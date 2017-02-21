@@ -1,7 +1,7 @@
 extends ../layout
 
 block paths
-	- var content_title= 'krot / articles / article'
+	- var content_title= 'КРОТ | ' + article.title
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/article.css' + version)
@@ -9,5 +9,10 @@ block content_style
 block content_scripts
 	script(type='text/javascript', src='/build/js/' + __app_name + '/article.js' + version)
 
+block logo
+	img(src=article.cover)
+
 block content
-	h1 articles --- article!
+	h1= article.title
+	p= article.intro
+	p= article.description

@@ -11,8 +11,7 @@ block content_scripts
 
 block inline_style
 	- var parse = function(prefix, style) { return Object.keys(style).map(function(name) { return prefix + name + ':' + style[name] + ';'; }).join(''); };
-	- var bg_image = issue.background ? 'background-image: url(' + issue.background + ');' : ''
-	- var bg_style = issue.background ? parse('background-', issue.style.background.toObject()) : ''
+	- var bg_image = issue.background ? 'background-image: url(' + issue.background + ');' + parse('background-', issue.style.background.toObject()) : ''
 
 block logo
 	img(src=issue.logo || '/stuff/' + __app_name + '/icons/logo/krot_main.png')
