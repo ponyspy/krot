@@ -10,9 +10,12 @@ block content_scripts
 	script(type='text/javascript', src='/build/js/' + __app_name + '/article.js' + version)
 
 block logo
-	img(src=article.cover)
+	img(src=article.cover || '/stuff/' + __app_name + '/icons/logo/krot_main.png')
 
 block content
 	h1= article.title
+	.article_files
+		each file, i in article.files || []
+			a.file_item(href=file.path)= file.desc ? '< ' + file.desc + ' >' : '< File ' + (i+1) + ' >'
 	p= article.intro
 	p= article.description
