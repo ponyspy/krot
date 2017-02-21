@@ -9,6 +9,9 @@ block content_style
 block content_scripts
 	script(type='text/javascript', src='/build/js/' + __app_name + '/about.js' + version)
 
+block logo
+	img(src='/stuff/' + __app_name + '/icons/logo/krot_main.png')
+
 block content
-	h1 about!
-	!= html
+	img.banner(src='/stuff/' + __app_name + '/backgrounds/about.jpg')
+	.description!= html
