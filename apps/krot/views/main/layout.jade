@@ -1,9 +1,10 @@
 doctype html
 html
+	block inline_style
 	head
 		block paths
 		include header
-	body
+	body(style=bg_image + bg_style)
 		.outer_block
 			.logo_block
 				block logo
