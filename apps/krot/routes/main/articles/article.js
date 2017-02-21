@@ -8,8 +8,13 @@ module.exports = function(Model) {
 
 		Article.find({ $or: [ { '_short_id': id }, { 'sym': id } ] }).populate('categorys').exec(function(err, articles) {
 			if (!articles || !articles.length) return next(err);
+			var categorys = articles[0].categorys.map(function(category) { return category._id; });
 
-			res.render('main/articles/article.jade', { article: articles[0] });
+			Article.find({ categorys: { '$in': categorys } }).limit(5).exec(function(err, summary) {
+				if (!summary || !summary.length) return next(err);
+
+				res.render('main/articles/article.jade', { article: articles[0], summary: summary });
+			});
 		});
 	};
 

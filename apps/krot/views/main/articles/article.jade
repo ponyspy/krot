@@ -2,6 +2,7 @@ extends ../layout
 
 block paths
 	- var content_title= 'КРОТ | ' + article.title
+	- var content_description = article.intro
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/article.css' + version)
@@ -25,3 +26,9 @@ block content
 				a.file_item(href=file.path)= file.desc ? '< ' + file.desc + ' >' : '< File ' + (i+1) + ' >'
 		.article_intro!= article.intro
 		.article_description!= article.description
+
+	.article_summary
+		each item in summary
+			a.summary_item(href='/articles/' + item._short_id)
+				img.s_item_base(src=item.base)
+				img.s_item_hover(src=item.hover)
