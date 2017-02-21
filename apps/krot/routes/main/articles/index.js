@@ -4,6 +4,8 @@ module.exports = function(Model) {
 	var Article = Model.Article;
 
 	module.index = function(req, res, next) {
+		return res.redirect('/');
+
 		Article.where('status').ne('hidden').sort('-date').exec(function(err, articles) {
 			if (err) return next(err);
 
