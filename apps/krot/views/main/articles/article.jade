@@ -13,9 +13,15 @@ block logo
 	img(src=article.cover || '/stuff/' + __app_name + '/icons/logo/krot_main.png')
 
 block content
-	h1= article.title
-	.article_files
-		each file, i in article.files || []
-			a.file_item(href=file.path)= file.desc ? '< ' + file.desc + ' >' : '< File ' + (i+1) + ' >'
-	p= article.intro
-	p= article.description
+	.article_header
+		a.header_back(href='/'): img(src='/stuff/' + __app_name + '/icons/logo/krot_mono_invert.png')
+		.article_categorys
+			each category in article.categorys
+				a.category_item(href='#' + category._short_id)!= category.title
+
+	.article_body
+		.article_files
+			each file, i in article.files || []
+				a.file_item(href=file.path)= file.desc ? '< ' + file.desc + ' >' : '< File ' + (i+1) + ' >'
+		.article_intro!= article.intro
+		.article_description!= article.description
