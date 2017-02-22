@@ -5,6 +5,12 @@ html
 		block paths
 		include header
 	body(style=bg_image)
+		if (session && session.user_id)
+			.stargazer
+				a(href='/auth', target='_blank') stargazer
+				span |
+				a(href='/auth/logout', target='_blank') logout
+
 		.outer_block
 			.logo_block
 				block logo
