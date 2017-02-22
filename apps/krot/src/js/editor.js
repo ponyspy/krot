@@ -16,15 +16,16 @@ $(function() {
 						image: '\uf030'
 					},
 					image_position: index === 0 ? false : {
-							title: 'Header',
-							// style: 'color:white;background:blue',
-							image: '<->',
+							title: 'Image position',
+							style: 'font-size: 16pt; line-height: 12pt;',
+							image: '↔',
 							popup: function( $popup, $button ) {
 								var list_headers = {
 												// Name : position
 												'<- img --' : 'left',
 												'-- img ->' : 'right',
-												'<- img ->' : 'clear',
+												'<- img ->' : 'center',
+												'x- img -x' : 'clear',
 										};
 
 								var $list = $('<div/>').addClass('wysiwyg-plugin-list')

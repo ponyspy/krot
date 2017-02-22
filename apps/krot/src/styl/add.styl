@@ -166,11 +166,21 @@ input, textarea, select
 	width 588px
 	border-radius 0px
 	img
-		max-width 420px
+		width 100%
+		// max-width 420px
 		box-sizing border-box
+		&.center
+			border-left 10px solid red
+			border-right 10px solid red
 		&.left
 			border-left 10px solid red
+			// float left
+			// margin-right 10px
+			// margin-bottom 10px
 		&.right
+			// float right
+			// margin-left 10px
+			// margin-bottom 10px
 			border-right 10px solid red
 
 .wysiwyg-toolbar-icon
