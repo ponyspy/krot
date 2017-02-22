@@ -1,3 +1,29 @@
+@media screen and (max-width: 960px) {
+	img.left {
+		margin-left: calc((100% - 100vw) / 2)!important;
+	}
+	img.right {
+		margin-right: calc((100% - 100vw) / 2)!important;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	img.left {
+		width: 100%!important;
+		max-width: 600px!important;
+		margin-left: 0!important;
+		padding: 0!important;
+		float: none!important;
+	}
+	img.right {
+		width: 100%!important;
+		max-width: 600px!important;
+		margin-right: 0!important;
+		padding: 0!important;
+		float: none!important;
+	}
+}
+
 .logo_block .cover
 	border 15px solid black
 	box-sizing border-box
@@ -22,22 +48,21 @@
 		font-weight bold
 		margin-bottom 20px
 	.article_description
-		overflow hidden
-		div
-			display inline-block
-			margin-bottom 20px
 		img
-			width 100%
-			display inline-block
-			position relative
-			// margin-right -180px
-			// float right
+			display block
+			max-width 420px
 			&.left
 				float left
-				left -180px
+				padding 15px 15px 10px 20px
+				margin-left: calc((100% - 960px) / 2);
 			&.right
 				float right
-				right -180px
+				padding 15px 20px 10px 15px
+				margin-right: calc((100% - 960px) / 2);
+		&:after
+			content ''
+			display block
+			clear both
 	.article_files
 		margin-bottom 20px
 		.file_item
