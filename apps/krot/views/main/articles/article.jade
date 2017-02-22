@@ -10,6 +10,9 @@ block content_style
 block content_scripts
 	script(type='text/javascript', src='/build/js/' + __app_name + '/article.js' + version)
 
+block params
+	- var sg_article = article._id
+
 block logo
 	img(class=article.cover && 'cover', src=article.cover || '/stuff/' + __app_name + '/icons/logo/krot_main.png')
 

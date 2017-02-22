@@ -9,9 +9,10 @@ block content_style
 block content_scripts
 	script(type='text/javascript', src='/build/js/' + __app_name + '/issue.js' + version)
 
-block inline_style
+block params
 	- var parse = function(prefix, style) { return Object.keys(style).map(function(name) { return prefix + name + ':' + style[name] + ';'; }).join(''); };
 	- var bg_image = issue.background ? 'background-image: url(' + issue.background + ');' + parse('background-', issue.style.background.toObject()) : ''
+	- var sg_issue = issue._id
 
 block logo
 	img(src=issue.logo || '/stuff/' + __app_name + '/icons/logo/krot_main.png')

@@ -1,0 +1,16 @@
+.stargazer
+	a(href='/auth', target='_blank') stargazer
+	span= '|'
+	a(href='/auth/logout', target='_blank') logout
+	.sg_drop
+		a.drop_item(href='/admin/users', target='_blank') пользователи
+		a.drop_item(class=sg_issue && 'go', href='/admin/issues', target='_blank') номера
+		if sg_issue
+			span= ' -> '
+			a(href='/admin/issues/edit/' + sg_issue, target='_blank') этот
+		a.drop_item(class=sg_article && 'go', href='/admin/articles', target='_blank') материалы
+		if sg_article
+			span= ' -> '
+			a(href='/admin/articles/edit/' + sg_article, target='_blank') этот
+		a.drop_item(href='/admin/categorys', target='_blank') категории
+		a.drop_item(href='/admin/about', target='_blank') о нас
