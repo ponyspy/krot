@@ -26,26 +26,33 @@ $(function() {
 												'-- img ->' : 'right',
 												'<- img ->' : 'clear',
 										};
+
 								var $list = $('<div/>').addClass('wysiwyg-plugin-list')
 																			 .attr('unselectable','on');
-								$.each( list_headers, function( name, format ) {
+
+								$.each( list_headers, function(name, format) {
 										var $link = $('<a/>').attr('href','#')
-																				 .css( 'font-family', format )
+																				 .css('font-family', format)
 																				 .html( name )
 																				 .click(function(event) {
-																						$(element).wysiwyg('shell').fontSize(7).closePopup();
-																						if (format == 'clear') {
-																							$(element).wysiwyg('container')
-																											.find('font[size=7]')
-																											.removeAttr('size')
-																											.find('img').removeAttr('class')
-																											.unwrap();
-																						} else {
-																							$(element).wysiwyg('container')
-																											.find('font[size=7]')
-																											.removeAttr('size')
-																											.find('img').removeAttr('class').addClass(format)
-																											.unwrap();
+																						var html = $(element).wysiwyg('shell').getSelectedHTML();
+
+																						if (/img/.test(html)) {
+																							$(element).wysiwyg('shell').fontSize(7).closePopup();
+
+																							if (format == 'clear') {
+																								$(element).wysiwyg('container')
+																												.find('font[size=7]')
+																												.removeAttr('size')
+																												.find('img').removeAttr('class')
+																												.unwrap();
+																							} else {
+																								$(element).wysiwyg('container')
+																												.find('font[size=7]')
+																												.removeAttr('size')
+																												.find('img').removeAttr('class').addClass(format)
+																												.unwrap();
+																							}
 																						}
 
 																						// prevent link-href-#
