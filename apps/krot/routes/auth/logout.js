@@ -5,7 +5,7 @@ module.exports = function() {
 	module.index = function(req, res) {
 		req.session.destroy();
 		res.clearCookie('session');
-		res.redirect('/auth');
+		res.redirect('back');
 	};
 
 
