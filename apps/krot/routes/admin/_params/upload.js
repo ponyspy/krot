@@ -45,7 +45,7 @@ module.exports.image_article = function(article, post, callback) {
 				var $this = $(image);
 				var file_name = path.basename($this.attr('src'));
 
-				$this.removeAttr('class').removeAttr('width').removeAttr('height').removeAttr('alt');
+				$this.removeAttr('width').removeAttr('height').removeAttr('alt');
 				$this.attr('src', dir_name + '/' + file_name);
 
 				mkdirp(public_path + dir_name, function() {

@@ -15,6 +15,49 @@ $(function() {
 						title: 'Insert image',
 						image: '\uf030'
 					},
+					image_position: index === 0 ? false : {
+							title: 'Header',
+							// style: 'color:white;background:blue',
+							image: '<->',
+							popup: function( $popup, $button ) {
+								var list_headers = {
+												// Name : position
+												'<- img --' : 'left',
+												'-- img ->' : 'right',
+												'<- img ->' : 'clear',
+										};
+								var $list = $('<div/>').addClass('wysiwyg-plugin-list')
+																			 .attr('unselectable','on');
+								$.each( list_headers, function( name, format ) {
+										var $link = $('<a/>').attr('href','#')
+																				 .css( 'font-family', format )
+																				 .html( name )
+																				 .click(function(event) {
+																						$(element).wysiwyg('shell').fontSize(7).closePopup();
+																						if (format == 'clear') {
+																							$(element).wysiwyg('container')
+																											.find('font[size=7]')
+																											.removeAttr('size')
+																											.find('img').removeAttr('class')
+																											.unwrap();
+																						} else {
+																							$(element).wysiwyg('container')
+																											.find('font[size=7]')
+																											.removeAttr('size')
+																											.find('img').removeAttr('class').addClass(format)
+																											.unwrap();
+																						}
+
+																						// prevent link-href-#
+																						event.stopPropagation();
+																						event.preventDefault();
+																						return false;
+																				});
+										$list.append( $link );
+								});
+								$popup.append( $list );
+							 }
+					},
 					insertvideo: index === 0 ? false : {
 						title: 'Insert video',
 						image: '\uf03d',
