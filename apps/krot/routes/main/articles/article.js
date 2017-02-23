@@ -6,7 +6,7 @@ module.exports = function(Model) {
 	module.index = function(req, res, next) {
 		var id = req.params.article_id;
 
-		Article.findOne({ $or: [ { '_short_id': id }, { 'sym': id } ] }).populate('categorys').exec(function(err, article) {
+		Article.findOne({ $or: [ { '_short_id': id }, { 'sym': id } ] }).where('status').ne('hidden').populate('categorys').exec(function(err, article) {
 			if (err || !article) return next(err);
 			var categorys = article.categorys.map(function(category) { return category._id; });
 
