@@ -10,7 +10,7 @@ module.exports = function(Model) {
 			if (!articles || !articles.length) return next(err);
 			var categorys = articles[0].categorys.map(function(category) { return category._id; });
 
-			Article.find({ categorys: { '$in': categorys } }).where('status').ne('hidden').limit(5).exec(function(err, summary) {
+			Article.find({ _id: { '$ne': articles[0]._id }, categorys: { '$in': categorys } }).where('status').ne('hidden').limit(5).exec(function(err, summary) {
 				if (!summary || !summary.length) return next(err);
 
 				res.render('main/articles/article.jade', { article: articles[0], summary: summary });
