@@ -4,10 +4,10 @@ module.exports = function(Model) {
 	var Issue = Model.Issue;
 
 	module.index = function(req, res, next) {
-		Issue.where('status').ne('hidden').sort('-date').skip(0).limit(1).exec(function(err, issues) {
-			if (!issues || !issues.length) return next(err);
+		Issue.findOne().where('status').ne('hidden').sort('-date').exec(function(err, issue) {
+			if (!issue) return next(err);
 
-			res.redirect('/issues/' + issues[0].numb || issues[0]._short_id);
+			res.redirect('/issues/' + issue.numb || issue._short_id);
 		});
 	};
 
