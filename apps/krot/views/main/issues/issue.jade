@@ -20,8 +20,7 @@ block logo
 	img(src=issue.logo || '/stuff/' + __app_name + '/icons/logo/krot_main.png')
 
 block content
-	br
-	.issue_columns.swiper-container.swiper-container-h: .swiper-wrapper
+	.issue_columns.swiper-container: .swiper-wrapper
 		each column in issue.columns
 			.column_item.swiper-slide
 				each article in column.articles
