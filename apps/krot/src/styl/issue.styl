@@ -1,12 +1,21 @@
+@media screen and (max-width: 960px) {
+	.column_item {
+		max-width 100%!important
+	}
+}
+
 .issue_columns
 	overflow hidden
+	width 100%
 	.column_item
-		width 300px
-		float left
-		margin-right 30px
+		max-width 310px
+		// width 60%
+		// width 300px
+		// float left
+		// margin-right 30px
 		// border 1px solid red
-		&:last-child
-			margin-right 0
+		// &:last-child
+		// 	margin-right 0
 		.article_item
 			position relative
 			display block

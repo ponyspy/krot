@@ -4,9 +4,11 @@ block paths
 	- var content_title= 'КРОТ | №' + issue.numb
 
 block content_style
+	link(rel='stylesheet', type='text/css', href='/libs/css/swiper.min.css' + version)
 	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/issue.css' + version)
 
 block content_scripts
+	script(type='text/javascript', src='/libs/js/swiper.jquery.min.js' + version)
 	script(type='text/javascript', src='/build/js/' + __app_name + '/issue.js' + version)
 
 block params
@@ -19,9 +21,9 @@ block logo
 
 block content
 	br
-	.issue_columns
+	.issue_columns.swiper-container.swiper-container-h: .swiper-wrapper
 		each column in issue.columns
-			.column_item
+			.column_item.swiper-slide
 				each article in column.articles
 					.article_item
 						a.article_cover(href='/articles/' + (article.sym || article._short_id))
