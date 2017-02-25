@@ -11,7 +11,7 @@ mixin form_map(columns)
 				.issue_column
 					.column_options
 						.delete_item.column
-						input.column_main(type='radio', name='main_column', title='Главная колонка')
+						input.column_main(type='radio', name='main_column', checked=!columns ? true : column.main, title='Главная колонка')
 					.column_articles
 						each article in column ? column.articles : new Array(0)
 							.issue_article(id=article._id)

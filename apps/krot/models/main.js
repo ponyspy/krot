@@ -33,9 +33,10 @@ var issueSchema = new Schema({
 			repeat: String
 		}
 	},
-	columns: [
-		{ articles: [{ type: ObjectId, ref: 'Article' }] }
-	],
+	columns: [{
+		main: Boolean,
+		articles: [{ type: ObjectId, ref: 'Article' }]
+	}],
 	status: String,	// hidden
 	_short_id: { type: String, unique: true, index: true, sparse: true },
 	date: { type: Date, default: Date.now, index: true },

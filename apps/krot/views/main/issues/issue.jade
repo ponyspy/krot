@@ -22,7 +22,7 @@ block logo
 block content
 	.issue_columns.swiper-container: .swiper-wrapper
 		each column in issue.columns
-			.column_item.swiper-slide
+			.column_item.swiper-slide(class=column.main && 'main')
 				each article in column.articles
 					.article_item
 						a.article_cover(href='/articles/' + (article.sym || article._short_id))

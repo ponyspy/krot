@@ -26,6 +26,11 @@ $(function() {
 		e.preventDefault();
 
 		$('.issue_column').toArray().forEach(function(column, i) {
+			$('<input />').attr('type', 'hidden')
+										.attr('name', 'columns' + '[' + i + ']' + '[main]')
+										.attr('value', $(column).find('.column_main:checked').val() ? true : false)
+										.appendTo('form');
+
 			$(column).find('.issue_article').toArray().forEach(function(article, j) {
 				$('<input />').attr('type', 'hidden')
 											.attr('name', 'columns' + '[' + i + ']' + '[articles][' + j + ']')
@@ -53,6 +58,7 @@ $(function() {
 
 		.on('click', '.add_item.column', function(e) {
 			$('.issue_column').first().clone()
+																.find('.column_main').removeAttr('checked').end()
 																.find('.issue_article').remove().end()
 																.find('.add_item').removeClass('select').end()
 																.insertBefore(this);
