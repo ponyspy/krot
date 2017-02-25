@@ -11,11 +11,13 @@ mixin form_map(columns)
 				.issue_column
 					.column_options
 						.delete_item.column
+						input.column_main(type='radio', name='main_column', title='Главная колонка')
 					.column_articles
 						each article in column ? column.articles : new Array(0)
 							.issue_article(id=article._id)
 								.delete_item.article
-								!= article.title
+								img.article_image(src=article.base)
+								.article_title= article.title
 						.add_item.article
 			.add_item.column
 		.articles_list

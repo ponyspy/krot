@@ -13,13 +13,21 @@
 			display block
 		.list_search
 			display block
-			// width 100%
-			// margin 0
-			// padding 0
-			// border none
+			width 100%
+			margin 0
+			padding 0
+			border none
+			background-color rgb(235, 235, 236)
+			font-size 20pt
+			padding-left 5px
+			box-sizing border-box
 		.list_items
 			height 100%
 			overflow-y scroll
+			.list_item
+				padding-left 5px
+				box-sizing border-box
+				cursor pointer
 	.issue_colums
 		float left
 		overflow hidden
@@ -32,21 +40,36 @@
 			min-height 220px
 			background-color lightgrey
 			margin-right 20px
+			cursor move
+			.column_main
+				float right
+				display block
+				margin-top 5px
+				margin-right 5px
 			&:hover .delete_item.column
 				opacity 1
-			.placeholder
-				width 200px
-				height 200px
-				background-color black
-				margin-bottom 20px
 			.issue_article
 				width 200px
-				height 200px
 				margin-bottom 20px
-				background-color green
 				position relative
-				&:hover .delete_item.article
-					opacity 1
+				cursor move
+				&:hover
+					background-color rgb(231, 197, 123)
+				.article_title
+					position absolute
+					bottom 0
+					background-color black
+					color white
+					padding 5px
+					opacity 0
+				.article_image
+					display block
+					width 100%
+				&:hover
+					.article_title
+						opacity 1
+					.delete_item.article
+						opacity 1
 
 .delete_item
 	background-color black
@@ -55,18 +78,22 @@
 	padding-left 5px
 	padding-right 5px
 	opacity 0
+	cursor pointer
 	&.article
 		position absolute
 		right 0
+		padding-top 2px
 		&:after
-			content 'удалить'
+			content '✕'
 	&.column
+		padding 3px
 		&:after
 			content 'удалить колонку'
 	&:hover
 		background-color red
 
 .add_item
+	cursor pointer
 	width 200px
 	height 200px
 	text-align center
@@ -79,7 +106,7 @@
 	&.article
 		background-color rgb(131, 193, 216)
 		&.select
-			background-color rgb(187, 242, 112)
+			background-color rgb(89, 187, 57)
 	&.column
 		float left
 		margin-top 20px

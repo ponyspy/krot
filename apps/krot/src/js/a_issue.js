@@ -1,6 +1,6 @@
 $(function() {
 	var articles_sort = {
-		placeholder: 'placeholder',
+		// placeholder: 'placeholder',
 		cancel: '.add_item',
 		connectWith: '.column_articles',
 		sort: function(e) {
@@ -10,7 +10,7 @@ $(function() {
 	};
 
 	var columns_sort = {
-		placeholder: 'placeholder',
+		// placeholder: 'placeholder',
 		cancel: '.add_item',
 		sort: function(e) {
 			$('.articles_list').removeAttr('index').removeClass('show');
@@ -47,6 +47,7 @@ $(function() {
 				$('.add_item.article').removeClass('select').filter(self).addClass('select');
 				$('.articles_list').addClass('show').children('.list_items').empty().append(data).end()
 																						.attr('index', index);
+				$('.list_search').val('').focus();
 			});
 		})
 
@@ -70,7 +71,9 @@ $(function() {
 			var index = $('.articles_list').attr('index');
 
 			var $del_article = $('<div/>', { 'class': 'delete_item article' });
-			var $article = $('<div/>', { 'class': 'issue_article', 'id': $this.attr('id'), 'text': $this.text() }).append($del_article);
+			var $img_article = $('<img/>', { 'class': 'article_image', 'src': $this.attr('image')  });
+			var $title_article = $('<div/>', { 'class': 'article_title', 'text': $this.text() });
+			var $article = $('<div/>', { 'class': 'issue_article', 'id': $this.attr('id') }).append($del_article, $img_article, $title_article);
 
 			$('.issue_column').eq(index).find('.add_item.article').before($article);
 			$('.column_articles').sortable(articles_sort);
