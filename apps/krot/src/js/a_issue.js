@@ -57,6 +57,7 @@ $(function() {
 		})
 
 		.on('click', '.add_item.column', function(e) {
+			if ($('.issue_column').length > 2) return false;
 			$('.issue_column').first().clone()
 																.find('.column_main').removeAttr('checked').end()
 																.find('.issue_article').remove().end()
@@ -65,7 +66,7 @@ $(function() {
 		})
 
 		.on('click', '.delete_item.column', function(e) {
-			$('.issue_column').length > 1 && $(this).closest('.issue_column').remove();
+			if ($('.issue_column').length > 1) $(this).closest('.issue_column').remove();
 		})
 
 		.on('click', '.delete_item.article', function(e) {
