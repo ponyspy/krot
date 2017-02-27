@@ -66,6 +66,8 @@ $(function() {
 		})
 
 		.on('click', '.delete_item.column', function(e) {
+			$('.articles_list').removeAttr('index').removeClass('show');
+			$('.add_item').removeClass('select');
 			if ($('.issue_column').length > 1) $(this).closest('.issue_column').remove();
 		})
 
