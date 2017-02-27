@@ -64,6 +64,20 @@ $(function() {
 
 	$(document)
 
+
+		.on('keyup change', '.list_search', function(event) {
+			search.val = $(this).val();
+		})
+		.on('focusin', '.list_search', function(event) {
+			search.interval = setInterval(function() {
+				search.checkResult.call(search);
+			}, 600);
+		})
+		.on('focusout', '.list_search', function(event) {
+			clearInterval(search.interval);
+		})
+
+
 		.on('keyup', function(event) {
 			if (event.altKey && event.which == 70) {
 				$('.list_search').focus();
@@ -79,17 +93,13 @@ $(function() {
 			}
 		})
 
-		.on('keyup change', '.list_search', function(event) {
-			search.val = $(this).val();
+		.on('mouseup', function(e) {
+			if (!/delete_item|add_item|list_item|list_search/.test(event.target.className)) {
+				$('.articles_list').removeAttr('index').removeClass('show');
+				$('.add_item').removeClass('select');
+			}
 		})
-		.on('focusin', '.list_search', function(event) {
-			search.interval = setInterval(function() {
-				search.checkResult.call(search);
-			}, 600);
-		})
-		.on('focusout', '.list_search', function(event) {
-			clearInterval(search.interval);
-		})
+
 
 		.on('click', '.add_item.article', function(e) {
 			var self = this;
@@ -133,13 +143,6 @@ $(function() {
 
 			$('.issue_column').eq(index).find('.add_item.article').before($article);
 			$('.column_articles').sortable(articles_sort);
-		})
-
-		.on('mouseup', function(e) {
-			if (!/delete_item|add_item|list_item|list_search/.test(event.target.className)) {
-				$('.articles_list').removeAttr('index').removeClass('show');
-				$('.add_item').removeClass('select');
-			}
 		});
 
 });
