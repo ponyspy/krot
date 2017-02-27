@@ -42,7 +42,54 @@ $(function() {
 		this.submit();
 	});
 
+
+	var search = {
+		val: '', buf: '',
+		checkResult: function() {
+			if (this.buf != this.val) {
+				this.buf = this.val;
+				this.getResult.call(search, this.val);
+			}
+		},
+		getResult: function (result) {
+			$.post('/admin/issues/get_articles', { context: { text: result } }).done(function(data) {
+				if (data == 'end') {
+					$('.list_items').empty().text('Ничего нет!');
+				} else {
+					$('.list_items').empty().append(data);
+				}
+			});
+		}
+	};
+
 	$(document)
+
+		.on('keyup', function(event) {
+			if (event.altKey && event.which == 70) {
+				$('.list_search').focus();
+				return false;
+			}
+
+			if (event.which == 27) {
+				var $sub_search = $('.list_search');
+				$sub_search.val() === ''
+					? $sub_search.blur()
+					: $sub_search.val('').trigger('keyup');
+				return false;
+			}
+		})
+
+		.on('keyup change', '.list_search', function(event) {
+			search.val = $(this).val();
+		})
+		.on('focusin', '.list_search', function(event) {
+			search.interval = setInterval(function() {
+				search.checkResult.call(search);
+			}, 600);
+		})
+		.on('focusout', '.list_search', function(event) {
+			clearInterval(search.interval);
+		})
 
 		.on('click', '.add_item.article', function(e) {
 			var self = this;
