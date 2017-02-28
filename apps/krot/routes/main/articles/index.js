@@ -6,7 +6,11 @@ module.exports = function(Model) {
 	module.index = function(req, res, next) {
 		return res.redirect('/');
 
-		Article.where('status').ne('hidden').sort('-date').exec(function(err, articles) {
+		var Query = req.session.user_id
+			? Article.find()
+			: Article.where('status').ne('hidden');
+
+		Query.sort('-date').exec(function(err, articles) {
 			if (err) return next(err);
 
 			res.render('main/articles/index.jade', { articles: articles });

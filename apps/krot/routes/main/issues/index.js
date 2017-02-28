@@ -6,7 +6,11 @@ module.exports = function(Model) {
 	module.index = function(req, res, next) {
 		return res.redirect('/');
 
-		Issue.where('status').ne('hidden').sort('-date').exec(function(err, issues) {
+		var Query = req.session.user_id
+			? Issue.find()
+			: Issue.where('status').ne('hidden');
+
+		Query.sort('-date').exec(function(err, issues) {
 			if (err) return next(err);
 
 			res.render('main/issues/index.jade', { issues: issues });

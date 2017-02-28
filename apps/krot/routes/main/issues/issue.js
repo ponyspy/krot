@@ -8,7 +8,11 @@ module.exports = function(Model) {
 	module.index = function(req, res, next) {
 		var id = req.params.issue_id;
 
-		Issue.findOne({ $or: [ { '_short_id': id }, { 'numb': id } ] }).where('status').ne('hidden').populate({
+		var Query = req.session.user_id
+			? Issue.findOne({ $or: [ { '_short_id': id }, { 'numb': id } ] })
+			: Issue.findOne({ $or: [ { '_short_id': id }, { 'numb': id } ] }).where('status').ne('hidden');
+
+		Query.populate({
 			path: 'columns.articles',
 			select: 'base hover sym categorys _short_id',
 			populate: {
