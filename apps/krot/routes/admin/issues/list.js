@@ -6,6 +6,7 @@ module.exports = function(Model) {
 
 	var Issue = Model.Issue;
 	var Article = Model.Article;
+	var Category = Model.Category;
 
 
 	module.index = function(req, res, next) {
@@ -24,21 +25,37 @@ module.exports = function(Model) {
 	module.get_list = function(req, res, next) {
 		var post = req.body;
 
-		async.series({
-			Query: function(callback) {
+		async.waterfall([
+			function(callback) {
 				if (post.context.text && post.context.text !== '') {
-					Article.find({ $text : { $search : post.context.text } } ).distinct('_id').exec(function(err, ids) {
-						var numb = post.context.text.replace(/Номер|номер/g, '').trim();
-						var arr_search = Number.isInteger(+numb)
-							? [ { 'numb': numb }, { 'columns.articles': { '$in': ids } } ]
-							: [ { 'columns.articles': { '$in': ids } } ];
+					callback(null, 'go');
+				} else {
+					callback(Error('none'));
+				}
+			},
+			function(result, callback) {
+				Category.find({ $text : { $search : post.context.text } } ).distinct('_id').exec(callback);
+			},
+			function(c_ids, callback) {
+				Article.find({ 'categorys': { '$in': c_ids } }).distinct('_id').exec(callback);
+			},
+			function(a_ids, callback) {
+				Article.find({ $text : { $search : post.context.text } }).distinct('_id').exec(function(err, a_text_ids) {
+					callback(err, a_ids.concat(a_text_ids));
+				});
+			},
+			function(a_ids, callback) {
+				var numb = post.context.text.replace(/Номер|номер/g, '').trim();
+				var arr_search = Number.isInteger(+numb)
+					? [ { 'numb': numb }, { 'columns.articles': { '$in': a_ids } } ]
+					: [ { 'columns.articles': { '$in': a_ids } } ];
 
-						callback(null, Issue.find({ '$or': arr_search }));
-					});
-				} else callback(null, Issue.find());
+				callback(null, Issue.find({ '$or': arr_search }));
 			}
-		}, function(err, results) {
-			var Query = results.Query;
+		], function(err, results) {
+			if (err && err.message != 'none') return next(err);
+
+			var Query = results || Issue.find();
 
 			if (post.context.type && post.context.type != 'all') {
 				Query.where('type').equals(post.context.type);
