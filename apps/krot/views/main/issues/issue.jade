@@ -24,10 +24,10 @@ block content
 		each column in issue.columns
 			.column_item.swiper-slide(class=column.main ? 'main' : '')
 				each article in column.articles
-					.article_item
+					.article_item(class=article.status == 'hidden' ? 'hidden' : '')
 						a.article_cover(href='/articles/' + (article.sym || article._short_id))
 							img.cover_base(src=article.base)
 							img.cover_hover(src=article.hover)
 						.article_categorys
 							each category in article.categorys
-								a.category_item(href='#' + category._short_id)!= category.title.replace(' ', '<br>')
+								a.category_item(class=category.status == 'hidden' ? 'hidden' : '', href='#' + category._short_id)!= category.title.replace(' ', '<br>')

@@ -21,7 +21,7 @@ block content
 		a.header_back(href='/'): img(src='/stuff/' + __app_name + '/icons/logo/krot_mono_invert.png')
 		.article_categorys
 			each category in article.categorys
-				a.category_item(href='#' + category._short_id)!= category.title
+				a.category_item(class=category.status == 'hidden' ? 'hidden' : '', href='#' + category._short_id)!= category.title
 
 	.article_body
 		.article_files
@@ -32,6 +32,6 @@ block content
 
 	.article_summary
 		each item in summary
-			a.summary_item(href='/articles/' + (item.sym || item._short_id))
+			a.summary_item(class=item.status == 'hidden' ? 'hidden' : '', href='/articles/' + (item.sym || item._short_id))
 				img.s_item_base(src=item.base)
 				img.s_item_hover(src=item.hover)

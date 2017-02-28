@@ -16,11 +16,11 @@ module.exports = function(Model) {
 		Query.populate({
 			path: 'columns.articles',
 			match: user_id ? undefined : { 'status': { '$ne': 'hidden' } },
-			select: 'base hover sym categorys _short_id',
+			select: 'base hover sym status categorys _short_id',
 			populate: {
 				path: 'categorys',
 				match: user_id ? undefined : { 'status': { '$ne': 'hidden' } },
-				select: 'title _short_id'
+				select: 'title status _short_id'
 			}
 		}).exec(function(err, issue) {
 			if (err || !issue) return next(err);
