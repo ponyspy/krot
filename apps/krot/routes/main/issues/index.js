@@ -6,7 +6,9 @@ module.exports = function(Model) {
 	module.index = function(req, res, next) {
 		return res.redirect('/');
 
-		var Query = req.session.user_id
+		var user_id = req.session.user_id;
+
+		var Query = user_id
 			? Issue.find()
 			: Issue.where('status').ne('hidden');
 

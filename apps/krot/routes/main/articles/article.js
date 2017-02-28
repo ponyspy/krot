@@ -4,9 +4,10 @@ module.exports = function(Model) {
 	var Article = Model.Article;
 
 	module.index = function(req, res, next) {
+		var user_id = req.session.user_id;
 		var id = req.params.article_id;
 
-		var Query = req.session.user_id
+		var Query = user_id
 			? Article.findOne({ $or: [ { '_short_id': id }, { 'sym': id } ] })
 			: Article.findOne({ $or: [ { '_short_id': id }, { 'sym': id } ] }).where('status').ne('hidden');
 
@@ -14,7 +15,7 @@ module.exports = function(Model) {
 			if (err || !article) return next(err);
 			var categorys = article.categorys.map(function(category) { return category._id; });
 
-			var Query = req.session.user_id
+			var Query = user_id
 				? Article.find({ _id: { '$ne': article._id }, categorys: { '$in': categorys } })
 				: Article.find({ _id: { '$ne': article._id }, categorys: { '$in': categorys } }).where('status').ne('hidden');
 

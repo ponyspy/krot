@@ -6,17 +6,20 @@ module.exports = function(Model) {
 	var Issue = Model.Issue;
 
 	module.index = function(req, res, next) {
+		var user_id = req.session.user_id;
 		var id = req.params.issue_id;
 
-		var Query = req.session.user_id
+		var Query = user_id
 			? Issue.findOne({ $or: [ { '_short_id': id }, { 'numb': id } ] })
 			: Issue.findOne({ $or: [ { '_short_id': id }, { 'numb': id } ] }).where('status').ne('hidden');
 
 		Query.populate({
 			path: 'columns.articles',
+			match: user_id ? undefined : { 'status': { '$ne': 'hidden' } },
 			select: 'base hover sym categorys _short_id',
 			populate: {
 				path: 'categorys',
+				match: user_id ? undefined : { 'status': { '$ne': 'hidden' } },
 				select: 'title _short_id'
 			}
 		}).exec(function(err, issue) {
