@@ -33,8 +33,9 @@ block content
 				option(value='country') Страна
 				option(value='author') Автор
 			.form_title Видимость:
-			input(type='checkbox', name='status', value='hidden')
-			!= ' скрыть'
+			label
+				input(type='checkbox', name='status', value='hidden')
+				!= ' скрыть'
 			br
 			br
 			input(type='submit', value='отправить')

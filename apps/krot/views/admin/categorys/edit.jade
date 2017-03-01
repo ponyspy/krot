@@ -33,8 +33,9 @@ block content
 				option(value='country', selected=category.type == 'country') Страна
 				option(value='author', selected=category.type == 'author') Автор
 			.form_title Видимость:
-			input(type='checkbox', name='status', value='hidden', checked=category.status)
-			!= ' скрыть'
+			label
+				input(type='checkbox', name='status', value='hidden', checked=category.status)
+				!= ' скрыть'
 			br
 			br
 			input(type='submit', value='отправить')
