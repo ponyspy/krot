@@ -24,6 +24,7 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 	mkdirp(public_path + dir_path, function() {
 		gm(file.path).size({ bufferStream: true }, function(err, size) {
 			this.resize(size.width > file_size ? file_size : false, false);
+			this.quality(size.width >= file_size ? 82 : 100);
 			this.write(public_path + dir_path + '/' + file_name, function(err) {
 				obj[field_name] = dir_path + '/' + file_name;
 				callback.call(null, null, obj);

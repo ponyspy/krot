@@ -26,14 +26,11 @@ block content
 		.title= content_title
 		form(action="", method="post", enctype="multipart/form-data")
 			.form_title Шапка:
-			input(type='file', name='cover')
-			.form_title Обложка:
-			span Базовая:
-			input(type='file', name='base')
-			br
-			br
-			span Наведение:
-			input(type='file', name='hover')
+			+form_single_file('cover')
+			.form_title Обложка [базовая]:
+			+form_single_file('base', article)
+			.form_title Обложка [наведение]:
+			+form_single_file('hover', article)
 			.form_title Название:
 			+form_text_single('title')
 			.form_title Синоним адреса:

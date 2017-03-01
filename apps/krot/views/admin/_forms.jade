@@ -86,14 +86,25 @@ mixin form_multiple_input(path, options)
 					input.input(type='text', name=path + '[]', value=option)
 		input.forward(type="button", value="+")
 
+//- Single File Form
+
+mixin form_single_file(path, object)
+	if (object && object[path])
+		label
+			span= 'удалить | '
+			input(type='checkbox', name=path + '_del')
+		span &nbsp;
+	input(type='file', name=path)
+
 //- Multiple Files Form
 
 mixin form_multiple_files(path, path_desc, object)
 	if (object && object.files.length > 0)
 		each file, i in object.files
-			span!= 'удалить | '
-			input(type='checkbox', name='files_delete[]', value=file.path)
-			span!='&nbsp;&nbsp;&nbsp;'
+			label
+				span= 'удалить | '
+				input(type='checkbox', name='files_delete[]', value=file.path)
+			span &nbsp;
 			a(href=file.path, target='_blank')=file.desc || 'файл ' + i
 			br
 		br

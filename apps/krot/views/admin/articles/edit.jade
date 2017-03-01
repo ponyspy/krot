@@ -26,23 +26,11 @@ block content
 		.title= content_title
 		form(action="", method="post", enctype="multipart/form-data")
 			.form_title Шапка:
-			input(type='file', name='cover')
-			if (article.cover)
-				input(type='checkbox', name='cover_del')
-				span= ' | удалить'
-			.form_title Обложка:
-			span Базовая:
-			input(type='file', name='base')
-			if (article.base)
-				input(type='checkbox', name='base_del')
-				span= ' | удалить'
-			br
-			br
-			span Наведение:
-			input(type='file', name='hover')
-			if (article.hover)
-				input(type='checkbox', name='hover_del')
-				span= ' | удалить'
+			+form_single_file('cover', article)
+			.form_title Обложка [базовая]:
+			+form_single_file('base', article)
+			.form_title Обложка [наведение]:
+			+form_single_file('hover', article)
 			.form_title Название:
 			+form_text_single('title', article)
 			.form_title Синоним адреса:
