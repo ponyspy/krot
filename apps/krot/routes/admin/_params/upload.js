@@ -19,12 +19,13 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 	if (!file) return callback.call(null, null, obj);
 
 	var dir_path = '/cdn/' + __app_name + '/images/' + base_path + '/' + obj._id;
-	var file_name = field_name + '.' + mime.extension(file.mimetype);
 
 	mkdirp(public_path + dir_path, function() {
-		gm(file.path).size({ bufferStream: true }, function(err, size) {
-			this.resize(size.width > file_size ? file_size : false, false);
-			this.quality(size.width >= file_size ? 82 : 100);
+		gm(file.path).identify({ bufferStream: true }, function(err, meta) {
+			var file_name = field_name + '.' + (meta['Channel depth'].Alpha ? 'png' : 'jpg');
+
+			this.resize(meta.size.width > file_size ? file_size : false, false);
+			this.quality(meta.size.width >= file_size ? 82 : 100);
 			this.write(public_path + dir_path + '/' + file_name, function(err) {
 				obj[field_name] = dir_path + '/' + file_name;
 				callback.call(null, null, obj);
