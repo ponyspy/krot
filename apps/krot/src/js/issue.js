@@ -8,7 +8,7 @@ $(function() {
 		spaceBetween: 20,
 		autoHeight: true,
 		centeredSlides: true,
-		keyboardControl: false,
+		keyboardControl: true,
 		loop: false,
 		// runCallbacksOnInit: false,
 	});
