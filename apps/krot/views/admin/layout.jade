@@ -7,7 +7,10 @@ html
 		.main_block
 			.header_block
 				.menu_block
-					a.logo(href='/admin') KROT | STARGAZER
+					.logo
+						a(href='/') KROT
+						span= ' | '
+						a(href='/admin') STARGAZER
 					a(href='/admin/users') ПОЛЬЗОВАТЕЛИ
 					a(href='/admin/issues') НОМЕРА
 					a(href='/admin/articles') МАТЕРИАЛЫ
