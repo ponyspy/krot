@@ -95,8 +95,13 @@ var categorySchema = new Schema({
 // ------------------------
 
 
-articleSchema.index({'title': 'text', 'intro': 'text', 'description': 'text'}, { default_language: 'russian', weights: { title: 3, intro: 2, description: 1 } });
-categorySchema.index({'title': 'text', 'description': 'text'}, { default_language: 'russian', weights: { title: 2, description: 1 } });
+articleSchema.index({'title': 'text', 'intro': 'text', 'description': 'text'}, {
+	default_language: 'russian', weights: { title: 3, intro: 2, description: 1 }
+});
+
+categorySchema.index({'title': 'text', 'description': 'text'}, {
+	default_language: 'russian', weights: { title: 2, description: 1 }
+});
 
 
 // ------------------------
