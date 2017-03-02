@@ -9,6 +9,16 @@ mongoose.connect('localhost', __app_name);
 
 
 // ------------------------
+// *** Getters Block ***
+// ------------------------
+
+
+var cdnPath = function(val) {
+	return '/cdn/' + __app_name + '/' + val;
+};
+
+
+// ------------------------
 // *** Schema Block ***
 // ------------------------
 
@@ -23,8 +33,8 @@ var userSchema = new Schema({
 
 var issueSchema = new Schema({
 	numb: { type: Number, index: true, unique: true },
-	logo: String,
-	background: String,
+	logo: { type: String, get: cdnPath },
+	background: { type: String, get: cdnPath },
 	style: {
 		background: {
 			position: String,
@@ -46,11 +56,11 @@ var articleSchema = new Schema({
 	title: { type: String, trim: true },
 	intro: { type: String, trim: true },
 	description: { type: String, trim: true },
-	cover: String,
-	base: String,
-	hover: String,
+	cover: { type: String, get: cdnPath },
+	base: { type: String, get: cdnPath },
+	hover: { type: String, get: cdnPath },
 	files: [{
-		path: String,
+		path: { type: String, get: cdnPath },
 		desc: String
 	}],
 	categorys: [{ type: ObjectId, ref: 'Category' }],
@@ -58,7 +68,7 @@ var articleSchema = new Schema({
 	sym: { type: String, trim: true, index: true, unique: true, sparse: true },
 	_short_id: { type: String, unique: true, index: true, sparse: true },
 	date: { type: Date, default: Date.now, index: true },
-});
+}, { toJSON: { getters: true }, toObject: { getters: true } });
 
 var categorySchema = new Schema({
 	title: { type: String, trim: true },

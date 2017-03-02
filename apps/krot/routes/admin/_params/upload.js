@@ -19,17 +19,18 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 
 	if (del_file || !file) return callback.call(null, null, obj);
 
-	var dir_path = '/cdn/' + __app_name + '/images/' + base_path + '/' + obj._id;
+	var file_path =  '/' + base_path + '/' + obj._id + '/images';
+	var cdn_path = '/cdn/' + __app_name + file_path;
 
-	rimraf(public_path + dir_path + '/' + field_name + '.*', { glob: true }, function() {
-		mkdirp(public_path + dir_path, function() {
+	rimraf(public_path + cdn_path + '/' + field_name + '.*', { glob: true }, function() {
+		mkdirp(public_path + cdn_path, function() {
 			gm(file.path).identify({ bufferStream: true }, function(err, meta) {
 				var file_name = field_name + '.' + (meta['Channel depth'].Alpha ? 'png' : 'jpg');
 
 				this.resize(meta.size.width > file_size ? file_size : false, false);
 				this.quality(meta.size.width >= file_size ? 82 : 100);
-				this.write(public_path + dir_path + '/' + file_name, function(err) {
-					obj[field_name] = dir_path + '/' + file_name;
+				this.write(public_path + cdn_path + '/' + file_name, function(err) {
+					obj[field_name] = file_path + '/' + file_name;
 					callback.call(null, null, obj);
 				});
 			});
@@ -39,9 +40,10 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 
 module.exports.image_article = function(article, post, callback) {
 	var jquery = fs.readFileSync(__glob_root + '/public/libs/js/jquery-2.2.4.min.js', 'utf-8');
-	var dir_path = '/cdn/' + __app_name + '/images/articles/' + article._id.toString() + '/content';
+	var file_path = '/articles/' + article._id.toString() + '/images/content';
+	var cdn_path = '/cdn/' + __app_name + file_path;
 
-	rimraf(dir_path, { glob: true }, function(file_path) {
+	rimraf(cdn_path, { glob: true }, function(file_path) {
 		jsdom.env(post.description, { src: [jquery] }, function(err, window) {
 			var $ = window.$;
 			var images = $('img').toArray();
@@ -51,10 +53,10 @@ module.exports.image_article = function(article, post, callback) {
 				var file_name = path.basename($this.attr('src'));
 
 				$this.removeAttr('width').removeAttr('height').removeAttr('alt');
-				$this.attr('src', dir_path + '/' + file_name);
+				$this.attr('src', file_path + '/' + file_name);
 
-				mkdirp(public_path + dir_path, function() {
-					fs.createReadStream(preview_path + file_name).pipe(fs.createWriteStream(public_path + dir_path + '/' + file_name));
+				mkdirp(public_path + cdn_path, function() {
+					fs.createReadStream(preview_path + file_name).pipe(fs.createWriteStream(public_path + cdn_path + '/' + file_name));
 					callback();
 				});
 			}, function() {
@@ -93,13 +95,14 @@ module.exports.image_article_preview = function(article, callback) {
 module.exports.files_article_upload = function(article, post, files, callback) {
 	if (files.attach && files.attach.length > 0) {
 		async.forEachOfSeries(files.attach, function(file, i, callback) {
-			var dir_path = '/cdn/' + __app_name + '/files/articles/' + article._id;
+			var file_path = '/articles/' + article._id + '/files';
+			var cdn_path = '/cdn/' + __app_name + file_path;
 			var file_name = Date.now() + '.' + mime.extension(file.mimetype);
 
-			mkdirp(public_path + dir_path, function() {
-				fs.rename(file.path, public_path + dir_path + '/' + file_name, function() {
+			mkdirp(public_path + cdn_path, function() {
+				fs.rename(file.path, public_path + cdn_path + '/' + file_name, function() {
 					article.files.push({
-						path: dir_path + '/' + file_name,
+						path: file_path + '/' + file_name,
 						desc: post.attach_desc[i] || ''
 					});
 					callback();
