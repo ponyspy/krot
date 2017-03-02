@@ -101,7 +101,7 @@ module.exports = function(Model) {
 			? Article.find({ $text : { $search : post.context.text } } )
 			: Article.find();
 
-		Query.sort('-date').lean().exec(function(err, articles) {
+		Query.sort('-date').exec(function(err, articles) {
 			if (err) return next(err);
 
 			if (articles.length > 0) {

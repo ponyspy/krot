@@ -13,8 +13,12 @@ mongoose.connect('localhost', __app_name);
 // ------------------------
 
 
-var cdnPath = function(val) {
-	return '/cdn/' + __app_name + '/' + val;
+var cdnPath = function(path) {
+	return path ? '/cdn/' + __app_name + path : undefined;
+};
+
+var cdnContentPath = function(content) {
+	return content ? content.replace(/\{CDN_PATH\}/g, '/cdn/' + __app_name) : undefined;
 };
 
 
@@ -50,12 +54,12 @@ var issueSchema = new Schema({
 	status: String,	// hidden
 	_short_id: { type: String, unique: true, index: true, sparse: true },
 	date: { type: Date, default: Date.now, index: true },
-});
+}, { toJSON: { getters: true }, toObject: { getters: true } });
 
 var articleSchema = new Schema({
 	title: { type: String, trim: true },
 	intro: { type: String, trim: true },
-	description: { type: String, trim: true },
+	description: { type: String, trim: true, get: cdnContentPath },
 	cover: { type: String, get: cdnPath },
 	base: { type: String, get: cdnPath },
 	hover: { type: String, get: cdnPath },

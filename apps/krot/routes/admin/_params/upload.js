@@ -43,7 +43,7 @@ module.exports.image_article = function(article, post, callback) {
 	var file_path = '/articles/' + article._id.toString() + '/images/content';
 	var cdn_path = '/cdn/' + __app_name + file_path;
 
-	rimraf(cdn_path, { glob: true }, function(file_path) {
+	rimraf(cdn_path, { glob: true }, function(rm_path) {
 		jsdom.env(post.description, { src: [jquery] }, function(err, window) {
 			var $ = window.$;
 			var images = $('img').toArray();
@@ -53,7 +53,7 @@ module.exports.image_article = function(article, post, callback) {
 				var file_name = path.basename($this.attr('src'));
 
 				$this.removeAttr('width').removeAttr('height').removeAttr('alt');
-				$this.attr('src', file_path + '/' + file_name);
+				$this.attr('src', '{CDN_PATH}' + file_path + '/' + file_name);
 
 				mkdirp(public_path + cdn_path, function() {
 					fs.createReadStream(preview_path + file_name).pipe(fs.createWriteStream(public_path + cdn_path + '/' + file_name));
