@@ -26,7 +26,7 @@ block content
 	.article_body
 		.article_files
 			each file, i in article.files || []
-				a.file_item(href=file.path)= file.desc ? '< ' + file.desc + ' >' : '< File ' + (i+1) + ' >'
+				a.file_item(href=file.path, target='_blank')= file.desc ? '< ' + file.desc + ' >' : '< File ' + (i+1) + ' >'
 		.article_intro!= article.intro
 		.article_description!= article.description
 
