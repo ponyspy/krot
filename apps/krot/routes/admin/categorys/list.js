@@ -21,7 +21,6 @@ module.exports = function(Model) {
 
 	module.get_list = function(req, res, next) {
 		var post = req.body;
-		console.log(post)
 
 		var Query = (post.context.text && post.context.text !== '')
 			? Category.find({ $text : { $search : post.context.text } } )
