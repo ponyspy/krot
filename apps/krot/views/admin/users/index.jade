@@ -33,4 +33,4 @@ block content
 			.list_item
 				a.item_rm.user(href='#', id=user._id) удалить
 				a.item_title(href='/admin/users/edit/' + user._id)= (user.login || '!!! ПУСТОЕ ПОЛЕ !!!')
-				span.item_status= ' ' + status
+				span.item_status(title='○ - no status\n● - user\n●● - admin ')= ' ' + status
