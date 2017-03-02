@@ -13,11 +13,11 @@ mongoose.connect('localhost', __app_name);
 // ------------------------
 
 
-var cdnPath = function(path) {
+var pathCDN = function(path) {
 	return path ? '/cdn/' + __app_name + path : undefined;
 };
 
-var cdnContentPath = function(content) {
+var pathContentCDN = function(content) {
 	return content ? content.replace(/\{CDN_PATH\}/g, '/cdn/' + __app_name) : undefined;
 };
 
@@ -37,8 +37,8 @@ var userSchema = new Schema({
 
 var issueSchema = new Schema({
 	numb: { type: Number, index: true, unique: true },
-	logo: { type: String, get: cdnPath },
-	background: { type: String, get: cdnPath },
+	logo: { type: String, get: pathCDN },
+	background: { type: String, get: pathCDN },
 	style: {
 		background: {
 			position: String,
@@ -62,12 +62,12 @@ var issueSchema = new Schema({
 var articleSchema = new Schema({
 	title: { type: String, trim: true },
 	intro: { type: String, trim: true },
-	description: { type: String, trim: true, get: cdnContentPath },
-	cover: { type: String, get: cdnPath },
-	base: { type: String, get: cdnPath },
-	hover: { type: String, get: cdnPath },
+	description: { type: String, trim: true, get: pathContentCDN },
+	cover: { type: String, get: pathCDN },
+	base: { type: String, get: pathCDN },
+	hover: { type: String, get: pathCDN },
 	files: [{
-		path: { type: String, get: cdnPath },
+		path: { type: String, get: pathCDN },
 		desc: String
 	}],
 	categorys: [{ type: ObjectId, ref: 'Category' }],
