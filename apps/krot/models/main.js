@@ -54,7 +54,10 @@ var issueSchema = new Schema({
 	status: String,	// hidden
 	_short_id: { type: String, unique: true, index: true, sparse: true },
 	date: { type: Date, default: Date.now, index: true },
-}, { toJSON: { getters: true }, toObject: { getters: true } });
+}, {
+	toJSON: { getters: true },
+	toObject: { getters: true }
+});
 
 var articleSchema = new Schema({
 	title: { type: String, trim: true },
@@ -72,7 +75,10 @@ var articleSchema = new Schema({
 	sym: { type: String, trim: true, index: true, unique: true, sparse: true },
 	_short_id: { type: String, unique: true, index: true, sparse: true },
 	date: { type: Date, default: Date.now, index: true },
-}, { toJSON: { getters: true }, toObject: { getters: true } });
+}, {
+	toJSON: { getters: true },
+	toObject: { getters: true }
+});
 
 var categorySchema = new Schema({
 	title: { type: String, trim: true },
