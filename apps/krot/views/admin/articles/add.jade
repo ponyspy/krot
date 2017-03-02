@@ -24,13 +24,13 @@ block sub_menu
 block content
 	.form_block
 		.title= content_title
-		form(action="", method="post", enctype="multipart/form-data")
+		form(action='', method='post', enctype='multipart/form-data')
 			.form_title Шапка:
-			+form_single_file('cover')
+			+form_single_file('cover')(accept='image/jpeg,image/png')
 			.form_title Обложка [базовая]:
-			+form_single_file('base', article)
+			+form_single_file('base')(accept='image/jpeg,image/png')
 			.form_title Обложка [наведение]:
-			+form_single_file('hover', article)
+			+form_single_file('hover')(accept='image/jpeg,image/png')
 			.form_title Название:
 			+form_text_single('title')
 			.form_title Синоним адреса:
@@ -40,7 +40,7 @@ block content
 			.form_title Описание:
 			+form_text_multi('description')
 			.form_title Файлы PDF:
-			+form_multiple_files('attach', 'attach_desc[]')
+			+form_multiple_files('attach')(accept='application/pdf,application/zip')
 			.form_title Категории:
 			+form_multiple_select('categorys', categorys)
 			.form_title Видимость:

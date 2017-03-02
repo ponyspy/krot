@@ -94,11 +94,11 @@ mixin form_single_file(path, object)
 			span= 'удалить | '
 			input(type='checkbox', name=path + '_del')
 		span &nbsp;
-	input(type='file', name=path)
+	input(type='file', name=path, accept=attributes.accept)
 
 //- Multiple Files Form
 
-mixin form_multiple_files(path, path_desc, object)
+mixin form_multiple_files(path, object)
 	if (object && object.files.length > 0)
 		each file, i in object.files
 			label
@@ -111,8 +111,8 @@ mixin form_multiple_files(path, path_desc, object)
 	.snake_outer
 		.snake
 			input(type="button", value='-').back
-			input(type='file', name=path)
-			input(type='text', name=path_desc, placeholder='описание')
+			input(type='file', name=path, accept=attributes.accept)
+			input(type='text', name=path + '_desc[]', placeholder='описание')
 		//- br
 		input(type="button", value='+').forward
 		br
