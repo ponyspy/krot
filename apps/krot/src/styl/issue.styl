@@ -42,14 +42,14 @@
 			.article_cover
 				display block
 				text-decoration none
-				.cover_base
+				img
 					width 100%
-					display block
-				.cover_hover
-					width 100%
+					&.cover_base
+						display block
+					&.cover_hover
+						display none
+			&:hover .article_cover.change
+				img.cover_base
 					display none
-			&:hover
-				.cover_base
-					display none
-				.cover_hover
+				img.cover_hover
 					display block
