@@ -32,6 +32,7 @@ block content
 
 	.article_summary
 		each item in summary
-			a.summary_item(class=item.status == 'hidden' ? 'hidden' : '', href='/articles/' + (item.sym || item._short_id))
+			a.summary_item(class=item.hover && 'change', class=item.status == 'hidden' ? 'hidden' : '', href='/articles/' + (item.sym || item._short_id))
 				img.s_item_base(src=item.base)
-				img.s_item_hover(src=item.hover)
+				if item.hover
+					img.s_item_hover(src=item.hover)
