@@ -68,6 +68,8 @@ module.exports.image_article = function(article, post, callback) {
 };
 
 module.exports.image_article_preview = function(article, callback) {
+	if (!article.description) return callback(null, article);
+
 	var jquery = fs.readFileSync(__glob_root + '/public/libs/js/jquery-2.2.4.min.js', 'utf-8');
 
 	jsdom.env(article.description, { src: [jquery] }, function(err, window) {
