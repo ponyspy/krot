@@ -19,7 +19,9 @@ module.exports.preview = function(req, res) {
 		fs.readFile(file.path, function(err, data) {
 			SVGO.optimize(data, function(result) {
 				fs.writeFile(__glob_root + '/public' + new_path, result.data, function(err) {
-					res.send(new_path);
+					rimraf(file.path, { glob: false }, function() {
+						res.send(new_path);
+					});
 				});
 			});
 		});
