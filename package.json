@@ -21,7 +21,8 @@
     "mongoose-bcrypt": "^1.1.1",
     "multer": "^1.0.0",
     "rimraf": "^2.5.4",
-    "shortid": "^2.2.2"
+    "shortid": "^2.2.2",
+    "svgo": "^0.7.2"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

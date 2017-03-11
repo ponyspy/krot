@@ -6,6 +6,7 @@ var fs = require('fs');
 var path = require('path');
 var mime = require('mime');
 var jsdom = require('jsdom');
+var svgo = require('svgo');
 
 var public_path = __glob_root + '/public';
 var preview_path = __glob_root + '/public/preview/';
@@ -24,16 +25,38 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 
 	rimraf(public_path + cdn_path + '/' + field_name + '.*', { glob: true }, function() {
 		mkdirp(public_path + cdn_path, function() {
-			gm(file.path).identify({ bufferStream: true }, function(err, meta) {
-				var file_name = field_name + '.' + (meta['Channel depth'].Alpha ? 'png' : 'jpg');
-
-				this.resize(meta.size.width > file_size ? file_size : false, false);
-				this.quality(meta.size.width >= file_size ? 82 : 100);
-				this.write(public_path + cdn_path + '/' + file_name, function(err) {
-					obj[field_name] = file_path + '/' + file_name;
-					callback.call(null, null, obj);
+			if (mime.extension(file.mimetype) == 'svg') {
+				var SVGO = new svgo({
+					plugins: [{
+						convertShapeToPath: false
+					}]
 				});
-			});
+				var file_name = field_name + '.svg';
+
+				fs.readFile(file.path, function(err, data) {
+					if (err) return callback.call(null, null, obj);
+
+					SVGO.optimize(data, function(result) {
+						fs.writeFile(public_path + cdn_path + '/' + file_name, result.data, function(err) {
+							obj[field_name] = file_path + '/' + file_name;
+							callback.call(null, null, obj);
+						});
+					});
+				});
+			} else if (/jpeg|png/.test(mime.extension(file.mimetype))) {
+				gm(file.path).identify({ bufferStream: true }, function(err, meta) {
+					var file_name = field_name + '.' + (meta['Channel depth'].Alpha ? 'png' : 'jpg');
+
+					this.resize(meta.size.width > file_size ? file_size : false, false);
+					this.quality(meta.size.width >= file_size ? 82 : 100);
+					this.write(public_path + cdn_path + '/' + file_name, function(err) {
+						obj[field_name] = file_path + '/' + file_name;
+						callback.call(null, null, obj);
+					});
+				});
+			} else {
+				callback.call(null, null, obj);
+			}
 		});
 	});
 };
