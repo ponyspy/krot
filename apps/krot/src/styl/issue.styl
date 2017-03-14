@@ -9,12 +9,37 @@
 		box-sizing border-box!important
 		max-width 100%!important
 	}
+	.slide_button.next {
+		margin-left 10px!important
+	}
+	.slide_button.prev {
+		margin-right 10px!important
+	}
 }
 
 .issue_columns
 	overflow hidden
 	margin-top 20px
 	width 100%
+	.slide_button
+		position absolute
+		width 60px
+		height 60px
+		top 50%
+		margin-top -30px
+		z-index 99999
+		cursor pointer
+		&.swiper-button-disabled
+			cursor default
+			opacity 0.6
+		&.next
+			margin-left -10px
+			background-image url('/stuff/krot/icons/arrow.svg')
+			transform rotate(180deg)
+		&.prev
+			margin-right -10px
+			right 0
+			background-image url('/stuff/krot/icons/arrow.svg')
 	.column_item
 		max-width 306px
 		// width 60%

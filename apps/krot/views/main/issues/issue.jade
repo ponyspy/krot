@@ -20,15 +20,18 @@ block logo
 	img(src=issue.logo || '/stuff/' + __app_name + '/icons/logo/krot_main.png')
 
 block content
-	.issue_columns.swiper-container: .swiper-wrapper
-		each column in issue.columns
-			.column_item.swiper-slide(class=column.main ? 'main' : '')
-				each article in column.articles
-					.article_item(class=article.status == 'hidden' ? 'hidden' : '')
-						a.article_cover(class=article.hover && 'change', href='/articles/' + (article.sym || article._short_id))
-							img.cover_base(src=article.base)
-							if article.hover
-								img.cover_hover(src=article.hover)
-						.article_categorys
-							each category in article.categorys
-								a.category_item(class=category.status == 'hidden' ? 'hidden' : '', href='#' + category._short_id)!= category.title.replace(' ', '<br>')
+	.issue_columns.swiper-container
+		.slide_button.next
+		.slide_button.prev
+		.swiper-wrapper
+			each column in issue.columns
+				.column_item.swiper-slide(class=column.main ? 'main' : '')
+					each article in column.articles
+						.article_item(class=article.status == 'hidden' ? 'hidden' : '')
+							a.article_cover(class=article.hover && 'change', href='/articles/' + (article.sym || article._short_id))
+								img.cover_base(src=article.base)
+								if article.hover
+									img.cover_hover(src=article.hover)
+							.article_categorys
+								each category in article.categorys
+									a.category_item(class=category.status == 'hidden' ? 'hidden' : '', href='#' + category._short_id)!= category.title.replace(' ', '<br>')

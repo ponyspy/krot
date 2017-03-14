@@ -1,7 +1,7 @@
 $(function() {
 	var swiperH = new Swiper('.swiper-container', {
-		// nextButton: '.swiper-button-next',
-		// prevButton: '.swiper-button-prev',
+		nextButton: '.slide_button.next',
+		prevButton: '.slide_button.prev',
 		slidesPerView: 'auto',
 		initialSlide: $('.column_item.main').index() || 0,
 		direction: 'horizontal',
