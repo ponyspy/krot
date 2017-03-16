@@ -151,10 +151,10 @@ gulp.task('watch', _(null, 'Watch files and build on change', function() {
 // Run Block
 
 
-gulp.task('build',  function(callback) {
+gulp.task('build', _(null, 'Build all...', function(callback) {
 	runSequence('clean', ['build:stylus', 'build:scripts', 'build:stuff'], callback);
-});
+}));
 
-gulp.task('default',  function(callback) {
+gulp.task('default', _(null, 'Build and start watching', function(callback) {
 	runSequence('clean', ['build:stylus', 'build:scripts', 'build:stuff'], 'watch', callback);
-});
+}));
