@@ -1,7 +1,7 @@
 mixin items(articles)
 	each article in articles
 		.list_item
-			a.item_rm.article(href='#', id=article._id) удалить
+			a.item_rm.article(href='#', id=article._id) -- удалить
 			a.item_title(href='/admin/articles/edit/' + article._id, class=article.status =='hidden' ? 'hidden': '')= article.title ? article.title : '!!! ПУСТОЕ ПОЛЕ !!!'
 
 mixin counters(count, skip)

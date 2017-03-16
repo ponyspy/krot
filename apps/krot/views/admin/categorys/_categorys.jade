@@ -1,7 +1,7 @@
 mixin items(categorys)
 	each category in categorys
 		.list_item
-			a.item_rm.category(href='#', id=category._id) удалить
+			a.item_rm.category(href='#', id=category._id) -- удалить
 			a.item_title(href='/admin/categorys/edit/' + category._id, class=category.status =='hidden' ? 'hidden': '')= (category.title || '!!! ПУСТОЕ ПОЛЕ !!!')
 
 

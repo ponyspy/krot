@@ -19,7 +19,7 @@ block content
 	.title= content_title
 	br
 	if (session.status == 'Admin')
-		a.add(href='/admin/users/add') добавить пользователя
+		a.add(href='/admin/users/add') + Добавить пользователя
 		br
 		br
 	.lists_block: .list_items
@@ -31,6 +31,6 @@ block content
 			else
 				- var status = '○'
 			.list_item
-				a.item_rm.user(href='#', id=user._id) удалить
+				a.item_rm.user(href='#', id=user._id) -- удалить
 				a.item_title(href='/admin/users/edit/' + user._id)= (user.login || '!!! ПУСТОЕ ПОЛЕ !!!')
 				span.item_status(title='○ - no status\n● - user\n●● - admin ')= ' ' + status

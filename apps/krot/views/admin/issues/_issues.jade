@@ -1,7 +1,7 @@
 mixin items(issues)
 	each issue in issues
 		.list_item
-			a.item_rm.issue(href='#', id=issue._id) удалить
+			a.item_rm.issue(href='#', id=issue._id) -- удалить
 			a.item_title(href='/admin/issues/edit/' + issue._id, class=issue.status =='hidden' ? 'hidden': '')= issue.numb ? ('Номер ' + issue.numb) : '!!! ПУСТОЕ ПОЛЕ !!!'
 			if (issue.theme && issue.numb)
 				span: i= ' - ' + issue.theme
