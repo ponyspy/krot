@@ -12,7 +12,7 @@ module.exports = function(Model) {
 			? Issue.find()
 			: Issue.where('status').ne('hidden');
 
-		Query.sort('-date').exec(function(err, issues) {
+		Query.sort('-numb').exec(function(err, issues) {
 			if (err) return next(err);
 
 			res.render('main/issues/index.jade', { issues: issues });

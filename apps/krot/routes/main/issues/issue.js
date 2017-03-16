@@ -12,9 +12,9 @@ module.exports = function(Model) {
 			: Issue.findOne({ $or: [ { '_short_id': id }, { 'numb': id } ] }).where('status').ne('hidden');
 
 		Query.populate({
-			path: 'columns.articles',
-			match: user_id ? undefined : { 'status': { '$ne': 'hidden' } },
-			select: 'base hover sym status categorys _short_id',
+				path: 'columns.articles',
+				match: user_id ? undefined : { 'status': { '$ne': 'hidden' } },
+				select: 'base hover sym status categorys _short_id',
 			populate: {
 				path: 'categorys',
 				match: user_id ? undefined : { 'status': { '$ne': 'hidden' } },
