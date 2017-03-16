@@ -31,8 +31,8 @@ block content
 		form(action='', method='post', enctype='multipart/form-data')
 			.form_title Номер:
 			input(type='number', name='numb', min='1', value=issue.numb)
-			.form_title Название:
-			+form_text_single('title', issue)
+			.form_title Тема:
+			+form_text_single('theme', issue)
 			.form_title Описание:
 			+form_text_multi('description', issue)
 			.form_title Логотип:

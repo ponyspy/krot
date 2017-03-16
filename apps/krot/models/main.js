@@ -37,7 +37,7 @@ var userSchema = new Schema({
 
 var issueSchema = new Schema({
 	numb: { type: Number, index: true, unique: true },
-	title: { type: String, trim: true },
+	theme: { type: String, trim: true },
 	description: { type: String, trim: true },
 	logo: { type: String, get: pathCDN },
 	background: { type: String, get: pathCDN },
@@ -97,8 +97,8 @@ var categorySchema = new Schema({
 // ------------------------
 
 
-issueSchema.index({'title': 'text', 'description': 'text'}, {
-	default_language: 'russian', weights: { title: 2, description: 1 }
+issueSchema.index({'theme': 'text', 'description': 'text'}, {
+	default_language: 'russian', weights: { theme: 2, description: 1 }
 });
 
 articleSchema.index({'title': 'text', 'intro': 'text', 'description': 'text'}, {
