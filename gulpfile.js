@@ -68,7 +68,7 @@ var _ = function(flags, description, fn) {
 	});
 
 	return fn;
-}
+};
 
 
 // Loggers Block
