@@ -30,6 +30,8 @@ module.exports = function(Model, Params) {
 
 			issue.status = post.status;
 			issue.date = moment(post.date.date + 'T' + post.date.time.hours + ':' + post.date.time.minutes);
+			issue.title = post.title;
+			issue.description = post.description;
 			issue.numb = post.numb;
 			issue.style = post.style;
 			issue.columns = post.columns;

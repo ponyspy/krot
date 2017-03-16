@@ -3,6 +3,8 @@ mixin items(issues)
 		.list_item
 			a.item_rm.issue(href='#', id=issue._id) удалить
 			a.item_title(href='/admin/issues/edit/' + issue._id, class=issue.status =='hidden' ? 'hidden': '')= issue.numb ? ('Номер ' + issue.numb) : '!!! ПУСТОЕ ПОЛЕ !!!'
+			if (issue.title && issue.numb)
+				span: i= ' - ' + issue.title
 
 mixin counters(count, skip)
 	a.list_back(href='#'): b назад
