@@ -5,6 +5,10 @@ mixin items(issues)
 			a.item_title(href='/admin/issues/edit/' + issue._id, class=issue.status =='hidden' ? 'hidden': '')= issue.numb ? ('Номер ' + issue.numb) : '!!! ПУСТОЕ ПОЛЕ !!!'
 			if (issue.theme && issue.numb)
 				span: i= ' - ' + issue.theme
+			if issue.numb
+				span.item_preview
+					span= ' --> '
+					a(href='/issues/' + issue.numb, target='_blank') превью
 
 mixin counters(count, skip)
 	a.list_back(href='#'): b назад

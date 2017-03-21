@@ -3,6 +3,9 @@ mixin items(articles)
 		.list_item
 			a.item_rm.article(href='#', id=article._id) -- удалить
 			a.item_title(href='/admin/articles/edit/' + article._id, class=article.status =='hidden' ? 'hidden': '')= article.title ? article.title : '!!! ПУСТОЕ ПОЛЕ !!!'
+			span.item_preview
+				span= ' --> '
+				a(href='/articles/' + article._short_id, target='_blank') превью
 
 mixin counters(count, skip)
 	a.list_back(href='#'): b назад

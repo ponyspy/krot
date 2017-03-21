@@ -139,6 +139,10 @@ $(function() {
 		$('.item_rm').toggleClass('show');
 	});
 
+	$('.toggle_preview').on('click', function() {
+		$('.item_preview').toggleClass('show');
+	});
+
 
 	function remove (event) {
 		var id  = $(this).attr('id');
