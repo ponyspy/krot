@@ -54,7 +54,7 @@ mixin form_multiple_select(path, options, select_options)
 				input.back(type="button", value="-", disabled=disable)
 				select(name=path + '[]', disabled=disable)
 					unless none
-						option(value='') нет
+						option(value='none') нет
 					each option in options
 						option(value=option._id)= option[field] || '!!! ПУСТОЕ ПОЛЕ !!!'
 		else
@@ -63,7 +63,7 @@ mixin form_multiple_select(path, options, select_options)
 					input.back(type="button", value="-", disabled=disable)
 					select(name=path + '[]', disabled=disable)
 						unless none
-							option(value='') нет
+							option(value='none') нет
 						each option in options
 							option(value=option._id, selected=option._id.toString() == select_option)= option[field] || '!!! ПУСТОЕ ПОЛЕ !!!'
 							if (disable && (option._id.toString() == select_option))

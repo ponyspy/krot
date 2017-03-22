@@ -31,7 +31,7 @@ module.exports = function(Model, Params) {
 
 		article._short_id = shortid.generate();
 		article.status = post.status;
-		article.categorys = post.categorys == '' ? [] : post.categorys;
+		article.categorys = post.categorys.filter(function(category) { return category != 'none'; });
 		article.date = moment(post.date.date + 'T' + post.date.time.hours + ':' + post.date.time.minutes);
 		article.title = post.title;
 		article.sym = post.sym ? post.sym : undefined;
