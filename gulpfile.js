@@ -60,7 +60,7 @@ var _ = function(flags, description, fn) {
 	fn.description = description;
 	fn.flags = {};
 
-	flags && flags.length && flags.forEach(function(flag) {
+	if (flags && flags.length) flags.forEach(function(flag) {
 		if (flag == 'prod') fn.flags['-p --prod'] = 'Builds in ' + util.colors.underline.green('production') + ' mode (minification, etc).';
 		if (flag == 'dev') fn.flags['-d --dev'] = 'Builds in ' + util.colors.underline.yellow('development') + ' mode (default).';
 		if (flag == 'lint') fn.flags['-l --lint']	= 'Lint JavaScript code.';
@@ -75,7 +75,7 @@ var _ = function(flags, description, fn) {
 
 
 var error_logger = function(err) {
-	err && console.log([
+	if (err) console.log([
 		'',
 		util.colors.bold.inverse.red('---------- ERROR MESSAGE START ----------'),
 		'',
