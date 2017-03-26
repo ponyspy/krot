@@ -20,17 +20,15 @@ var Prod = util.env.p || util.env.prod;
 var Lint = util.env.l || util.env.lint;
 var Maps = util.env.m || util.env.maps;
 
-console.log([
-	'',
-	'Lint '
-	+ (Lint ? util.colors.green('enabled') : util.colors.red('disabled'))
-	+ ', sourcemaps '
-	+ (Maps ? util.colors.green('enabled') : util.colors.yellow('disabled'))
-	+ ', build in '
-	+ (Prod ? util.colors.underline.green('production') : util.colors.underline.yellow('development'))
-	+ ' mode.',
-	''
-].join('\n'));
+console.log('\n', [
+	'Lint ',
+	(Lint ? util.colors.green('enabled') : util.colors.red('disabled')),
+	', sourcemaps ',
+	(Maps ? util.colors.green('enabled') : util.colors.yellow('disabled')),
+	', build in ',
+	(Prod ? util.colors.underline.green('production') : util.colors.underline.yellow('development')),
+	' mode.',
+].join(''), '\n');
 
 
 // Paths Block
@@ -88,10 +86,13 @@ var error_logger = function(err) {
 };
 
 var watch_logger = function(event) {
-	console.log('File ' + util.colors.green(event.path.replace(__dirname + '/', ''))
-											+ ' was '
-											+ util.colors.yellow(event.type)
-											+ ', running tasks...');
+	util.log([
+		'File ',
+		util.colors.green(event.path.replace(__dirname + '/', '')),
+		' was ',
+		util.colors.yellow(event.type),
+		', running tasks...'
+	].join(''));
 };
 
 
