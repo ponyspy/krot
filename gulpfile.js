@@ -20,7 +20,7 @@ var Prod = util.env.p || util.env.prod;
 var Lint = util.env.l || util.env.lint;
 var Maps = util.env.m || util.env.maps;
 
-console.log('\n', [
+util.log([
 	'Lint ',
 	(Lint ? util.colors.green('enabled') : util.colors.red('disabled')),
 	', sourcemaps ',
@@ -28,7 +28,7 @@ console.log('\n', [
 	', build in ',
 	(Prod ? util.colors.underline.green('production') : util.colors.underline.yellow('development')),
 	' mode.',
-].join(''), '\n');
+].join(''));
 
 
 // Paths Block
@@ -73,7 +73,7 @@ var _ = function(flags, description, fn) {
 
 
 var error_logger = function(err) {
-	if (err) console.log([
+	if (err) util.log([
 		'',
 		util.colors.bold.inverse.red('---------- ERROR MESSAGE START ----------'),
 		'',
