@@ -20,36 +20,6 @@ var Prod = util.env.p || util.env.prod;
 var Lint = util.env.l || util.env.lint;
 var Maps = util.env.m || util.env.maps;
 
-util.log([
-	'Lint ',
-	(Lint ? util.colors.green('enabled') : util.colors.red('disabled')),
-	', sourcemaps ',
-	(Maps ? util.colors.green('enabled') : util.colors.yellow('disabled')),
-	', build in ',
-	(Prod ? util.colors.underline.green('production') : util.colors.underline.yellow('development')),
-	' mode.',
-].join(''));
-
-
-// Paths Block
-
-
-var paths = {
-	stylus: {
-		src: 'apps/**/src/styl/*.styl',
-		dest: 'public/build/css'
-	},
-	scripts: {
-		src: 'apps/**/src/js/*.js',
-		dest: 'public/build/js'
-	},
-	stuff: {
-		src: 'apps/**/stuff/**',
-		dest: 'public/stuff'
-	},
-	clean: '{' + 'public/build/**' + ',' + 'public/stuff/**' + '}'
-};
-
 
 // Decorators Block
 
@@ -72,6 +42,16 @@ var _ = function(flags, description, fn) {
 // Loggers Block
 
 
+util.log([
+	'Lint ',
+	(Lint ? util.colors.green('enabled') : util.colors.red('disabled')),
+	', sourcemaps ',
+	(Maps ? util.colors.green('enabled') : util.colors.yellow('disabled')),
+	', build in ',
+	(Prod ? util.colors.underline.green('production') : util.colors.underline.yellow('development')),
+	' mode.',
+].join(''));
+
 var error_logger = function(err) {
 	if (err) util.log([
 		'',
@@ -93,6 +73,26 @@ var watch_logger = function(event) {
 		util.colors.yellow(event.type),
 		', running tasks...'
 	].join(''));
+};
+
+
+// Paths Block
+
+
+var paths = {
+	stylus: {
+		src: 'apps/**/src/styl/*.styl',
+		dest: 'public/build/css'
+	},
+	scripts: {
+		src: 'apps/**/src/js/*.js',
+		dest: 'public/build/js'
+	},
+	stuff: {
+		src: 'apps/**/stuff/**',
+		dest: 'public/stuff'
+	},
+	clean: '{' + 'public/build/**' + ',' + 'public/stuff/**' + '}'
 };
 
 
@@ -149,7 +149,7 @@ gulp.task('watch', _(null, 'Watch files and build on change', function() {
 }));
 
 
-// Run Block
+// Run Tasks Block
 
 
 gulp.task('build', _(null, 'Build all...', function(callback) {
