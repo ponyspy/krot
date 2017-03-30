@@ -24,18 +24,18 @@ var Maps = util.env.m || util.env.maps;
 // Decorators Block
 
 
-var _ = function(flags, description, fn) {
-	fn.description = description;
-	fn.flags = {};
+var _ = function(flags, description, task) {
+	task.description = description;
+	task.flags = {};
 
 	if (flags && flags.length) flags.forEach(function(flag) {
-		if (flag == 'prod') fn.flags['-p --prod'] = 'Builds in ' + util.colors.underline.green('production') + ' mode (minification, etc).';
-		if (flag == 'dev') fn.flags['-d --dev'] = 'Builds in ' + util.colors.underline.yellow('development') + ' mode (default).';
-		if (flag == 'lint') fn.flags['-l --lint']	= 'Lint JavaScript code.';
-		if (flag == 'maps') fn.flags['-m --maps']	= 'Generate sourcemaps files.';
+		if (flag == 'prod') task.flags['-p --prod'] = 'Builds in ' + util.colors.underline.green('production') + ' mode (minification, etc).';
+		if (flag == 'dev') task.flags['-d --dev'] = 'Builds in ' + util.colors.underline.yellow('development') + ' mode (default).';
+		if (flag == 'lint') task.flags['-l --lint']	= 'Lint JavaScript code.';
+		if (flag == 'maps') task.flags['-m --maps']	= 'Generate sourcemaps files.';
 	});
 
-	return fn;
+	return task;
 };
 
 
