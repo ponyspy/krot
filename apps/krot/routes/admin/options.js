@@ -27,7 +27,7 @@ module.exports.preview = function(req, res) {
 		});
 	} else if (/jpeg|png/.test(mime.extension(file.mimetype))) {
 		gm(file.path).identify({ bufferStream: true }, function(err, meta) {
-			var new_path = '/preview/' + file_name + '.' + (meta['Channel depth'].Alpha ? 'png' : 'jpg');
+			var new_path = '/preview/' + file_name + '.' + ((meta['Channel depth'].Alpha || meta['Channel statistics'].Alpha || meta.Alpha) ? 'png' : 'jpg');
 
 			this.resize(meta.size.width > 600 ? 600 : false, false);
 			this.quality(meta.size.width >= 600 ? 82 : 100);
