@@ -1,15 +1,16 @@
 $(function() {
 	var $document = $(document);
+	var timer;
 
 	$(window)
 		.on('load', function(e) {
 			$document.scrollTop(history.state.scroll || 0);
 		})
 		.on('scroll', function(e) {
-			clearTimeout($.data(this, 'scrollTimer'));
-			$.data(this, 'scrollTimer', setTimeout(function() {
-				history.pushState({ scroll: $document.scrollTop() }, 'scroll');
-			}, 250));
+			clearTimeout(timer);
+			timer = setTimeout(function() {
+				history.pushState($document.scrollTop(), 'scroll');
+			}, 250);
 		});
 
 });
