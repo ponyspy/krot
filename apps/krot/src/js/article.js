@@ -1,15 +1,18 @@
 $(function() {
 	var $document = $(document);
+	var $triangle = $('.bookmark_triangle');
 	var timer;
 
 	$(window)
 		.on('load', function(e) {
-			$document.scrollTop(history.state.scroll || 0);
+			$document.scrollTop(localStorage.getItem(window.location.href));
 		})
 		.on('scroll', function(e) {
+			$triangle.addClass('scroll');
 			clearTimeout(timer);
 			timer = setTimeout(function() {
-				history.pushState($document.scrollTop(), 'scroll');
+				$triangle.removeClass('scroll');
+				localStorage.setItem(window.location.href, $document.scrollTop());
 			}, 250);
 		});
 
