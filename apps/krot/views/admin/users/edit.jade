@@ -17,11 +17,11 @@ block content
 		.title= content_title
 		form(action="", method="post")
 			.form_title Логин:
-			input(type='text', name='login', value=user.login)
+			input(type='text', name='login', value=user.login, autocomplete='off')
 			.form_title Email:
-			input(type='text', name='email', value=user.email)
+			input(type='text', name='email', value=user.email, autocomplete='off')
 			.form_title Пароль:
-			input(type='password', name='password', placeholder='*******')
+			input(type='password', name='password', placeholder='*******', autocomplete='off')
 			if (session.status == 'Admin')
 				.form_title Роль:
 				select(name='status')

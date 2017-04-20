@@ -17,11 +17,11 @@ block content
 		.title= content_title
 		form(action="", method="post")
 			.form_title Логин:
-			input(type='text', name='login')
+			input(type='text', name='login', autocomplete='off')
 			.form_title E-mail:
-			input(type='text', name='email')
+			input(type='text', name='email', autocomplete='off')
 			.form_title Пароль:
-			input(type='password', name='password')
+			input(type='password', name='password', autocomplete='off')
 			.form_title Роль:
 			select(name='status')
 				option(value='User') Пользователь
