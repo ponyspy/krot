@@ -155,17 +155,17 @@ $(function() {
 						// youtube - http://stackoverflow.com/questions/3392993/php-regex-to-get-youtube-video-id
 						var youtube_match = url.match( /^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]{11,11}).*/ );
 						if( youtube_match && youtube_match[1].length == 11 )
-								return '<iframe class="video_embed" src="//www.youtube.com/embed/' + youtube_match[1] + '" width="640" height="360" frameborder="0" allowfullscreen></iframe>';
+								return '<iframe class="video_embed" src="//www.youtube.com/embed/' + youtube_match[1] + '" width="560" height="315" frameborder="0" allowfullscreen></iframe>';
 
 						// vimeo - http://embedresponsively.com/
 						var vimeo_match = url.match( /^(?:http(?:s)?:\/\/)?(?:[a-z0-9.]+\.)?vimeo\.com\/([0-9]+)$/ );
 						if( vimeo_match )
-								return '<iframe class="video_embed" src="//player.vimeo.com/video/' + vimeo_match[1] + '" width="640" height="360" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+								return '<iframe class="video_embed" src="//player.vimeo.com/video/' + vimeo_match[1] + '" width="560" height="315" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 
 						// dailymotion - http://embedresponsively.com/
 						var dailymotion_match = url.match( /^(?:http(?:s)?:\/\/)?(?:[a-z0-9.]+\.)?dailymotion\.com\/video\/([0-9a-z]+)$/ );
 						if( dailymotion_match )
-								return '<iframe class="video_embed" src="//www.dailymotion.com/embed/video/' + dailymotion_match[1] + '" width="640" height="360" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+								return '<iframe class="video_embed" src="//www.dailymotion.com/embed/video/' + dailymotion_match[1] + '" width="560" height="315" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 
 						// undefined -> create '<video/>' tag
 				},
