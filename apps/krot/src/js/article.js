@@ -1,6 +1,8 @@
 $(function() {
 	var timer;
 
+	$('.video_embed').wrap("<div class='video_outer'></div>");
+
 	var $bookmark = $('.bookmark');
 	var $window = $(window)
 		.on('load', function(e) {
