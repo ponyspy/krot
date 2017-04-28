@@ -9,11 +9,7 @@ module.exports.preview = function(req, res) {
 	var file_name = Date.now();
 
 	if (mime.extension(file.mimetype) == 'svg') {
-		var SVGO = new svgo({
-			plugins: [{
-				convertShapeToPath: false
-			}]
-		});
+		var SVGO = new svgo({ plugins: [{ convertShapeToPath: false }] });
 		var new_path = '/preview/' + file_name + '.svg';
 
 		fs.readFile(file.path, function(err, data) {

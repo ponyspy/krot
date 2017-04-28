@@ -26,11 +26,7 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 	rimraf(public_path + cdn_path + '/' + field_name + '.*', { glob: true }, function() {
 		mkdirp(public_path + cdn_path, function() {
 			if (mime.extension(file.mimetype) == 'svg') {
-				var SVGO = new svgo({
-					plugins: [{
-						convertShapeToPath: false
-					}]
-				});
+				var SVGO = new svgo({ plugins: [{ convertShapeToPath: false }] });
 				var file_name = field_name + '.svg';
 
 				fs.readFile(file.path, function(err, data) {
