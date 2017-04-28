@@ -26,11 +26,11 @@ block content
 		.title= content_title
 		form(action='', method='post', enctype='multipart/form-data')
 			.form_title Шапка:
-			+form_single_file('cover')(accept='image/jpeg,image/png,image/svg+xml')
+			+form_single_file('cover')(accept='image/jpeg,image/png,image/svg+xm,image/gifl')
 			.form_title Обложка [базовая]:
-			+form_single_file('base')(accept='image/jpeg,image/png,image/svg+xml')
+			+form_single_file('base')(accept='image/jpeg,image/png,image/svg+xml,image/gif')
 			.form_title Обложка [наведение]:
-			+form_single_file('hover')(accept='image/jpeg,image/png,image/svg+xml')
+			+form_single_file('hover')(accept='image/jpeg,image/png,image/svg+xml,image/gif')
 			.form_title Название:
 			+form_text_single('title')
 			.form_title Синоним адреса:
