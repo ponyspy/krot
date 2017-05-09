@@ -35,7 +35,10 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 					SVGO.optimize(data, function(result) {
 						fs.writeFile(public_path + cdn_path + '/' + file_name, result.data, function(err) {
 							obj[field_name] = file_path + '/' + file_name;
-							callback.call(null, null, obj);
+
+							rimraf(file.path, { glob: false }, function() {
+								callback.call(null, null, obj);
+							});
 						});
 					});
 				});
@@ -49,7 +52,10 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 					this.quality(meta.size.width >= file_size ? 82 : 100);
 					this.write(public_path + cdn_path + '/' + file_name, function(err) {
 						obj[field_name] = file_path + '/' + file_name;
-						callback.call(null, null, obj);
+
+						rimraf(file.path, { glob: false }, function() {
+							callback.call(null, null, obj);
+						});
 					});
 				});
 			} else {
