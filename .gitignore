@@ -7,3 +7,4 @@
 /public/cdn*
 /public/robots.txt
 .DS_Store
+package-lock.json
