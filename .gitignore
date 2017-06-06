@@ -1,7 +1,7 @@
 /node_modules*
 /db*
-/maket*
-/subl*
+/_maket_*
+/_sublime_*
 /public/build*
 /public/stuff*
 /public/cdn*
