@@ -4,8 +4,8 @@ var mongoose = require('mongoose'),
 var Schema = mongoose.Schema,
 		ObjectId = Schema.ObjectId;
 
-mongoose.Promise = Promise;
-mongoose.connect('localhost', __app_name);
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/' +  __app_name, { useMongoClient: true });
 
 
 // ------------------------
