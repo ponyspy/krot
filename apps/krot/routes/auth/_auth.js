@@ -1,6 +1,6 @@
 var express = require('express');
 
-var Model = require(__app_root + '/models/main.js');
+var Model = require(__glob_root + '/models/main.js');
 
 var Params = {
 	msg: require('../admin/_params/auth').msg,
