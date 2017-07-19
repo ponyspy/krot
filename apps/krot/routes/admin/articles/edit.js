@@ -10,8 +10,8 @@ module.exports = function(Model, Params) {
 	var uploadImagesArticlePreview = Params.upload.image_article_preview;
 	var uploadImagesArticle = Params.upload.image_article;
 	var uploadImage = Params.upload.image;
-	var filesUpload = Params.upload.files_article_upload;
-	var filesDelete = Params.upload.files_article_delete;
+	var filesUpload = Params.upload.files_upload;
+	var filesDelete = Params.upload.files_delete;
 
 
 	module.index = function(req, res, next) {
@@ -54,8 +54,8 @@ module.exports = function(Model, Params) {
 				async.apply(uploadImage, article, 'articles', 'base', 600, files.base && files.base[0], post.base_del),
 				async.apply(uploadImage, article, 'articles', 'hover', 600, files.hover && files.hover[0], post.hover_del),
 				async.apply(uploadImagesArticle, article, post),
-				async.apply(filesDelete, article, post, files),
-				async.apply(filesUpload, article, post, files)
+				async.apply(filesDelete, article, 'files', post, files),
+				async.apply(filesUpload, article, 'articles', 'files', post, files)
 			], function(err, results) {
 				if (err) return next(err);
 

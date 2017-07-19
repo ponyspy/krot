@@ -9,20 +9,6 @@ mongoose.connect('mongodb://localhost/' +  __app_name, { useMongoClient: true })
 
 
 // ------------------------
-// *** Getters Block ***
-// ------------------------
-
-
-var pathCDN = function(path) {
-	return path ? '/cdn/' + __app_name + path : undefined;
-};
-
-var pathContentCDN = function(content) {
-	return content ? content.replace(/\{CDN_PATH\}/g, '/cdn/' + __app_name) : undefined;
-};
-
-
-// ------------------------
 // *** Schema Block ***
 // ------------------------
 
@@ -39,8 +25,8 @@ var issueSchema = new Schema({
 	numb: { type: Number, index: true, unique: true },
 	theme: { type: String, trim: true },
 	description: { type: String, trim: true },
-	logo: { type: String, get: pathCDN },
-	background: { type: String, get: pathCDN },
+	logo: String,
+	background: String,
 	style: {
 		background: {
 			position: String,
@@ -56,20 +42,17 @@ var issueSchema = new Schema({
 	status: String,	// hidden
 	_short_id: { type: String, unique: true, index: true, sparse: true },
 	date: { type: Date, default: Date.now, index: true },
-}, {
-	toJSON: { getters: true },
-	toObject: { getters: true }
 });
 
 var articleSchema = new Schema({
 	title: { type: String, trim: true },
 	intro: { type: String, trim: true },
-	description: { type: String, trim: true, get: pathContentCDN },
-	cover: { type: String, get: pathCDN },
-	base: { type: String, get: pathCDN },
-	hover: { type: String, get: pathCDN },
+	description: { type: String, trim: true },
+	cover: String,
+	base: String,
+	hover: String,
 	files: [{
-		path: { type: String, get: pathCDN },
+		path: String,
 		desc: String
 	}],
 	categorys: [{ type: ObjectId, ref: 'Category' }],
@@ -77,9 +60,6 @@ var articleSchema = new Schema({
 	sym: { type: String, trim: true, index: true, unique: true, sparse: true },
 	_short_id: { type: String, unique: true, index: true, sparse: true },
 	date: { type: Date, default: Date.now, index: true },
-}, {
-	toJSON: { getters: true },
-	toObject: { getters: true }
 });
 
 var categorySchema = new Schema({

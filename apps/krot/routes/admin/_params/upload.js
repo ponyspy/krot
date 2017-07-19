@@ -20,11 +20,10 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 
 	if (del_file || !file) return callback.call(null, null, obj);
 
-	var file_path =  '/' + base_path + '/' + obj._id + '/images';
-	var cdn_path = '/cdn/' + __app_name + file_path;
+	var file_path = '/cdn/' + base_path + '/' + obj._id + '/images';
 
-	rimraf(public_path + cdn_path + '/' + field_name + '.*', { glob: true }, function() {
-		mkdirp(public_path + cdn_path, function() {
+	rimraf(public_path + file_path + '/' + field_name + '.*', { glob: true }, function() {
+		mkdirp(public_path + file_path, function() {
 			if (mime.extension(file.mimetype) == 'svg') {
 				var SVGO = new svgo({ plugins: [{ convertShapeToPath: false }] });
 				var file_name = field_name + '.svg';
@@ -33,7 +32,7 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 					if (err) return callback.call(null, null, obj);
 
 					SVGO.optimize(data, function(result) {
-						fs.writeFile(public_path + cdn_path + '/' + file_name, result.data, function(err) {
+						fs.writeFile(public_path + file_path + '/' + file_name, result.data, function(err) {
 							obj[field_name] = file_path + '/' + file_name;
 
 							rimraf(file.path, { glob: false }, function() {
@@ -50,7 +49,7 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 
 					this.resize(meta.size.width > file_size ? file_size : false, false);
 					this.quality(meta.size.width >= file_size ? 82 : 100);
-					this.write(public_path + cdn_path + '/' + file_name, function(err) {
+					this.write(public_path + file_path + '/' + file_name, function(err) {
 						obj[field_name] = file_path + '/' + file_name;
 
 						rimraf(file.path, { glob: false }, function() {
@@ -121,18 +120,24 @@ module.exports.image_article_preview = function(article, callback) {
 	});
 };
 
-module.exports.files_article_upload = function(article, post, files, callback) {
+module.exports.files_upload = function(obj, base_path, field_name, post, files, callback) {
 	if (files.attach && files.attach.length > 0) {
 		async.forEachOfSeries(files.attach, function(file, i, callback) {
-			var file_path = '/articles/' + article._id + '/files';
-			var cdn_path = '/cdn/' + __app_name + file_path;
+			var file_path = '/cdn/' + base_path + '/' + obj._id + '/files';
 			var file_name = Date.now() + '.' + mime.extension(file.mimetype);
 
-			mkdirp(public_path + cdn_path, function() {
-				fs.rename(file.path, public_path + cdn_path + '/' + file_name, function() {
-					article.files.push({
+			mkdirp(public_path + file_path, function() {
+				fs.rename(file.path, public_path + file_path + '/' + file_name, function() {
+					var description = [];
+
+					description.push({ lg: 'ru', value: post.attach_desc.ru[i] });
+					if (post.attach_desc.en) {
+						description.push({ lg: 'en', value: post.attach_desc.en[i] });
+					}
+
+					obj[field_name].push({
 						path: file_path + '/' + file_name,
-						desc: post.attach_desc[i] || ''
+						description: description
 					});
 					callback();
 				});
@@ -145,13 +150,13 @@ module.exports.files_article_upload = function(article, post, files, callback) {
 	}
 };
 
-module.exports.files_article_delete = function(article, post, files, callback) {
+module.exports.files_delete = function(obj, field_name, post, files, callback) {
 	if (post.files_delete && post.files_delete.length > 0) {
 		async.eachSeries(post.files_delete, function(path, callback) {
 			rimraf(public_path + path, { glob: false }, function() {
-				var num = article.files.map(function(e) { return e.path; }).indexOf(path);
-				article.files.splice(num, 1);
-				article.markModified('files');
+				var num = obj[field_name].map(function(e) { return e.path; }).indexOf(path);
+				obj[field_name].splice(num, 1);
+				obj.markModified(field_name);
 				callback();
 			});
 		}, function() {
