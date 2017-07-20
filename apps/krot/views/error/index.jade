@@ -4,7 +4,7 @@ block paths
 	- var content_title= 'Error' + ' / ' + status
 
 block content_style
-	link(rel='stylesheet', type='text/css', href='/build/css/admin/error.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/' + __app_name + '/css/error.css' + version)
 
 block content
 	.error_title= 'Error' + ' ' + status
