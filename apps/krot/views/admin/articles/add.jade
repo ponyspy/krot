@@ -8,15 +8,15 @@ block content_style
 	link(rel='stylesheet', type='text/css', href='/libs/css/pickmeup.min.css' + version)
 	link(rel='stylesheet', type='text/css', href='/libs/css/font-awesome.css' + version)
 	link(rel='stylesheet', type='text/css', href='/libs/css/wysiwyg-editor.min.css' + version)
-	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/add.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/add.css' + version)
 
 block content_scripts
 	script(type='text/javascript', src='/libs/js/jquery.pickmeup.min.js' + version)
 	script(type='text/javascript', src='/libs/js/wysiwyg.min.js' + version)
 	script(type='text/javascript', src='/libs/js/wysiwyg-editor.min.js' + version)
-	script(type='text/javascript', src='/build/js/' + __app_name + '/editor.js' + version)
-	script(type='text/javascript', src='/build/js/' + __app_name + '/add.js' + version)
-	script(type='text/javascript', src='/build/js/' + __app_name + '/a_events.js' + version)
+	script(type='text/javascript', src='/build/' + __app_name +  '/js/editor.js' + version)
+	script(type='text/javascript', src='/build/' + __app_name +  '/js/add.js' + version)
+	script(type='text/javascript', src='/build/' + __app_name +  '/js/a_events.js' + version)
 
 block sub_menu
 	a.sub_item.back_link(href='/admin/articles') Назад

@@ -5,10 +5,10 @@ block paths
 	- var content_description = article.intro
 
 block content_style
-	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/article.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/article.css' + version)
 
 block content_scripts
-	script(type='text/javascript', src='/build/js/' + __app_name + '/article.js' + version)
+	script(type='text/javascript', src='/build/' + __app_name +  '/js/article.js' + version)
 
 block params
 	- var sg_article = article._id

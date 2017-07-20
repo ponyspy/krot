@@ -6,11 +6,11 @@ block paths
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/libs/css/swiper.min.css' + version)
-	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/issue.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/issue.css' + version)
 
 block content_scripts
 	script(type='text/javascript', src='/libs/js/swiper.jquery.min.js' + version)
-	script(type='text/javascript', src='/build/js/' + __app_name + '/issue.js' + version)
+	script(type='text/javascript', src='/build/' + __app_name +  '/js/issue.js' + version)
 
 block params
 	- var parse = function(prefix, style) { return Object.keys(style).map(function(name) { return prefix + name + ':' + style[name] + ';'; }).join(''); };
