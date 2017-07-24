@@ -4,8 +4,6 @@ module.exports = function(Model) {
 	var Issue = Model.Issue;
 
 	module.index = function(req, res, next) {
-		return res.redirect('/');
-
 		var user_id = req.session.user_id;
 
 		var Query = user_id

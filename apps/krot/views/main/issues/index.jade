@@ -1,13 +1,22 @@
 extends ../layout
 
 block paths
-	- var content_title= 'krot / issues'
+	- var content_title= 'КРОТ | ВЫПУСКИ'
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/issues.css' + version)
 
 block content_scripts
-	script(type='text/javascript', src='/build/' + __app_name +  '/js/issues.js' + version)
+	//- script(type='text/javascript', src='/build/' + __app_name +  '/js/issues.js' + version)
+
+block logo
+	img(src='/stuff/' + __app_name + '/icons/logo/krot_main.png')
 
 block content
-	h1 issues!
+	- var parse = function(prefix, style) { return Object.keys(style).map(function(name) { return prefix + name + ':' + style[name] + ';'; }).join(''); };
+	.issues_block: .issues_inner
+		each issue in issues
+			- var bg_image = issue.background ? 'background-image: url(' + issue.background + ');' + parse('background-', issue.style.background.toObject()) : ''
+			a.issue_item(href='/issues/' + issue.numb, style=bg_image)
+				.issue_numb= issue.numb
+				.issue_theme= issue.theme
