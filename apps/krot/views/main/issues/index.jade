@@ -17,6 +17,6 @@ block content
 	.issues_block: .issues_inner
 		each issue in issues
 			- var bg_image = issue.background ? 'background-image: url(' + issue.background + ');' + parse('background-', issue.style.background.toObject()) : ''
-			a.issue_item(href='/issues/' + issue.numb, style=bg_image)
+			a.issue_item(href='/issues/' + issue.numb, style=bg_image, class=issue.status == 'hidden' ? 'hidden' : '')
 				.issue_numb= issue.numb
 				.issue_theme= issue.theme
