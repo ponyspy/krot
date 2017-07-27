@@ -68,6 +68,6 @@ app.use(error.err_500, error.err_404);
 // ------------------------
 
 
-app.listen(process.env.PORT || 3000, 'localhost', function() {
+app.listen(process.env.PORT || 3000, (process.env.NODE_ENV == 'production' ? 'localhost' : undefined), function() {
 	console.log('http://localhost:' + (process.env.PORT || 3000));
 });
