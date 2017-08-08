@@ -19,7 +19,7 @@ module.exports = function(Model) {
 				? Article.find({ _id: { '$ne': article._id }, categorys: { '$in': categorys } })
 				: Article.find({ _id: { '$ne': article._id }, categorys: { '$in': categorys } }).where('status').ne('hidden');
 
-			Query.limit(5).exec(function(err, summary) {
+			Query.limit(4).exec(function(err, summary) {
 				if (err) return next(err);
 
 				res.render('main/articles/article.jade', { article: article, summary: summary });
