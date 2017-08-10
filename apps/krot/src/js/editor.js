@@ -25,7 +25,7 @@ $(function() {
 												'<- img --' : 'left',
 												'-- img ->' : 'right',
 												'<- img ->' : 'center',
-												'<= img =>' : 'double',
+												'>- img -<' : 'double',
 												'x- img -x' : 'clear',
 										};
 
