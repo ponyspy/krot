@@ -3,6 +3,7 @@ extends ../layout
 block paths
 	- var content_title= 'КРОТ | №' + issue.numb
 	- var content_description = issue.description
+	- var content_images = [issue.background]
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/libs/css/swiper.min.css' + version)

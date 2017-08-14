@@ -8,6 +8,8 @@ if content_title
 	title= content_title
 if content_description
 	meta(name='description', content=content_description)
+each image in content_images || []
+	meta(property='og:image' content='http://' + host + image)
 
 link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/global.css' + version)
 block content_style
