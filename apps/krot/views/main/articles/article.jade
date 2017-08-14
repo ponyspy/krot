@@ -2,7 +2,7 @@ extends ../layout
 
 block paths
 	- var content_title= 'КРОТ | ' + article.title
-	- var content_description = article.intro
+	- var content_description = article.intro.replace(/<(?:.|\n)*?>/gm, '')
 	- var content_images = [article.cover || '/stuff/' + __app_name + '/icons/logo/krot_main.png']
 
 block content_style

@@ -2,7 +2,7 @@ extends ../layout
 
 block paths
 	- var content_title= 'КРОТ | №' + issue.numb
-	- var content_description = issue.description
+	- var content_description = issue.description.replace(/<(?:.|\n)*?>/gm, '')
 	- var content_images = [issue.background]
 
 block content_style
