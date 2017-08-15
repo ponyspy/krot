@@ -73,7 +73,7 @@ module.exports.image_article = function(article, post, callback) {
 			var $ = window.$;
 			var images = $('img').toArray();
 
-			async.forEach(images, function(image, callback) {
+			async.each(images, function(image, callback) {
 				var $this = $(image);
 				var file_name = path.basename($this.attr('src'));
 
@@ -101,7 +101,7 @@ module.exports.image_article_preview = function(article, callback) {
 		var $ = window.$;
 		var images = $('img').toArray();
 
-		async.forEach(images, function(image, callback) {
+		async.each(images, function(image, callback) {
 			var $this = $(image);
 
 			var file_path = $this.attr('src');
@@ -121,22 +121,15 @@ module.exports.image_article_preview = function(article, callback) {
 
 module.exports.files_upload = function(obj, base_path, field_name, post, files, callback) {
 	if (files.attach && files.attach.length > 0) {
-		async.forEachOfSeries(files.attach, function(file, i, callback) {
+		async.eachOfSeries(files.attach, function(file, i, callback) {
 			var file_path = '/cdn/' + base_path + '/' + obj._id + '/files';
 			var file_name = Date.now() + '.' + mime.extension(file.mimetype);
 
 			mkdirp(public_path + file_path, function() {
 				fs.rename(file.path, public_path + file_path + '/' + file_name, function() {
-					var description = [];
-
-					description.push({ lg: 'ru', value: post.attach_desc.ru[i] });
-					if (post.attach_desc.en) {
-						description.push({ lg: 'en', value: post.attach_desc.en[i] });
-					}
-
 					obj[field_name].push({
 						path: file_path + '/' + file_name,
-						description: description
+						desc: post.attach_desc
 					});
 					callback();
 				});
