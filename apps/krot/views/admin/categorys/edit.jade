@@ -32,10 +32,10 @@ block content
 				option(value='theme', selected=category.type == 'theme') Тема
 				option(value='country', selected=category.type == 'country') Страна
 				option(value='author', selected=category.type == 'author') Автор
-			.form_title Видимость:
-			label
-				input(type='checkbox', name='status', value='hidden', checked=category.status)
-				!= ' скрыть'
+			.form_title Статус:
+			select(name='status')
+				option(value='base') Обычный
+				option(value='hidden', selected= category.status == 'hidden' && 'hidden') Скрытый
 			br
 			br
 			input(type='submit', value='отправить')

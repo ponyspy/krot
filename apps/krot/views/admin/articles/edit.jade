@@ -43,10 +43,10 @@ block content
 			+form_multiple_files('attach', article)(accept='application/pdf,application/zip')
 			.form_title Категории:
 			+form_multiple_select('categorys', categorys, article.categorys)
-			.form_title Видимость:
-			label
-				input(type='checkbox', name='status', value='hidden', checked=article.status == 'hidden')
-				!= ' скрыть'
+			.form_title Статус:
+			select(name='status')
+				option(value='base') Обычный
+				option(value='hidden', selected= article.status == 'hidden' && 'hidden') Скрытый
 			.form_title Дата публикации:
 			+form_date('date', article.date)
 			br
