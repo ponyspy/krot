@@ -1,13 +1,10 @@
 extends ../layout
 
-block paths
-	- var content_title= 'krot / articles'
+block content_header
+	- var content_title= 'КРОТ | МАТЕРИАЛЫ'
 
-block content_style
-	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/articles.css' + version)
-
-block content_scripts
-	script(type='text/javascript', src='/build/' + __app_name +  '/js/articles.js' + version)
+	- var content_comps_css = ['articles.css']
+	- var content_comps_js = ['articles.js']
 
 block content
-	h1 articles!
+	h1 МАТЕРИАЛЫ!

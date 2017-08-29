@@ -1,19 +1,14 @@
 extends ../layout
 include ../_forms
 
-block paths
+block content_header
 	- var content_title= 'РЕДАКТИРОВАТЬ КАТЕГОРИЮ'
 
-block content_style
-	link(rel='stylesheet', type='text/css', href='/libs/css/font-awesome.css' + version)
-	link(rel='stylesheet', type='text/css', href='/libs/css/wysiwyg-editor.min.css' + version)
-	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/add.css' + version)
+	- var content_libs_css = ['font-awesome.css', 'wysiwyg-editor.min.css']
+	- var content_comps_css = ['add.css']
 
-block content_scripts
-	script(type='text/javascript', src='/libs/js/wysiwyg.min.js' + version)
-	script(type='text/javascript', src='/libs/js/wysiwyg-editor.min.js' + version)
-	script(type='text/javascript', src='/build/' + __app_name +  '/js/editor.js' + version)
-	script(type='text/javascript', src='/build/' + __app_name +  '/js/add.js' + version)
+	- var content_libs_js = ['wysiwyg.min.js', 'wysiwyg-editor.min.js']
+	- var content_comps_js = ['editor.js', 'add.js']
 
 block sub_menu
 	a.sub_item.back_link(href='/admin/categorys') Назад

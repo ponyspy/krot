@@ -1,13 +1,10 @@
 extends ../layout
 
-block paths
+block content_header
 	- var content_title= 'ДОБАВИТЬ ПОЛЬЗОВАТЕЛЯ'
 
-block content_style
-	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/add.css' + version)
-
-block content_scripts
-	script(type='text/javascript', src='/build/' + __app_name +  '/js/add.js' + version)
+	- var content_comps_css = ['add.css']
+	- var content_comps_js = ['add.js']
 
 block sub_menu
 	a.sub_item.back_link(href='/admin/users') Назад

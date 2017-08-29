@@ -1,10 +1,9 @@
 extends layout
 
-block paths
+block content_header
 	- var content_title= 'Error' + ' / ' + status
 
-block content_style
-	link(rel='stylesheet', type='text/css', href='/build/' + __app_name + '/css/error.css' + version)
+	- var content_comps_css = ['error.css']
 
 block content
 	.error_title= 'Error' + ' ' + status
