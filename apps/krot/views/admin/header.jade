@@ -1,13 +1,26 @@
-- var version = '?ver=1.0'
+- var version = '1.0'
+- var include = { libs: { css: [], js: [] }, comps: { css: [], js: [] } }
 
-meta(charset="utf-8")
+meta(charset='utf-8')
 
 if content_title
 	title= 'STARGAZER | ' + content_title
 if content_description
 	meta(name='description', content=content_description)
 
-block content_style
+block content_includes
 
-script(type='text/javascript', src='/libs/js/jquery-2.2.4.min.js' + version)
-block content_scripts
+//- styles
+
+each item in include.libs.css
+	link(rel='stylesheet', type='text/css', href='/libs/css/' + item + '?ver=' + version)
+each item in include.comps.css
+	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/' + item + '?ver=' + version)
+
+
+//- scripts
+
+each item in ['jquery-2.2.4.min.js'].concat(include.libs.js)
+	script(type='text/javascript', src='/libs/js/' + item + '?ver=' + version)
+each item in include.comps.js
+	script(type='text/javascript', src='/build/' + __app_name +  '/js/' + item + '?ver=' + version)
