@@ -1,26 +1,24 @@
 - var version = '1.0'
-- var include = { libs: { css: [], js: [] }, comps: { css: [], js: [] } }
 
 meta(charset='utf-8')
+
+block content_header
 
 if content_title
 	title= 'STARGAZER | ' + content_title
 if content_description
 	meta(name='description', content=content_description)
 
-block content_includes
-
 //- styles
 
-each item in include.libs.css
+each item in content_libs_css
 	link(rel='stylesheet', type='text/css', href='/libs/css/' + item + '?ver=' + version)
-each item in include.comps.css
+each item in content_comps_css
 	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/' + item + '?ver=' + version)
-
 
 //- scripts
 
-each item in ['jquery-2.2.4.min.js'].concat(include.libs.js)
+each item in ['jquery-2.2.4.min.js'].concat(content_libs_js)
 	script(type='text/javascript', src='/libs/js/' + item + '?ver=' + version)
-each item in include.comps.js
+each item in content_comps_js
 	script(type='text/javascript', src='/build/' + __app_name +  '/js/' + item + '?ver=' + version)

@@ -1,15 +1,14 @@
 extends ../layout
 include ../_forms
 
-block paths
+block content_header
 	- var content_title= 'ДОБАВИТЬ МАТЕРИАЛ'
 
-block content_includes
-	- include['libs'].css = ['pickmeup.min.css', 'font-awesome.css', 'wysiwyg-editor.min.css']
-	- include['comps'].css = ['add.css']
+	- var content_libs_css = ['pickmeup.min.css', 'font-awesome.css', 'wysiwyg-editor.min.css']
+	- var content_comps_css = ['add.css']
 
-	- include['libs'].js = ['jquery.pickmeup.min.js', 'wysiwyg.min.js', 'wysiwyg-editor.min.js']
-	- include['comps'].js = ['editor.js', 'add.js', 'a_events.js']
+	- var content_libs_js = ['jquery.pickmeup.min.js', 'wysiwyg.min.js', 'wysiwyg-editor.min.js']
+	- var content_comps_js = ['editor.js', 'add.js', 'a_events.js']
 
 block sub_menu
 	a.sub_item.back_link(href='/admin/articles') Назад
