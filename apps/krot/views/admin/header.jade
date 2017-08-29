@@ -9,22 +9,32 @@ if content_title
 if content_description
 	meta(name='description', content=content_description)
 
+
 //- styles
 
+
 - var glob_libs_css = []
-each item in glob_libs_css.concat(content_libs_css || [])
+- var glob_comps_css = []
+
+- glob_libs_css.push.apply(glob_libs_css, content_libs_css || [])
+each item in glob_libs_css
 	link(rel='stylesheet', type='text/css', href='/libs/css/' + item + '?ver=' + version)
 
-- var glob_comps_css = []
-each item in glob_comps_css.concat(content_comps_css || [])
+- glob_comps_css.push.apply(glob_comps_css, content_comps_css || [])
+each item in glob_comps_css
 	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/' + item + '?ver=' + version)
+
 
 //- scripts
 
+
 - var glob_libs_js = ['jquery-2.2.4.min.js']
-each item in glob_libs_js.concat(content_libs_js || [])
+- var glob_comps_js = []
+
+- glob_libs_js.push.apply(glob_libs_js, content_libs_js || [])
+each item in glob_libs_js
 	script(type='text/javascript', src='/libs/js/' + item + '?ver=' + version)
 
-- var glob_comps_js = []
-each item in glob_comps_js.concat(content_comps_js || [])
+- glob_comps_js.push.apply(glob_comps_js, content_comps_js || [])
+each item in glob_comps_js
 	script(type='text/javascript', src='/build/' + __app_name +  '/js/' + item + '?ver=' + version)
