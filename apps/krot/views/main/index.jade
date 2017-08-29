@@ -1,13 +1,10 @@
 extends layout
 
-block paths
-	- var content_title= 'krot'
+block content_header
+	- var content_title= 'КРОТ'
 
-block content_style
-	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/main.css' + version)
-
-block content_scripts
-	script(type='text/javascript', src='/build/' + __app_name +  '/js/main.js' + version)
+	- var content_comps_css = ['main.css']
+	- var content_comps_js = ['main.js']
 
 block content
 	h1 hello!
