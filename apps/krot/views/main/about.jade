@@ -1,10 +1,11 @@
 extends layout
 
-block content_header
+block header_meta
 	- var content_title= 'КРОТ | О нас'
 
-	- var content_comps_css = ['about.css']
-	- var content_comps_js = ['about.js']
+block header_include
+	- var include_css = ['about.css']
+	- var include_js = ['about.js']
 
 block logo
 	img(src='/stuff/' + __app_name + '/icons/logo/krot_main.png')

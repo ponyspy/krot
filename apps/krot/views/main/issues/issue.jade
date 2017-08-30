@@ -1,15 +1,15 @@
 extends ../layout
 
-block content_header
-	- var content_title= 'КРОТ | №' + issue.numb
-	- var content_description = issue.description.replace(/<(?:.|\n)*?>/gm, '')
-	- var content_images = [issue.background]
+block header_meta
+	- var meta_title= 'КРОТ | №' + issue.numb
+	- var meta_description = issue.description.replace(/<(?:.|\n)*?>/gm, '')
+	- var meta_images = [issue.background]
 
-	- var content_libs_css = ['swiper.min.css']
-	- var content_comps_css = ['issue.css']
-
-	- var content_libs_js = ['swiper.jquery.min.js']
-	- var content_comps_js = ['issue.js']
+block header_include
+	- var include_libs_css = ['swiper.min.css']
+	- var include_css = ['issue.css']
+	- var include_libs_js = ['swiper.jquery.min.js']
+	- var include_js = ['issue.js']
 
 block params
 	- var parse = function(prefix, style) { return Object.keys(style).map(function(name) { return prefix + name + ':' + style[name] + ';'; }).join(''); };

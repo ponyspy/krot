@@ -2,14 +2,14 @@ extends ../layout
 include ../_forms
 include _forms
 
-block content_header
+block header_meta
 	- var content_title= 'ДОБАВИТЬ НОМЕР'
 
-	- var content_libs_css = ['pickmeup.min.css', 'font-awesome.css', 'wysiwyg-editor.min.css']
-	- var content_comps_css = ['add.css', 'a_issue.css']
-
-	- var content_libs_js = ['jquery.pickmeup.min.js', 'wysiwyg.min.js', 'wysiwyg-editor.min.js', 'jquery-ui.min.js']
-	- var content_comps_js = ['editor.js', 'add.js', 'a_events.js', 'a_issue.js']
+block header_include
+	- var include_libs_css = ['pickmeup.min.css', 'font-awesome.css', 'wysiwyg-editor.min.css']
+	- var include_css = ['add.css', 'a_issue.css']
+	- var include_libs_js = ['jquery.pickmeup.min.js', 'wysiwyg.min.js', 'wysiwyg-editor.min.js', 'jquery-ui.min.js']
+	- var include_js = ['editor.js', 'add.js', 'a_events.js', 'a_issue.js']
 
 block sub_menu
 	a.sub_item.back_link(href='/admin/issues') Назад

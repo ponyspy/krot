@@ -2,7 +2,9 @@
 
 meta(charset="utf-8")
 
-block content_header
+
+block header_meta
+
 
 if content_title
 	title= content_title
@@ -10,18 +12,21 @@ if content_description
 	meta(name='description', content=content_description)
 
 
+block header_include
+
+
 //- styles
 
 
 - var glob_libs_css = []
-- var glob_comps_css = []
+- var glob_css = []
 
-- glob_libs_css.push.apply(glob_libs_css, content_libs_css || [])
+- glob_libs_css.push.apply(glob_libs_css, include_libs_css || [])
 each item in glob_libs_css
 	link(rel='stylesheet', type='text/css', href='/libs/css/' + item + '?ver=' + version)
 
-- glob_comps_css.push.apply(glob_comps_css, content_comps_css || [])
-each item in glob_comps_css
+- glob_css.push.apply(glob_css, include_css || [])
+each item in glob_css
 	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/' + item + '?ver=' + version)
 
 
@@ -29,12 +34,12 @@ each item in glob_comps_css
 
 
 - var glob_libs_js = []
-- var glob_comps_js = []
+- var glob_js = []
 
-- glob_libs_js.push.apply(glob_libs_js, content_libs_js || [])
+- glob_libs_js.push.apply(glob_libs_js, include_libs_js || [])
 each item in glob_libs_js
 	script(type='text/javascript', src='/libs/js/' + item + '?ver=' + version)
 
-- glob_comps_js.push.apply(glob_comps_js, content_comps_js || [])
-each item in glob_comps_js
+- glob_js.push.apply(glob_js, include_js || [])
+each item in glob_js
 	script(type='text/javascript', src='/build/' + __app_name +  '/js/' + item + '?ver=' + version)

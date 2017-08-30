@@ -1,9 +1,10 @@
 extends ../layout
 
-block content_header
+block header_meta
 	- var content_title= 'КРОТ | ВЫПУСКИ'
 
-	- var content_comps_css = ['issues.css']
+block header_include
+	- var include_css = ['issues.css']
 
 block logo
 	img(src='/stuff/' + __app_name + '/icons/logo/krot_main.png')

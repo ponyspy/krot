@@ -1,9 +1,10 @@
 extends layout
 
-block content_header
+block header_meta
 	- var content_title= 'Error' + ' / ' + status
 
-	- var content_comps_css = ['error.css']
+block header_include
+	- var include_css = ['error.css']
 
 block content
 	.error_title= 'Error' + ' ' + status

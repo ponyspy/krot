@@ -1,12 +1,13 @@
 extends ../layout
 
-block content_header
+block header_meta
 	- var content_title= 'КРОТ | ' + article.title
 	- var content_description = article.intro.replace(/<(?:.|\n)*?>/gm, '')
 	- var content_images = [article.cover || '/stuff/' + __app_name + '/icons/logo/krot_main.png']
 
-	- var content_comps_css = ['article.css']
-	- var content_comps_js = ['article.js']
+block header_include
+	- var include_css = ['article.css']
+	- var include_js = ['article.js']
 
 block params
 	- var sg_article = article._id

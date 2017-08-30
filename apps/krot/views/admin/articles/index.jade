@@ -1,11 +1,12 @@
 extends ../layout
 include _articles
 
-block content_header
+block header_meta
 	- var content_title= 'МАТЕРИАЛЫ'
 
-	- var content_comps_css = ['add.css']
-	- var content_comps_js = ['lists.js']
+block header_include
+	- var include_css = ['add.css']
+	- var include_js = ['lists.js']
 
 block sub_menu
 	a.sub_item.back_link(href='/admin') Назад
