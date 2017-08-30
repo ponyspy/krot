@@ -18,28 +18,28 @@ block header_include
 //- styles
 
 
-- var glob_libs_css = []
-- var glob_css = []
+- var global_libs_css = []
+- var global_css = []
 
-- glob_libs_css.push.apply(glob_libs_css, include_libs_css || [])
-each item in glob_libs_css
+- global_libs_css.push.apply(global_libs_css, include_libs_css || [])
+each item in global_libs_css
 	link(rel='stylesheet', type='text/css', href='/libs/css/' + item + '?ver=' + version)
 
-- glob_css.push.apply(glob_css, include_css || [])
-each item in glob_css
+- global_css.push.apply(global_css, include_css || [])
+each item in global_css
 	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/' + item + '?ver=' + version)
 
 
 //- scripts
 
 
-- var glob_libs_js = []
-- var glob_js = []
+- var global_libs_js = []
+- var global_js = []
 
-- glob_libs_js.push.apply(glob_libs_js, include_libs_js || [])
-each item in glob_libs_js
+- global_libs_js.push.apply(global_libs_js, include_libs_js || [])
+each item in global_libs_js
 	script(type='text/javascript', src='/libs/js/' + item + '?ver=' + version)
 
-- glob_js.push.apply(glob_js, include_js || [])
-each item in glob_js
+- global_js.push.apply(global_js, include_js || [])
+each item in global_js
 	script(type='text/javascript', src='/build/' + __app_name +  '/js/' + item + '?ver=' + version)
