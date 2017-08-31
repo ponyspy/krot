@@ -1,16 +1,47 @@
-- var version = '?ver=1.0'
+- var version = '1.0'
 
-meta(charset="utf-8")
+meta(charset='utf-8')
+
+
+block header_meta
+
 
 if content_title
-	title= 'STARTGAZER | ' + content_title
+	title= 'STARGAZER | ' + content_title
 if content_description
 	meta(name='description', content=content_description)
 
-link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/fonts.css' + version)
-link(rel='stylesheet', type='text/css', href='/libs/css/txtbirds.css' + version)
-block content_style
 
-script(type='text/javascript', src='/libs/js/jquery-2.2.4.min.js' + version)
-script(type='text/javascript', src='/build/' + __app_name +  '/js/auth.js' + version)
-block content_scripts
+block header_include
+
+
+//- styles
+
+
+- var global_libs_css = ['txtbirds.css']
+- var global_css = []
+
+- global_libs_css.push.apply(global_libs_css, include_libs_css || [])
+each item in global_libs_css
+	link(rel='stylesheet', type='text/css', href='/libs/css/' + item + '?ver=' + version)
+
+- global_css.push.apply(global_css, include_css || [])
+each item in global_css
+	link(rel='stylesheet', type='text/css', href='/build/' + __app_name +  '/css/' + item + '?ver=' + version)
+
+
+//- scripts
+
+
+- var global_libs_js = ['jquery-2.2.4.min.js']
+- var global_js = ['auth.js']
+
+- global_libs_js.push.apply(global_libs_js, include_libs_js || [])
+each item in global_libs_js
+	script(type='text/javascript', src='/libs/js/' + item + '?ver=' + version)
+
+- global_js.push.apply(global_js, include_js || [])
+each item in global_js
+	script(type='text/javascript', src='/build/' + __app_name +  '/js/' + item + '?ver=' + version)
+
+
