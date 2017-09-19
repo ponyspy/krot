@@ -17,7 +17,7 @@
     "mime": "^2.0.2",
     "mkdirp": "^0.5.1",
     "moment": "^2.10.6",
-    "mongoose": "^4.11.11",
+    "mongoose": "^4.11.12",
     "mongoose-bcrypt": "^1.1.1",
     "multer": "^1.0.0",
     "rimraf": "^2.6.2",

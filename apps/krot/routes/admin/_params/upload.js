@@ -24,7 +24,7 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 
 	rimraf(public_path + file_path + '/' + field_name + '.*', { glob: true }, function() {
 		mkdirp(public_path + file_path, function() {
-			if (mime.extension(file.mimetype) == 'svg') {
+			if (mime.getExtension(file.mimetype) == 'svg') {
 				var SVGO = new svgo({ plugins: [{ convertShapeToPath: false }] });
 				var file_name = field_name + '.svg';
 
@@ -41,9 +41,9 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 						});
 					});
 				});
-			} else if (/jpeg|png|gif/.test(mime.extension(file.mimetype))) {
+			} else if (/jpeg|png|gif/.test(mime.getExtension(file.mimetype))) {
 				gm(file.path).identify({ bufferStream: true }, function(err, meta) {
-					var file_name = mime.extension(file.mimetype) == 'gif'
+					var file_name = mime.getExtension(file.mimetype) == 'gif'
 						? field_name + '.gif'
 						: field_name + '.' + ((meta['Channel depth'].Alpha || meta['Channel statistics'].Alpha || meta.Alpha) ? 'png' : 'jpg');
 
@@ -123,7 +123,7 @@ module.exports.files_upload = function(obj, base_path, field_name, post, files, 
 	if (files.attach && files.attach.length > 0) {
 		async.eachOfSeries(files.attach, function(file, i, callback) {
 			var file_path = '/cdn/' + base_path + '/' + obj._id + '/files';
-			var file_name = Date.now() + '.' + mime.extension(file.mimetype);
+			var file_name = Date.now() + '.' + mime.getExtension(file.mimetype);
 
 			mkdirp(public_path + file_path, function() {
 				fs.rename(file.path, public_path + file_path + '/' + file_name, function() {

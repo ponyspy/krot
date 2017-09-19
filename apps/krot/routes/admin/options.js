@@ -8,7 +8,7 @@ module.exports.preview = function(req, res) {
 	var file = req.file;
 	var file_name = Date.now();
 
-	if (mime.extension(file.mimetype) == 'svg') {
+	if (mime.getExtension(file.mimetype) == 'svg') {
 		var SVGO = new svgo({ plugins: [{ convertShapeToPath: false }] });
 		var new_path = '/preview/' + file_name + '.svg';
 
@@ -21,9 +21,9 @@ module.exports.preview = function(req, res) {
 				});
 			});
 		});
-	} else if (/jpeg|png|gif/.test(mime.extension(file.mimetype))) {
+	} else if (/jpeg|png|gif/.test(mime.getExtension(file.mimetype))) {
 		gm(file.path).identify({ bufferStream: true }, function(err, meta) {
-			var new_path = mime.extension(file.mimetype) == 'gif'
+			var new_path = mime.getExtension(file.mimetype) == 'gif'
 				? '/preview/' + file_name + '.gif'
 				: '/preview/' + file_name + '.' + ((meta['Channel depth'].Alpha || meta['Channel statistics'].Alpha || meta.Alpha) ? 'png' : 'jpg');
 
