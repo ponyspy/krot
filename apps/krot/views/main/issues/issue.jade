@@ -1,9 +1,9 @@
 extends ../layout
 
 block header_meta
-	- var meta_title= 'КРОТ | №' + issue.numb
-	- var meta_description = issue.description.replace(/<(?:.|\n)*?>/gm, '')
-	- var meta_images = [issue.background]
+	- var content_title= 'КРОТ | №' + issue.numb
+	- var content_description = issue.description.replace(/<(?:.|\n)*?>/gm, '')
+	- var content_images = [issue.background]
 
 block header_include
 	- var include_libs_css = ['swiper.min.css']
