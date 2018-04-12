@@ -15,11 +15,12 @@ module.exports = function(Model) {
 			if (err || !article) return next(err);
 			var categorys = article.categorys.map(function(category) { return category._id; });
 
-			var Query = user_id
-				? Article.find({ _id: { '$ne': article._id }, categorys: { '$in': categorys } })
-				: Article.find({ _id: { '$ne': article._id }, categorys: { '$in': categorys } }).where('status').ne('hidden');
+			Article.aggregate([
+				{ $match: { status: { $ne: 'hidden' } }	},
+				{ $match: { _id : { $ne: article._id } } },
+				{ $match: { categorys: { $in: categorys } } },
+				{ $sample: { size: 4 } }]).exec(function(err, summary) {
 
-			Query.limit(4).exec(function(err, summary) {
 				if (err) return next(err);
 
 				res.render('main/articles/article.jade', { article: article, summary: summary });
