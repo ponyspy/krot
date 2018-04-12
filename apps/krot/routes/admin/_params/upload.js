@@ -31,7 +31,7 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 				fs.readFile(file.path, function(err, data) {
 					if (err) return callback.call(null, null, obj);
 
-					SVGO.optimize(data, function(result) {
+					SVGO.optimize(data, { path: file.path }).then(function(result) {
 						fs.writeFile(public_path + file_path + '/' + file_name, result.data, function(err) {
 							obj[field_name] = file_path + '/' + file_name;
 
