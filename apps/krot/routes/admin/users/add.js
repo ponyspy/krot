@@ -9,7 +9,7 @@ module.exports = function(Model, Params) {
 
 	module.index = function(req, res) {
 		if (req.session.status == 'Admin') {
-			res.render('admin/users/add.jade');
+			res.render('admin/users/add.pug');
 		} else {
 			res.redirect('back');
 		}

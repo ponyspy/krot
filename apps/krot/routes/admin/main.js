@@ -9,7 +9,7 @@ exports.index = function(req, res, next) {
 		figlet('KROT\nSTARGAZER', {font: font, horizontalLayout: 'default', verticalLayout: 'default'}, function(err, data) {
 			if (err) return next(err);
 
-			res.render('admin/index.jade', {data: data, font: font});
+			res.render('admin/index.pug', {data: data, font: font});
 		});
 	});
 };

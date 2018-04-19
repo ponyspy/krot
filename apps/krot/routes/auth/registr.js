@@ -10,7 +10,7 @@ module.exports = function(Model, Params) {
 	module.index = function(req, res) {
 		req.session.user_id
 			? res.redirect('/auth')
-			: res.render('auth/registr.jade');
+			: res.render('auth/registr.pug');
 	};
 
 

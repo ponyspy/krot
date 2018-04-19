@@ -1,4 +1,4 @@
-var jade = require('jade');
+var pug = require('pug');
 var async = require('async');
 
 module.exports = function(Model) {
@@ -84,7 +84,7 @@ module.exports = function(Model) {
 							compileDebug: false, debug: false, cache: true, pretty: false
 						};
 
-						res.send(jade.renderFile(__app_root + '/views/admin/issues/_issues.jade', opts));
+						res.send(pug.renderFile(__app_root + '/views/admin/issues/_issues.pug', opts));
 					} else {
 						res.send('end');
 					}
@@ -110,7 +110,7 @@ module.exports = function(Model) {
 					compileDebug: false, debug: false, cache: true, pretty: false
 				};
 
-				res.send(jade.renderFile(__app_root + '/views/admin/issues/_get_articles.jade', opts));
+				res.send(pug.renderFile(__app_root + '/views/admin/issues/_get_articles.pug', opts));
 			} else {
 				res.send('end');
 			}

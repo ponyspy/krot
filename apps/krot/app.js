@@ -12,7 +12,7 @@ var MongoStore = require('connect-mongo')(session);
 
 app.set('x-powered-by', false);
 app.set('views', __app_root + '/views');
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 
 if (process.env.NODE_ENV != 'production') {

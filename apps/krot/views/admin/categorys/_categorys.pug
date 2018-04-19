@@ -1,11 +1,10 @@
-mixin items(categorys)
+.list_items
 	each category in categorys
 		.list_item
 			a.item_rm.category(href='#', id=category._id) -- удалить
 			a.item_title(href='/admin/categorys/edit/' + category._id, class=category.status =='hidden' ? 'hidden': '')= (category.title || '!!! ПУСТОЕ ПОЛЕ !!!')
 
-
-mixin counters(count, skip)
+.list_counter
 	a.list_back(href='#'): b назад
 	span= ' - '
 	select.list_select
@@ -15,10 +14,3 @@ mixin counters(count, skip)
 			- i++
 	span= ' - '
 	a.list_next(href='#'): b вперед
-
-
-if load_list
-	.list_items
-		+items(categorys)
-	.list_counter
-		+counters(count, skip)

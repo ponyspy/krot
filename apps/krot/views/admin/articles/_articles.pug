@@ -1,4 +1,4 @@
-mixin items(articles)
+.list_items
 	each article in articles
 		.list_item
 			a.item_rm.article(href='#', id=article._id) -- удалить
@@ -7,7 +7,7 @@ mixin items(articles)
 				span= ' --> '
 				a(href='/articles/' + (article.sym ? article.sym : article._short_id), target='_blank') превью
 
-mixin counters(count, skip)
+.list_counter
 	a.list_back(href='#'): b назад
 	span= ' - '
 	select.list_select
@@ -17,10 +17,3 @@ mixin counters(count, skip)
 			- i++
 	span= ' - '
 	a.list_next(href='#'): b вперед
-
-
-if load_list
-	.list_items
-		+items(articles)
-	.list_counter
-		+counters(count, skip)

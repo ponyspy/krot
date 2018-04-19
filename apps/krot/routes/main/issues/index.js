@@ -13,7 +13,7 @@ module.exports = function(Model) {
 		Query.sort('-numb').exec(function(err, issues) {
 			if (err) return next(err);
 
-			res.render('main/issues/index.jade', { issues: issues });
+			res.render('main/issues/index.pug', { issues: issues });
 		});
 	};
 

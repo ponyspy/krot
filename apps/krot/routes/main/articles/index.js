@@ -15,7 +15,7 @@ module.exports = function(Model) {
 		Query.sort('-date').exec(function(err, articles) {
 			if (err) return next(err);
 
-			res.render('main/articles/index.jade', { articles: articles });
+			res.render('main/articles/index.pug', { articles: articles });
 		});
 	};
 

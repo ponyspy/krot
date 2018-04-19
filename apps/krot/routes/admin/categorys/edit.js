@@ -10,7 +10,7 @@ module.exports = function(Model) {
 		Category.findById(id).exec(function(err, category) {
 			if (err) return next(err);
 
-			res.render('admin/categorys/edit.jade', {category: category});
+			res.render('admin/categorys/edit.pug', {category: category});
 		});
 	};
 

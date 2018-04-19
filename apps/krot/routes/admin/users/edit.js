@@ -12,7 +12,7 @@ module.exports = function(Model, Params) {
     User.findById(id).exec(function(err, user) {
       if (err) return next(err);
 
-      res.render('admin/users/edit.jade', {user: user});
+      res.render('admin/users/edit.pug', {user: user});
     });
   };
 

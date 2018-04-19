@@ -15,7 +15,7 @@ module.exports = function(Model, Params) {
 		Issue.findById(id).populate('columns.articles').exec(function(err, issue) {
 			if (err) return next(err);
 
-			res.render('admin/issues/edit.jade', { issue: issue });
+			res.render('admin/issues/edit.pug', { issue: issue });
 		});
 	};
 

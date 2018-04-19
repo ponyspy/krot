@@ -1,5 +1,4 @@
 extends ../layout
-include _categorys
 
 block header_meta
 	- var content_title= 'КАТЕГОРИИ'
@@ -37,7 +36,4 @@ block content
 	br
 	br
 	.lists_block
-		.list_items
-			+items(categorys)
-		.list_counter
-			+counters(count)
+		include _categorys

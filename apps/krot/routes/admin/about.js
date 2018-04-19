@@ -2,7 +2,7 @@ var fs = require('fs');
 
 exports.edit = function(req, res) {
 	fs.readFile(__app_root + '/static/about.html', function(err, content) {
-		res.render('admin/about.jade', { content: content });
+		res.render('admin/about.pug', { content: content });
 	});
 };
 

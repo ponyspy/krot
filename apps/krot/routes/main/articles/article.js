@@ -23,7 +23,7 @@ module.exports = function(Model) {
 
 				if (err) return next(err);
 
-				res.render('main/articles/article.jade', { article: article, summary: summary });
+				res.render('main/articles/article.pug', { article: article, summary: summary });
 			});
 		});
 	};

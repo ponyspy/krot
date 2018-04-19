@@ -1,8 +1,7 @@
 extends ../layout
-include _issues
 
 block header_meta
-	- var content_title= 'НОМЕРА'
+	- var content_title= 'МАТЕРИАЛЫ'
 
 block header_include
 	- var include_css = ['add.css']
@@ -26,11 +25,8 @@ block sub_menu
 block content
 	.title= content_title
 	br
-	a.add(href='/admin/issues/add') + Добавить номер
+	a.add(href='/admin/articles/add') + Добавить материал
 	br
 	br
 	.lists_block
-		.list_items
-			+items(issues)
-		.list_counter
-			+counters(count)
+		include _articles

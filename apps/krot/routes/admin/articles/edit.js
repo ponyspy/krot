@@ -26,7 +26,7 @@ module.exports = function(Model, Params) {
 				uploadImagesArticlePreview(article, function(err, article) {
 					if (err) return next(err);
 
-					res.render('admin/articles/edit.jade', { article: article, categorys: categorys });
+					res.render('admin/articles/edit.pug', { article: article, categorys: categorys });
 				});
 			});
 		});

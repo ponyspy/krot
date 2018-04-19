@@ -13,7 +13,7 @@ module.exports = function(Model, Params) {
 	module.index = function(req, res, next) {
 		Issue.find().sort('-date').skip(0).limit(1).exec(function(err, issue) {
 			Issue.count(function(err, count) {
-				res.render('admin/issues/add.jade', { count: (issue && issue.length && issue[0].numb) || count });
+				res.render('admin/issues/add.pug', { count: (issue && issue.length && issue[0].numb) || count });
 			});
 		});
 	};
