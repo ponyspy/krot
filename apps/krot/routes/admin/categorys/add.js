@@ -1,4 +1,5 @@
 var shortid = require('shortid');
+var moment = require('moment');
 
 module.exports = function(Model) {
 	var module = {};
@@ -20,6 +21,7 @@ module.exports = function(Model) {
 		category.title = post.title;
 		category.description = post.description;
 		category.type = post.type;
+		category.date = moment(post.date.date + 'T' + post.date.time.hours + ':' + post.date.time.minutes);
 		category.status = post.status;
 
 		category.save(function(err, category) {

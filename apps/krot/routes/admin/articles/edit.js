@@ -62,7 +62,7 @@ module.exports = function(Model, Params) {
 				article.save(function(err, article) {
 					if (err) return next(err);
 
-					res.redirect('/admin/articles');
+					res.redirect('back');
 				});
 			});
 		});

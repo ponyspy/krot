@@ -5,14 +5,16 @@ block header_meta
 	- var content_title= 'РЕДАКТИРОВАТЬ КАТЕГОРИЮ'
 
 block header_include
-	- var include_libs_css = ['font-awesome.css', 'wysiwyg-editor.min.css']
+	- var include_libs_css = ['pickmeup.min.css', 'font-awesome.css', 'wysiwyg-editor.min.css']
 	- var include_css = ['add.css']
-	- var include_libs_js = ['wysiwyg.min.js', 'wysiwyg-editor.min.js']
-	- var include_js = ['editor.js', 'add.js']
+	- var include_libs_js = ['jquery.pickmeup.min.js', 'wysiwyg.min.js', 'wysiwyg-editor.min.js']
+	- var include_js = ['editor.js', 'add.js', 'a_events.js']
 
 block sub_menu
 	a.sub_item.back_link(href='/admin/categorys') Назад
-
+	.sub_right_block
+		input.form_cancel(type='submit', value='Отменить')
+		input.form_submit(type='submit', value='Сохранить')
 
 block content
 	.form_block
@@ -31,6 +33,5 @@ block content
 			select(name='status')
 				option(value='base') Обычный
 				option(value='hidden', selected= category.status == 'hidden' && 'hidden') Скрытый
-			br
-			br
-			input(type='submit', value='отправить')
+			.form_title Дата публикации:
+			+form_date('date', category.date)

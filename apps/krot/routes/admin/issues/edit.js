@@ -44,7 +44,7 @@ module.exports = function(Model, Params) {
 					if (err && err.code == 11000) return res.send(post.numb + ' is dublicate number!');
 					else if (err) return next(err);
 
-					res.redirect('/admin/issues');
+					res.redirect('back');
 				});
 			});
 		});

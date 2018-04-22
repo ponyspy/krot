@@ -9,6 +9,9 @@ block header_include
 
 block sub_menu
 	a.sub_item.back_link(href='/admin/users') Назад
+	.sub_right_block
+		input.form_cancel(type='submit', value='Отменить')
+		input.form_submit(type='submit', value='Добавить')
 
 block content
 	.form_block
@@ -24,6 +27,3 @@ block content
 			select(name='status')
 				option(value='User') Пользователь
 				option(value='Admin') Администратор
-			br
-			br
-			input(type='submit', value='отправить')

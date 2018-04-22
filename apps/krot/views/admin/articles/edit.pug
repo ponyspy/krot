@@ -12,6 +12,9 @@ block header_include
 
 block sub_menu
 	a.sub_item.back_link(href='/admin/articles') Назад
+	.sub_right_block
+		input.form_cancel(type='submit', value='Отменить')
+		input.form_submit(type='submit', value='Сохранить')
 
 block content
 	.form_block
@@ -41,6 +44,3 @@ block content
 				option(value='hidden', selected= article.status == 'hidden' && 'hidden') Скрытый
 			.form_title Дата публикации:
 			+form_date('date', article.date)
-			br
-			br
-			input(type='submit', value='отправить')
