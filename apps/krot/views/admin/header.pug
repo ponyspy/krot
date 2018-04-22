@@ -18,8 +18,13 @@ block header_include
 //- styles
 
 
+- var global_ext_css = []
 - var global_libs_css = []
 - var global_css = []
+
+- global_ext_css.push.apply(global_ext_css, include_ext_css || [])
+each item in global_ext_css
+	link(rel='stylesheet', type='text/css', href=item)
 
 - global_libs_css.push.apply(global_libs_css, include_libs_css || [])
 each item in global_libs_css
@@ -33,12 +38,17 @@ each item in global_css
 //- scripts
 
 
-- var global_libs_js = ['jquery-2.2.4.min.js']
+- var global_ext_js = []
+- var global_libs_js = ['jquery-3.3.1.min.js']
 - var global_js = []
 
 - global_libs_js.push.apply(global_libs_js, include_libs_js || [])
 each item in global_libs_js
 	script(type='text/javascript', src='/libs/js/' + item + '?ver=' + version)
+
+- global_ext_js.push.apply(global_ext_js, include_ext_js || [])
+each item in global_ext_js
+	script(type='text/javascript', src=item)
 
 - global_js.push.apply(global_js, include_js || [])
 each item in global_js

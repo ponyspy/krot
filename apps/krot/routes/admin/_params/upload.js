@@ -65,7 +65,7 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 };
 
 module.exports.image_article = function(article, post, callback) {
-	var jquery = fs.readFileSync(__glob_root + '/public/libs/js/jquery-2.2.4.min.js', 'utf-8');
+	var jquery = fs.readFileSync(__glob_root + '/public/libs/js/jquery-3.3.1.min.js', 'utf-8');
 	var file_path = '/cdn/articles/' + article._id.toString() + '/images/content';
 
 	rimraf(file_path, { glob: true }, function(rm_path) {
@@ -95,7 +95,7 @@ module.exports.image_article = function(article, post, callback) {
 module.exports.image_article_preview = function(article, callback) {
 	if (!article.description) return callback(null, article);
 
-	var jquery = fs.readFileSync(__glob_root + '/public/libs/js/jquery-2.2.4.min.js', 'utf-8');
+	var jquery = fs.readFileSync(__glob_root + '/public/libs/js/jquery-3.3.1.min.js', 'utf-8');
 
 	jsdom.env(article.description, { src: [jquery] }, function(err, window) {
 		var $ = window.$;

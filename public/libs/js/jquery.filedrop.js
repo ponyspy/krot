@@ -15,7 +15,7 @@
  * Project home:
  *   http://www.github.com/weixiyen/jquery-filedrop
  *
- * Version:  0.1.0
+ * Version:  0.1.1
  *
  * Features:
  *      Allows sending of extra parameters with file.
@@ -26,8 +26,6 @@
  *
  */
 ;(function($) {
-
-  jQuery.event.props.push("dataTransfer");
 
   var default_opts = {
       fallback_id: '',
@@ -94,9 +92,9 @@
 
     function drop(e) {
       if( opts.drop.call(this, e) === false ) return false;
-      if(!e.dataTransfer)
+      if(!e.originalEvent.dataTransfer)
         return;
-      files = e.dataTransfer.files;
+      files = e.originalEvent.dataTransfer.files;
       if (files === null || files === undefined || files.length === 0) {
         opts.error(errors[0]);
         return false;
@@ -411,7 +409,7 @@
                   this.send(ui8a.buffer);
               }
           }
-          
+
         xhr.sendAsBinary(builder);
 
         global_progress[global_progress_index] = 0;
