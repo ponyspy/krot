@@ -1,0 +1,16 @@
+.list_items
+	each link in links
+		.list_item
+			a.item_rm.link(href='#', id=link._id) -- удалить
+			a.item_title(href='/admin/links/edit/' + link._id, class=link.status =='hidden' ? 'hidden': '')= (link.title || link._short_id)
+
+.list_counter
+	a.list_back(href='#'): b назад
+	span= ' - '
+	select.list_select
+		- var i = 0;
+		while i < count
+			option(value=i selected= (i == skip / 10) )= i+1
+			- i++
+	span= ' - '
+	a.list_next(href='#'): b вперед

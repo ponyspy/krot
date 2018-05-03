@@ -71,6 +71,14 @@ var categorySchema = new Schema({
 	date: { type: Date, default: Date.now, index: true },
 });
 
+var linkSchema = new Schema({
+	title: { type: String, trim: true, index: true },
+	url: { type: String, trim: true },
+	status: String,	// hidden
+	_short_id: { type: String, unique: true, index: true, sparse: true },
+	date: { type: Date, default: Date.now, index: true },
+});
+
 
 // ------------------------
 // *** Index Block ***
@@ -87,6 +95,10 @@ articleSchema.index({'title': 'text', 'intro': 'text', 'description': 'text'}, {
 
 categorySchema.index({'title': 'text', 'description': 'text'}, {
 	default_language: 'russian', weights: { title: 2, description: 1 }
+});
+
+linkSchema.index({'title': 'text'}, {
+	default_language: 'russian', weights: { title: 1 }
 });
 
 
@@ -107,3 +119,4 @@ module.exports.User = mongoose.model('User', userSchema);
 module.exports.Article = mongoose.model('Article', articleSchema);
 module.exports.Category = mongoose.model('Category', categorySchema);
 module.exports.Issue = mongoose.model('Issue', issueSchema);
+module.exports.Link = mongoose.model('Link', linkSchema);

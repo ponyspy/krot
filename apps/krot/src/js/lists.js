@@ -180,6 +180,7 @@ $(function() {
 		.on('click', '.item_rm.user', {path:'/admin/users/remove', description: 'Удалить пользователя?'}, remove)
 		.on('click', '.item_rm.issue', {path:'/admin/issues/remove', description: 'Удалить номер?'}, remove)
 		.on('click', '.item_rm.article', {path:'/admin/articles/remove', description: 'Удалить материал?'}, remove)
-		.on('click', '.item_rm.category', {path:'/admin/categorys/remove', description: 'Удалить категорию?'}, remove);
+		.on('click', '.item_rm.category', {path:'/admin/categorys/remove', description: 'Удалить категорию?'}, remove)
+		.on('click', '.item_rm.link', {path:'/admin/links/remove', description: 'Удалить ссылку?'}, remove);
 
 });

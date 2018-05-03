@@ -1,0 +1,31 @@
+extends ../layout
+
+block header_meta
+	- var content_title= 'ССЫЛКИ'
+
+block header_include
+	- var include_css = ['add.css']
+	- var include_js = ['lists.js']
+
+block sub_menu
+	a.sub_item.back_link(href='/') Назад
+	span.sub_item.toggle_rm Удалить
+	.sub_right_block
+
+		.sub_drop.status(style='z-index: 2;')
+			.drop_title Статус
+			.drop_inner
+				.drop_item(class='all').select Все
+				.drop_item(class='default') Обычный
+				.drop_item(class='hidden') Скрытый
+
+		input.sub_search(type='text', placeholder='Поиск...')
+
+block content
+	.title= content_title
+	br
+	a.add(href='/admin/links/add') + Добавить ссылку
+	br
+	br
+	.lists_block
+		include _links

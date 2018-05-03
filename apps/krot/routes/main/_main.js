@@ -6,7 +6,8 @@ var main = {
 	index: require('./index.js')(Model),
 	content: require('./content.js'),
 	issues: require('./issues/_issues.js'),
-	articles: require('./articles/_articles.js')
+	articles: require('./articles/_articles.js'),
+	options: require('./options.js')(Model)
 };
 
 module.exports = (function() {
@@ -21,6 +22,9 @@ module.exports = (function() {
 
 	router.route('/about')
 		.get(main.content.about);
+
+	router.route('/t/:name')
+		.get(main.options.link);
 
 	return router;
 })();

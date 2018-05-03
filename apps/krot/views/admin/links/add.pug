@@ -2,7 +2,7 @@ extends ../layout
 include ../_forms
 
 block header_meta
-	- var content_title= 'ДОБАВИТЬ КАТЕГОРИЮ'
+	- var content_title= 'ДОБАВИТЬ ССЫЛКУ'
 
 block header_include
 	- var include_libs_css = ['pickmeup.min.css', 'font-awesome.css', 'wysiwyg-editor.min.css']
@@ -11,7 +11,7 @@ block header_include
 	- var include_js = ['editor.js', 'add.js', 'a_events.js']
 
 block sub_menu
-	a.sub_item.back_link(href='/admin/categorys') Назад
+	a.sub_item.back_link(href='/admin/links') Назад
 	.sub_right_block
 		input.form_cancel(type='submit', value='Отменить')
 		input.form_submit(type='submit', value='Добавить')
@@ -20,15 +20,11 @@ block content
 	.form_block
 		.title= content_title
 		form(action="", method="post")
+			.form_title URL:
+			+form_text_single('url')
 			.form_title Название:
-			+form_text_single('title')
-			.form_title Описание:
-			+form_text_multi('description')
-			.form_title Тип:
-			select(name='type')
-				option(value='theme') Тема
-				option(value='country') Страна
-				option(value='author') Автор
+			span= 'https://' + host + '/t/'
+			input(type='text', name='title')
 			.form_title Статус:
 			select(name='status')
 				option(value='base') Обычный

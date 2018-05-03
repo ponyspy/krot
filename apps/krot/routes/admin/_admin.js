@@ -8,6 +8,7 @@ var admin = {
 	issues: require('./issues/_issues.js'),
 	articles: require('./articles/_articles.js'),
 	categorys: require('./categorys/_categorys.js'),
+	links: require('./links/_links.js'),
 	about: require('./about.js'),
 	users: require('./users/_users.js'),
 	options: require('./options.js')
@@ -31,6 +32,7 @@ module.exports = (function() {
 	router.use('/issues', checkAuth, upload.fields([ { name: 'logo' }, { name: 'background' } ]), admin.issues);
 	router.use('/articles', checkAuth, upload.fields([ { name: 'attach' }, { name: 'cover' }, { name: 'base' }, { name: 'hover' } ]), admin.articles);
 	router.use('/categorys', checkAuth, admin.categorys);
+	router.use('/links', checkAuth, admin.links);
 	router.use('/users', checkAuth, admin.users);
 
 	router.post('/preview', checkAuth, upload.single('image'), admin.options.preview);
