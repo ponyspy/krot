@@ -68,7 +68,7 @@ module.exports.image_article = function(article, post, callback) {
 	var file_path = '/cdn/articles/' + article._id.toString() + '/images/content';
 
 	rimraf(file_path, { glob: true }, function(rm_path) {
-		var $ = cheerio.load(article.i18n.description.get(locale), { decodeEntities: false });
+		var $ = cheerio.load(article.description.get(locale), { decodeEntities: false });
 		var images = $('img').toArray();
 
 		async.each(images, function(image, callback) {
@@ -92,7 +92,7 @@ module.exports.image_article = function(article, post, callback) {
 module.exports.image_article_preview = function(article, callback) {
 	if (!article.description) return callback(null, article);
 
-	var $ = cheerio.load(article.i18n.description.get(locale), { decodeEntities: false });
+	var $ = cheerio.load(article.description.get(locale), { decodeEntities: false });
 	var images = $('img').toArray();
 
 	async.each(images, function(image, callback) {
