@@ -5,7 +5,10 @@ var Schema = mongoose.Schema,
 		ObjectId = Schema.ObjectId;
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/' +  __app_name);
+mongoose.connect('mongodb://localhost/' +  __app_name, {
+	useCreateIndex: true,
+	useNewUrlParser: true
+});
 
 
 // ------------------------
