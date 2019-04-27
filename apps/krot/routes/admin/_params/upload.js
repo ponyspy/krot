@@ -5,7 +5,7 @@ var gm = require('gm').subClass({ imageMagick: true });
 var fs = require('fs');
 var path = require('path');
 var mime = require('mime');
-var jsdom = require('jsdom/lib/old-api.js');
+var cheerio = require('cheerio');
 var svgo = require('svgo');
 
 var public_path = __glob_root + '/public';
@@ -65,29 +65,26 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 };
 
 module.exports.image_article = function(article, post, callback) {
-	var jquery = fs.readFileSync(__glob_root + '/public/libs/js/jquery-3.3.1.min.js', 'utf-8');
 	var file_path = '/cdn/articles/' + article._id.toString() + '/images/content';
 
 	rimraf(file_path, { glob: true }, function(rm_path) {
-		jsdom.env(post.description, { src: [jquery] }, function(err, window) {
-			var $ = window.$;
-			var images = $('img').toArray();
+		var $ = cheerio.load(article.i18n.description.get(locale), { decodeEntities: false });
+		var images = $('img').toArray();
 
-			async.each(images, function(image, callback) {
-				var $this = $(image);
-				var file_name = path.basename($this.attr('src'));
+		async.each(images, function(image, callback) {
+			var $this = $(image);
+			var file_name = path.basename($this.attr('src'));
 
-				$this.removeAttr('width').removeAttr('height').removeAttr('alt');
-				$this.attr('src', file_path + '/' + file_name);
+			$this.removeAttr('width').removeAttr('height').removeAttr('alt');
+			$this.attr('src', file_path + '/' + file_name);
 
-				mkdirp(public_path + file_path, function() {
-					fs.createReadStream(preview_path + file_name).pipe(fs.createWriteStream(public_path + file_path + '/' + file_name));
-					callback();
-				});
-			}, function() {
-					article.description = $('body').html();
-					callback(null, article);
+			mkdirp(public_path + file_path, function() {
+				fs.createReadStream(preview_path + file_name).pipe(fs.createWriteStream(public_path + file_path + '/' + file_name));
+				callback();
 			});
+		}, function() {
+				article.description = $('body').html();
+				callback(null, article);
 		});
 	});
 };
@@ -95,27 +92,23 @@ module.exports.image_article = function(article, post, callback) {
 module.exports.image_article_preview = function(article, callback) {
 	if (!article.description) return callback(null, article);
 
-	var jquery = fs.readFileSync(__glob_root + '/public/libs/js/jquery-3.3.1.min.js', 'utf-8');
+	var $ = cheerio.load(article.i18n.description.get(locale), { decodeEntities: false });
+	var images = $('img').toArray();
 
-	jsdom.env(article.description, { src: [jquery] }, function(err, window) {
-		var $ = window.$;
-		var images = $('img').toArray();
+	async.each(images, function(image, callback) {
+		var $this = $(image);
 
-		async.each(images, function(image, callback) {
-			var $this = $(image);
+		var file_path = $this.attr('src');
+		var file_name = path.basename(file_path);
 
-			var file_path = $this.attr('src');
-			var file_name = path.basename(file_path);
+		fs.createReadStream(public_path + file_path).pipe(fs.createWriteStream(preview_path + file_name));
 
-			fs.createReadStream(public_path + file_path).pipe(fs.createWriteStream(preview_path + file_name));
+		$this.attr('src', '/preview/' + file_name);
 
-			$this.attr('src', '/preview/' + file_name);
-
-			callback();
-		}, function() {
-				article.description = $('body').html();
-				callback(null, article);
-		});
+		callback();
+	}, function() {
+			article.description = $('body').html();
+			callback(null, article);
 	});
 };
 
