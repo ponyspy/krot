@@ -31,9 +31,9 @@ block content
 		.article_intro!= article.intro
 		.article_description!= article.description
 
-	.article_summary
+	.article_summary: .summary_inner
 		each item in summary
-			a.summary_item(class=item.hover && 'change', class=item.status == 'hidden' ? 'hidden' : '', href='/articles/' + (item.sym || item._short_id))
-				img.s_item_base(src=item.base)
+			a.summary_item(class=item.hover && 'change', class=item.status == 'hidden' ? 'hidden' : '', href='/articles/' + (item.sym || item._short_id)): .item_cover
+				.cover_base(style='background-image: url(' + item.base + ')')
 				if item.hover
-					img.s_item_hover(src=item.hover)
+					.cover_hover(style='background-image: url(' + item.hover + ')')
