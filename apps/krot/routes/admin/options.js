@@ -23,7 +23,7 @@ module.exports.preview = function(req, res) {
 		});
 	} else if (/jpeg|png|gif/.test(mime.getExtension(file.mimetype))) {
 		gm(file.path).identify({ bufferStream: true }, function(err, meta) {
-			var newPath = '/preview/' + file_name + '.' + mime.getExtension(file.mimetype);
+			var new_path = '/preview/' + file_name + '.' + mime.getExtension(file.mimetype);
 
 			// var new_path = mime.getExtension(file.mimetype) == 'gif'
 			// 	? '/preview/' + file_name + '.gif'
