@@ -43,9 +43,11 @@ module.exports.image = function(obj, base_path, field_name, file_size, file, del
 				});
 			} else if (/jpeg|png|gif/.test(mime.getExtension(file.mimetype))) {
 				gm(file.path).identify({ bufferStream: true }, function(err, meta) {
-					var file_name = mime.getExtension(file.mimetype) == 'gif'
-						? field_name + '.gif'
-						: field_name + '.' + ((meta['Channel depth'].Alpha || meta['Channel statistics'].Alpha || meta.Alpha) ? 'png' : 'jpg');
+					var file_name = field_name + '.' + mime.getExtension(file.mimetype);
+
+					// var file_name = mime.getExtension(file.mimetype) == 'gif'
+					// 	? field_name + '.gif'
+					// 	: field_name + '.' + ((meta['Channel depth'].Alpha || meta['Channel statistics'].Alpha || meta.Alpha) ? 'png' : 'jpg');
 
 					this.resize(meta.size.width > file_size ? file_size : false, false);
 					this.quality(meta.size.width >= file_size ? 82 : 100);
