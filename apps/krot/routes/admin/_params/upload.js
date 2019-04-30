@@ -124,7 +124,7 @@ module.exports.files_upload = function(obj, base_path, field_name, post, files, 
 				fs.rename(file.path, public_path + file_path + '/' + file_name, function() {
 					obj[field_name].push({
 						path: file_path + '/' + file_name,
-						desc: post.attach_desc
+						desc: post.attach_desc[i]
 					});
 					callback();
 				});
