@@ -16,7 +16,7 @@ module.exports = function(Model) {
 
 			if (err || !mirrors || mirrors.length == 0) {
 				rimraf(conf_path, function() {
-					exec(run_cmd, function(err, stdout, stderr) { // systemctl restart nginx
+					exec(run_cmd, function(err, stdout, stderr) {
 						res.send('fail');
 					});
 				});
@@ -30,8 +30,8 @@ module.exports = function(Model) {
 					data = data.replace(/@mirrors@/g, domains.join(' '));
 					data = data.replace(/@www_mirrors@/g, www.join(' '));
 
-					fs.writeFile(conf_path, data, function(err) { // /etc/nginx/vhosts/mirrors.conf
-						exec(run_cmd, function(err, stdout, stderr) { // systemctl restart nginx
+					fs.writeFile(conf_path, data, function(err) {
+						exec(run_cmd, function(err, stdout, stderr) {
 							res.send('ok');
 						});
 					});
