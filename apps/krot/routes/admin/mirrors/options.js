@@ -13,7 +13,6 @@ module.exports = function(Model) {
 		var run_cmd = process.env.NODE_ENV == 'production' ? 'systemctl restart nginx' : 'ls';
 
 		Mirror.find().where('status').ne('hidden').sort('-date').exec(function(err, mirrors) {
-
 			if (err || !mirrors || mirrors.length == 0) {
 				rimraf(conf_path, function() {
 					exec(run_cmd, function(err, stdout, stderr) {
