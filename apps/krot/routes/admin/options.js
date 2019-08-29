@@ -4,6 +4,11 @@ var mime = require('mime');
 var svgo = require('svgo');
 var rimraf = require('rimraf');
 
+
+exports.dump = function(req, res) {
+	res.sendFile('dump.tar', {root: __glob_root});
+};
+
 module.exports.preview = function(req, res) {
 	var file = req.file;
 	var file_name = Date.now();

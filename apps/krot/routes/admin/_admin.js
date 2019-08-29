@@ -37,5 +37,7 @@ module.exports = (function() {
 
 	router.post('/preview', checkAuth, upload.single('image'), admin.options.preview);
 
+	router.get('/dump', checkAuth, admin.options.dump);
+
 	return router;
 })();
