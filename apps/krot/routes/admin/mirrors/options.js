@@ -9,7 +9,7 @@ module.exports = function(Model) {
 
 
 	module.mirrors_apply = function(req, res) {
-		Mirror.find().sort('-date').exec(function(err, mirrors) {
+		Mirror.find().where('status').ne('hidden').sort('-date').exec(function(err, mirrors) {
 
 			if (err || !mirrors || mirrors.length == 0) {
 				rimraf(__glob_root + '/out.conf', function() { // /etc/nginx/vhosts/mirrors.conf
