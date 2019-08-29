@@ -1,0 +1,30 @@
+extends ../layout
+include ../_forms
+
+block header_meta
+	- var content_title= 'ДОБАВИТЬ ЗЕРКАЛО'
+
+block header_include
+	- var include_libs_css = ['pickmeup.min.css', 'font-awesome.css', 'wysiwyg-editor.min.css']
+	- var include_css = ['add.css']
+	- var include_libs_js = ['jquery.pickmeup.min.js', 'wysiwyg.min.js', 'wysiwyg-editor.min.js']
+	- var include_js = ['editor.js', 'add.js', 'a_events.js']
+
+block sub_menu
+	a.sub_item.back_link(href='/admin/mirrors') Назад
+	.sub_right_block
+		input.form_cancel(type='submit', value='Отменить')
+		input.form_submit(type='submit', value='Добавить')
+
+block content
+	.form_block
+		.title= content_title
+		form(action="", method="post")
+			.form_title Домен:
+			+form_text_single('name')
+			.form_title Статус:
+			select(name='status')
+				option(value='base') Обычный
+				option(value='hidden') Скрытый
+			.form_title Дата публикации:
+			+form_date('date')

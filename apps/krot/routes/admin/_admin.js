@@ -9,6 +9,7 @@ var admin = {
 	articles: require('./articles/_articles.js'),
 	categorys: require('./categorys/_categorys.js'),
 	links: require('./links/_links.js'),
+	mirrors: require('./mirrors/_mirrors.js'),
 	about: require('./about.js'),
 	users: require('./users/_users.js'),
 	options: require('./options.js')
@@ -33,6 +34,7 @@ module.exports = (function() {
 	router.use('/articles', checkAuth, upload.fields([ { name: 'attach' }, { name: 'cover' }, { name: 'base' }, { name: 'hover' } ]), admin.articles);
 	router.use('/categorys', checkAuth, admin.categorys);
 	router.use('/links', checkAuth, admin.links);
+	router.use('/mirrors', checkAuth, admin.mirrors);
 	router.use('/users', checkAuth, admin.users);
 
 	router.post('/preview', checkAuth, upload.single('image'), admin.options.preview);

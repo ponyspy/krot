@@ -1,0 +1,16 @@
+.list_items
+	each mirror in mirrors
+		.list_item
+			a.item_rm.mirror(href='#', id=mirror._id) -- удалить
+			a.item_title(href='/admin/mirrors/edit/' + mirror._id, class=mirror.status =='hidden' ? 'hidden': '')= (mirror.name || mirror._short_id)
+
+.list_counter
+	a.list_back(href='#'): b назад
+	span= ' - '
+	select.list_select
+		- var i = 0;
+		while i < count
+			option(value=i selected= (i == skip / 10) )= i+1
+			- i++
+	span= ' - '
+	a.list_next(href='#'): b вперед

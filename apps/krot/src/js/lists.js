@@ -132,6 +132,20 @@ $(function() {
 	});
 
 
+	// -- Mirrors
+
+
+	$('.mirrors_apply').on('click', function(e) {
+		$.post('/admin/mirrors/mirrors_apply').done(function(data) {
+			if (data == 'ok') {
+				alert('Список зеркал обновлен!\n\n Изменения вступят в силу в течение 15мин. - 24ч.');
+			} else {
+				alert('Ошибка!\n\nСписок зеркал сброшен!');
+			}
+		});
+	});
+
+
 	// -- Remove
 
 
@@ -181,6 +195,7 @@ $(function() {
 		.on('click', '.item_rm.issue', {path:'/admin/issues/remove', description: 'Удалить номер?'}, remove)
 		.on('click', '.item_rm.article', {path:'/admin/articles/remove', description: 'Удалить материал?'}, remove)
 		.on('click', '.item_rm.category', {path:'/admin/categorys/remove', description: 'Удалить категорию?'}, remove)
-		.on('click', '.item_rm.link', {path:'/admin/links/remove', description: 'Удалить ссылку?'}, remove);
+		.on('click', '.item_rm.link', {path:'/admin/links/remove', description: 'Удалить ссылку?'}, remove)
+		.on('click', '.item_rm.mirror', {path:'/admin/mirrors/remove', description: 'Удалить зеркало?'}, remove);
 
 });

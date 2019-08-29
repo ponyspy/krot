@@ -82,6 +82,13 @@ var linkSchema = new Schema({
 	date: { type: Date, default: Date.now, index: true },
 });
 
+var mirrorSchema = new Schema({
+	name: { type: String, trim: true, index: true },
+	status: String,	// hidden
+	_short_id: { type: String, unique: true, index: true, sparse: true },
+	date: { type: Date, default: Date.now, index: true },
+});
+
 
 // ------------------------
 // *** Index Block ***
@@ -104,6 +111,10 @@ linkSchema.index({'title': 'text'}, {
 	default_language: 'russian', weights: { title: 1 }
 });
 
+mirrorSchema.index({'name': 'text'}, {
+	default_language: 'russian', weights: { name: 1 }
+});
+
 
 // ------------------------
 // *** Plugins Block ***
@@ -123,3 +134,4 @@ module.exports.Article = mongoose.model('Article', articleSchema);
 module.exports.Category = mongoose.model('Category', categorySchema);
 module.exports.Issue = mongoose.model('Issue', issueSchema);
 module.exports.Link = mongoose.model('Link', linkSchema);
+module.exports.Mirror = mongoose.model('Mirror', mirrorSchema);
