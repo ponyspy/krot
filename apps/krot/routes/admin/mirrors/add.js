@@ -1,10 +1,12 @@
 var shortid = require('shortid');
 var moment = require('moment');
 
-module.exports = function(Model) {
+module.exports = function(Model, Params) {
 	var module = {};
 
 	var Mirror = Model.Mirror;
+
+	var validateDomain = Params.auth.validateDomain;
 
 
 	module.index = function(req, res) {
@@ -16,6 +18,14 @@ module.exports = function(Model) {
 		var post = req.body;
 
 		var mirror = new Mirror();
+
+		if (post.name == '') {
+			return next(new Error('Name field is required!'));
+		}
+
+		if (!validateDomain(post.name)) {
+			return next(new Error('Domain name invalid!'));
+		}
 
 		mirror._short_id = shortid.generate();
 		mirror.name = post.name;

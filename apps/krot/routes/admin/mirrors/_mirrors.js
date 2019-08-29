@@ -2,10 +2,14 @@ var express = require('express');
 
 var Model = require(__glob_root + '/models/main.js');
 
+var Params = {
+	auth: require('../_params/auth')
+};
+
 var mirrors = {
 	list: require('./list.js')(Model),
-	add: require('./add.js')(Model),
-	edit: require('./edit.js')(Model),
+	add: require('./add.js')(Model, Params),
+	edit: require('./edit.js')(Model, Params),
 	options: require('./options.js')(Model),
 	remove: require('./remove.js')(Model)
 };
