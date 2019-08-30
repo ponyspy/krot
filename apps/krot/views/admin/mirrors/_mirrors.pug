@@ -3,6 +3,9 @@
 		.list_item
 			a.item_rm.mirror(href='#', id=mirror._id) -- удалить
 			a.item_title(href='/admin/mirrors/edit/' + mirror._id, class=mirror.status =='hidden' ? 'hidden': '')= (mirror.name || mirror._short_id)
+			span.item_preview
+				span= ' --> '
+				a(href='http://' + mirror.name, target='_blank') превью
 
 .list_counter
 	a.list_back(href='#'): b назад
