@@ -10,7 +10,7 @@ module.exports = function(Model) {
 
 	module.mirrors_apply = function(req, res) {
 		var conf_path = process.env.NODE_ENV == 'production' ? '/etc/nginx/vhosts/mirrors.conf' : __glob_root + '/test.conf';
-		var run_cmd = process.env.NODE_ENV == 'production' ? 'systemctl restart nginx' : 'ls';
+		var run_cmd = process.env.NODE_ENV == 'production' ? 'nginx -s reload' : 'ls';
 
 		Mirror.find().where('status').ne('hidden').sort('-date').exec(function(err, mirrors) {
 			if (err || !mirrors || mirrors.length == 0) {
