@@ -142,7 +142,7 @@ function styles() {
 			Maps ? sourcemaps.init({ loadMaps: true }) : noop(),
 			stylus({ compress: Prod }),
 			autoprefixer({
-				browsers: ['last 12 versions'],
+				overrideBrowserslist: ['last 12 versions'],
 				cascade: !Prod
 			}),
 			Maps ? sourcemaps.write('.') : noop(),
