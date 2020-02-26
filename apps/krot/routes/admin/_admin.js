@@ -10,6 +10,7 @@ var admin = {
 	categorys: require('./categorys/_categorys.js'),
 	links: require('./links/_links.js'),
 	mirrors: require('./mirrors/_mirrors.js'),
+	questions: require('./questions/_questions.js'),
 	about: require('./about.js'),
 	users: require('./users/_users.js'),
 	options: require('./options.js')
@@ -35,6 +36,7 @@ module.exports = (function() {
 	router.use('/categorys', checkAuth, admin.categorys);
 	router.use('/links', checkAuth, admin.links);
 	router.use('/mirrors', checkAuth, admin.mirrors);
+	router.use('/questions', upload.fields([ { name: 'cover' } ]), checkAuth, admin.questions);
 	router.use('/users', checkAuth, admin.users);
 
 	router.post('/preview', checkAuth, upload.single('image'), admin.options.preview);

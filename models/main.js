@@ -89,6 +89,20 @@ var mirrorSchema = new Schema({
 	date: { type: Date, default: Date.now, index: true },
 });
 
+var questionSchema = new Schema({
+	title: { type: String, trim: true },
+	answer: { type: String, trim: true },
+	cheats: [{ type: String, trim: true }],
+	cover: String,
+	stat: {
+		right: Number,
+		total: Number
+	},
+	status: String,	// hidden
+	_short_id: { type: String, unique: true, index: true, sparse: true },
+	date: { type: Date, default: Date.now, index: true },
+});
+
 
 // ------------------------
 // *** Index Block ***
@@ -115,6 +129,10 @@ mirrorSchema.index({'name': 'text'}, {
 	default_language: 'russian', weights: { name: 1 }
 });
 
+questionSchema.index({'title': 'text'}, {
+	default_language: 'russian', weights: { title: 3, answer: 2, cheats: 1 }
+});
+
 
 // ------------------------
 // *** Plugins Block ***
@@ -135,3 +153,4 @@ module.exports.Category = mongoose.model('Category', categorySchema);
 module.exports.Issue = mongoose.model('Issue', issueSchema);
 module.exports.Link = mongoose.model('Link', linkSchema);
 module.exports.Mirror = mongoose.model('Mirror', mirrorSchema);
+module.exports.Question = mongoose.model('Question', questionSchema);

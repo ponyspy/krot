@@ -1,0 +1,16 @@
+.list_items
+	each question in questions
+		.list_item
+			a.item_rm.question(href='#', id=question._id) -- удалить
+			a.item_title(href='/admin/questions/edit/' + question._id, class=question.status =='hidden' ? 'hidden': '')= question.title ? question.title : '!!! ПУСТОЕ ПОЛЕ !!!'
+
+.list_counter
+	a.list_back(href='#'): b назад
+	span= ' - '
+	select.list_select
+		- var i = 0;
+		while i < count
+			option(value=i selected= (i == skip / 10) )= i+1
+			- i++
+	span= ' - '
+	a.list_next(href='#'): b вперед
