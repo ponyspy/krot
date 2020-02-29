@@ -4,6 +4,10 @@ module.exports = function(Model) {
 	var Article = Model.Article;
 	var Question = Model.Question;
 
+	var randInt = function(min, max) {
+		return Math.floor(min + Math.random() * (max + 1 - min));
+	}
+
 	module.index = function(req, res, next) {
 		var hole_rank = req.session.hole_rank;
 		var user_id = req.session.user_id;
@@ -46,7 +50,7 @@ module.exports = function(Model) {
 			question.stat.total += 1;
 
 			if (question.answer.toLowerCase() == post.answer.trim().toLowerCase()) {
-				req.session.hole_rank = req.session.hole_rank ? req.session.hole_rank + 1 : 1;
+				req.session.hole_rank = req.session.hole_rank ? req.session.hole_rank += randInt(1, 3) : 1;
 				question.stat.right += 1;
 			}
 
