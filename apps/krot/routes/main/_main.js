@@ -20,6 +20,9 @@ module.exports = (function() {
 
 	router.use('/articles', main.articles);
 
+	router.route('/hole')
+		.get(main.index.hole);
+
 	router.route('/about')
 		.get(main.content.about);
 

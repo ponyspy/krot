@@ -1,0 +1,20 @@
+extends layout
+
+block header_meta
+	- var content_title= 'КРОТ | Нора'
+
+block header_include
+	- var include_css = ['hole.css']
+
+block logo
+	img(src='/stuff/' + __app_name + '/icons/logo/krot_main.png')
+
+block content
+	h1.hole_title Нора
+	.hole_question
+		if question.cover
+			img.question_cover(src=question.cover)
+		.question_title= question.title
+		.question_answer
+			input.answer_input(type='text', placeholder='ответ...')
+			.answer_check Вперед
