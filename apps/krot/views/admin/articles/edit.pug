@@ -42,5 +42,6 @@ block content
 			select(name='status')
 				option(value='base') Обычный
 				option(value='hidden', selected= article.status == 'hidden' && 'hidden') Скрытый
+				option(value='special', selected= article.status == 'special' && 'special') Особый
 			.form_title Дата публикации:
 			+form_date('date', article.date)

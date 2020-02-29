@@ -14,7 +14,8 @@ module.exports = (function() {
 		.get(articles.index.index);
 
 	router.route('/:article_id')
-		.get(articles.article.index);
+		.get(articles.article.index)
+		.post(articles.article.hole);
 
 	return router;
 })();

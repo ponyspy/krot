@@ -5,13 +5,14 @@ block header_meta
 
 block header_include
 	- var include_css = ['hole.css']
+	- var include_js = ['hole.js']
 
 block logo
 	img(src='/stuff/' + __app_name + '/icons/logo/krot_main.png')
 
 block content
 	h1.hole_title Нора
-	.hole_question
+	.hole_question(id=question._short_id)
 		if question.cover
 			img.question_cover(src=question.cover)
 		.question_title= question.title
