@@ -53,13 +53,11 @@ module.exports = function(Model) {
 				req.session.hole_rank = req.session.hole_rank ? req.session.hole_rank += randInt(1, 3) : 1;
 				question.stat.right += 1;
 			} else {
-				var cheat = question.cheats.some(function(cheat) {
+				var cheat_check = question.cheats.some(function(cheat) {
 					return cheat.toLowerCase() == post.answer.trim().toLowerCase();
 				});
 
-				if (cheat) {
-					req.session.hole_rank = 1000;
-				}
+				if (cheat_check) req.session.hole_rank = 1000;
 			}
 
 			question.save(function(err) {
