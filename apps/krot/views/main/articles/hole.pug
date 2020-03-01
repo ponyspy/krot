@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block header_meta
 	- var content_title= 'КРОТ | Нора'
@@ -6,6 +6,9 @@ block header_meta
 block header_include
 	- var include_css = ['hole.css']
 	- var include_js = ['hole.js']
+
+block params
+	- var sg_question = question._id
 
 block logo
 	img(src='/stuff/' + __app_name + '/icons/logo/krot_main.png')

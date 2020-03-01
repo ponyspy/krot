@@ -22,11 +22,11 @@ module.exports = function(Model) {
 			var hole_rank = req.session.hole_rank;
 			var hole_right = req.session.hole_right || [];
 
-			if (!user_id && article.status == 'special' && (!hole_rank || hole_rank <= 5)) {
+			if (article.status == 'special' && (!hole_rank || hole_rank <= 5)) {
 				Question.aggregate().match({'status': {'$ne': 'hidden'}, '_short_id': {'$nin': hole_right}}).sample(1).exec(function(err, question) {
 					if (err || !question.length) return next(err);
 
-					return res.render('main/hole.pug', {question: question[0]});
+					return res.render('main/articles/hole.pug', {question: question[0]});
 				});
 			} else {
 				var categorys = article.categorys.map(function(category) { return category._id; });

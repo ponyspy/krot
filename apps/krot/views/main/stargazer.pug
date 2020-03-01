@@ -15,4 +15,8 @@
 		a.drop_item(href='/admin/categorys', target='_blank') категории
 		a.drop_item(href='/admin/links', target='_blank') ссылки
 		a.drop_item(href='/admin/mirrors', target='_blank') зеркала
+		a.drop_item(class=sg_question && 'go', href='/admin/questions', target='_blank') вопросы
+		if sg_question
+			span= ' -> '
+			a(href='/admin/questions/edit/' + sg_question, target='_blank') этот
 		a.drop_item(href='/admin/about', target='_blank') о нас
