@@ -26,7 +26,7 @@ module.exports = function(Model, Params) {
 		question.date = moment(post.date.date + 'T' + post.date.time.hours + ':' + post.date.time.minutes);
 		question.title = post.title;
 		question.answer = post.answer;
-		question.cheats = post.cheats ? post.cheats.split(' ') : [];
+		question.cheats = post.cheats ? post.cheats.trim().replace(/[^a-zA-Z0-9 ]/g, '').split(' ') : [];
 		question.stat = { right: 0, total: 0 }
 
 		async.series([

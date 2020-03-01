@@ -21,10 +21,10 @@ block content
 		.title= content_title
 		form(action='', method='post', enctype='multipart/form-data')
 			.form_title Вопрос:
-			+form_text_single('title')
+			+form_text_multi('title')
 			.form_title Правильный ответ:
 			+form_text_single('answer')
-			.form_title Читы:
+			.form_title Читы [разделены пробелом, спецсимволы не допускаются]:
 			input(type='text', name='cheats')
 			.form_title Обложка:
 			+form_single_file('cover')(accept='image/jpeg,image/png,image/svg+xm,image/gifl')

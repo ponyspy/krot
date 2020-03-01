@@ -15,7 +15,7 @@ block content
 	.hole_question(id=question._short_id)
 		if question.cover
 			img.question_cover(src=question.cover)
-		.question_title= question.title
+		.question_title!= question.title
 		.question_answer
 			input.answer_input(type='text', placeholder='ответ...')
 			.answer_check Вперед
