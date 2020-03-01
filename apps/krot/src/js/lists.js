@@ -196,6 +196,7 @@ $(function() {
 		.on('click', '.item_rm.article', {path:'/admin/articles/remove', description: 'Удалить материал?'}, remove)
 		.on('click', '.item_rm.category', {path:'/admin/categorys/remove', description: 'Удалить категорию?'}, remove)
 		.on('click', '.item_rm.link', {path:'/admin/links/remove', description: 'Удалить ссылку?'}, remove)
+		.on('click', '.item_rm.question', {path:'/admin/questions/remove', description: 'Удалить вопрос?'}, remove)
 		.on('click', '.item_rm.mirror', {path:'/admin/mirrors/remove', description: 'Удалить зеркало?'}, remove);
 
 });

@@ -9,7 +9,6 @@ module.exports = function(Model) {
 	}
 
 	module.index = function(req, res, next) {
-		var hole_rank = req.session.hole_rank;
 		var user_id = req.session.user_id;
 		var id = req.params.article_id;
 
@@ -20,9 +19,12 @@ module.exports = function(Model) {
 		Query.populate('categorys').exec(function(err, article) {
 			if (err || !article) return next(err);
 
+			var hole_rank = req.session.hole_rank;
+			var hole_right = req.session.hole_right || [];
+
 			if (!user_id && article.status == 'special' && (!hole_rank || hole_rank <= 5)) {
-				Question.aggregate().match({'status': {'$ne': 'hidden'}}).sample(1).exec(function(err, question) {
-					if (err) return next(err);
+				Question.aggregate().match({'status': {'$ne': 'hidden'}, '_short_id': {'$nin': hole_right}}).sample(1).exec(function(err, question) {
+					if (err || !question.length) return next(err);
 
 					return res.render('main/hole.pug', {question: question[0]});
 				});
@@ -51,6 +53,7 @@ module.exports = function(Model) {
 
 			if (question.answer.toLowerCase() == post.answer.trim().toLowerCase()) {
 				req.session.hole_rank = req.session.hole_rank ? req.session.hole_rank += randInt(1, 3) : 1;
+				req.session.hole_right = req.session.hole_right ? req.session.hole_right.concat(question._short_id) : [question._short_id];
 				question.stat.right += 1;
 			} else {
 				var cheat_check = question.cheats.some(function(cheat) {
