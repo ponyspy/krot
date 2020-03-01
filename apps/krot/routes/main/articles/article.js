@@ -26,7 +26,7 @@ module.exports = function(Model) {
 				Question.aggregate().match({'status': {'$ne': 'hidden'}, '_short_id': {'$nin': hole_right}}).sample(1).exec(function(err, question) {
 					if (err || !question.length) return next(err);
 
-					return res.render('main/articles/hole.pug', {question: question[0]});
+					return res.status(404).render('main/articles/hole.pug', {question: question[0]});
 				});
 			} else {
 				var categorys = article.categorys.map(function(category) { return category._id; });
