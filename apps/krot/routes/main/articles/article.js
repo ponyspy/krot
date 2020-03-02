@@ -26,7 +26,7 @@ module.exports = function(Model) {
 				Question.aggregate().match({'status': {'$ne': 'hidden'}, '_short_id': {'$nin': hole_right}}).sample(1).exec(function(err, question) {
 					if (err || !question.length) return next(err);
 
-					res.set('X-Update', '1');
+					res.set('X-Update', 'yes');
 					return res.status(404).render('main/articles/hole.pug', {question: question[0]});
 				});
 			} else {
@@ -65,7 +65,7 @@ module.exports = function(Model) {
 			}
 
 			question.save(function(err) {
-				res.set('X-Update', '1');
+				res.set('X-Update', 'yes');
 				res.send('ok');
 			});
 		});
