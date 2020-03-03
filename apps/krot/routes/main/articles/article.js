@@ -26,7 +26,7 @@ module.exports = function(Model) {
 				Question.aggregate().match({'status': {'$ne': 'hidden'}, '_short_id': {'$nin': hole_right}}).sample(1).exec(function(err, question) {
 					if (err || !question.length) return next(err);
 
-					res.cookie('hole', 1, { expires: new Date(Date.now() + 3 * 60000) }); // 3 min
+					res.cookie('hole', 1, { expires: new Date(Date.now() + 5 * 60000) }); // 5 min
 					return res.status(404).render('main/articles/hole.pug', {question: question[0]});
 				});
 			} else {
@@ -50,6 +50,8 @@ module.exports = function(Model) {
 		var post = req.body;
 
 		Question.findOne({'_short_id': post.question_id}).exec(function(err, question) {
+			if (err || !question) return next(err);
+
 			question.stat.total += 1;
 
 			if (question.answer.toLowerCase() == post.answer.trim().toLowerCase()) {
@@ -73,3 +75,4 @@ module.exports = function(Model) {
 
 	return module;
 };
+
