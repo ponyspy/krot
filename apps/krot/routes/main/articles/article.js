@@ -60,11 +60,8 @@ module.exports = function(Model) {
 				question.stat.right += 1;
 			} else {
 				var cheat_check = question.cheats.some(function(cheat) {
-					return cheat.toLowerCase() == post.answer.trim().toLowerCase();
+					return cheat !== '' && cheat.toLowerCase() == post.answer.trim().toLowerCase();
 				});
-				console.log(question._id)
-				console.log(question.cheats)
-				console.log(cheat_check)
 
 				if (cheat_check) req.session.hole_rank = 1000;
 			}
