@@ -62,6 +62,9 @@ module.exports = function(Model) {
 				var cheat_check = question.cheats.some(function(cheat) {
 					return cheat.toLowerCase() == post.answer.trim().toLowerCase();
 				});
+				console.log(post._id)
+				console.log(question.cheats)
+				console.log(cheat_check)
 
 				if (cheat_check) req.session.hole_rank = 1000;
 			}
