@@ -25,9 +25,8 @@ module.exports = function(Model) {
 			if (article.status == 'special' && (!hole_rank || hole_rank <= 5)) {
 				Question.aggregate().match({'status': {'$ne': 'hidden'}, '_short_id': {'$nin': hole_right}}).sample(1).exec(function(err, question) {
 					if (err || !question.length) return next(err);
-					if (!req.session.hole) req.session.hole = Date.now();
 
-					// res.cookie('hole', 1, { expires: new Date(Date.now() + 10 * 60000) });
+					res.cookie('hole', 1, { expires: new Date(Date.now() + 10 * 60000) });
 					return res.status(404).render('main/articles/hole.pug', {question: question[0]});
 				});
 			} else {
