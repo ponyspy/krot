@@ -3,7 +3,9 @@
 		.list_item
 			a.item_rm.question(href='#', id=question._id) -- удалить
 			a.item_title(href='/admin/questions/edit/' + question._id, class=question.status =='hidden' ? 'hidden': '')= question.title ? question.title.replace(/<\/?[^>]+(>|$)/g, '') : '!!! ПУСТОЕ ПОЛЕ !!!'
-			span= ' -- r: ' + question.stat.right + ' | t: ' + question.stat.total
+			span= ' - читы: ' + question.cheats.length
+			span.item_preview
+				span= ' | правильных: ' + question.stat.right + ' | всего: ' + question.stat.total
 
 .list_counter
 	a.list_back(href='#'): b назад

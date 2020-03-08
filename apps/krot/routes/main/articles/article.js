@@ -49,6 +49,8 @@ module.exports = function(Model) {
 	module.hole = function(req, res, next) {
 		var post = req.body;
 
+		if (post.answer.trim() == '') return res.send('ok');
+
 		Question.findOne({'_short_id': post.question_id}).exec(function(err, question) {
 			if (err || !question) return next(err);
 
