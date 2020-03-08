@@ -23,10 +23,12 @@ module.exports = function(Model) {
 			var hole_right = req.session.hole_right || [];
 
 			if (article.status == 'special' && (!hole_rank || hole_rank <= 5)) {
+				var hole_right = req.cookies.hole ? hole_right.concat(req.cookies.hole) : hole_right;
+
 				Question.aggregate().match({'status': {'$ne': 'hidden'}, '_short_id': {'$nin': hole_right}}).sample(1).exec(function(err, question) {
 					if (err || !question.length) return next(err);
 
-					res.cookie('hole', 1, { expires: new Date(Date.now() + 5 * 60000) }); // 5 min
+					res.cookie('hole', question[0]._short_id, { expires: new Date(Date.now() + 5 * 60000) }); // 5 min
 					return res.status(404).render('main/articles/hole.pug', {question: question[0]});
 				});
 			} else {
