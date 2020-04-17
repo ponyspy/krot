@@ -99,37 +99,27 @@
 		padding-left 20px
 		box-sizing border-box
 		display inline-block
-		vertical-align top
+		vertical-align bottom
 		margin-bottom 20px
 		position relative
+		text-decoration none
 		&.hidden
 			opacity 0.5
-		.item_cover
-			width 100%
-			padding-bottom 75%
-			position relative
-
-			background-color: rgb(255, 237, 52);
-			background-image: radial-gradient(white 15%, transparent 15%),
-			radial-gradient(white 15%, transparent 15%);
-			background-size: 60px 60px;
-			background-position: 0 0, 30px 30px;
-
-			.cover_base
-				opacity 1
-			.cover_hover
-				opacity 0
+		.summary_title
+			text-transform uppercase
+			font-size 22pt
+			font-weight bold
+			padding-left 20px
+			box-sizing border-box
+			border-bottom 8px solid black
+			padding-bottom 30px
 			&:hover
-				.cover_base
-					opacity 0
-				.cover_hover
-					opacity 1
-			.cover_base
-			.cover_hover
-				top 0; left 0; right 0; bottom 0
-				margin auto
-				position absolute
-				background-position center
-				background-repeat no-repeat
-				background-size contain
+				color rgb(255, 237, 52)
+				border-color rgb(255, 237, 52)
+
+
+.footer_block
+	margin-top 0!important
+	padding-top 15px!important
+	border-top none!important
 
