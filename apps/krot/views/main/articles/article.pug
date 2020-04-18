@@ -3,7 +3,7 @@ extends ../layout
 block header_meta
 	- var content_title= 'КРОТ | ' + article.title
 	- var content_description = article.intro.replace(/<(?:.|\n)*?>/gm, '')
-	- var content_images = [article.cover || '/stuff/' + __app_name + '/icons/logo/krot_main.png']
+	- var content_images = [article.cover || '/stuff/' + __app_name + '/icons/logo/krot_b.svg']
 
 block header_include
 	- var include_css = ['article.css']
