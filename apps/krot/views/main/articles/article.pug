@@ -13,13 +13,13 @@ block params
 	- var sg_article = article._id
 
 block logo
-	img(class=article.cover && 'cover', src=article.cover || '/stuff/' + __app_name + '/icons/logo/krot_main.png')
+	img(class=article.cover && 'cover', src=article.cover || '/stuff/' + __app_name + '/icons/logo/krot_b.svg')
 
 block content
 	.bookmark
 
 	.article_header
-		a.header_back(href='/'): img(src='/stuff/' + __app_name + '/icons/logo/krot_mono_invert.png')
+		a.header_back(href='/'): img(src='/stuff/' + __app_name + '/icons/logo/krot_b.svg')
 		.article_categorys
 			each category in article.categorys
 				a.category_item(class=category.status == 'hidden' ? 'hidden' : '', href='#' + category._short_id)!= category.title
