@@ -1,7 +1,7 @@
 extends ../layout
 
 block header_meta
-	- var content_title= 'КРОТ | №' + issue.numb
+	- var content_title= 'КРОТ | №' + issue.numb + ' - ' + issue.theme
 	- var content_description = issue.description.replace(/<(?:.|\n)*?>/gm, '')
 	- var content_images = [issue.background]
 
