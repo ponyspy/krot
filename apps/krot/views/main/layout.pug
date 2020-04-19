@@ -14,8 +14,8 @@ html
 			.content_block
 				block content
 
-			.footer_block
-				a.footer_logo(href='/'): img(src='/stuff/' + __app_name + '/icons/logo/krot_b_fill.svg')
+			.footer_block(class=accent)
+				a.footer_logo(href='/'): img(src='/stuff/' + __app_name + '/icons/logo/' + (accent == 'white' ? 'krot_w_fill.svg' : 'krot_b_fill.svg'))
 				.footer_links
 					a(href='/issues') Архив
 					a(href='/about') О нас

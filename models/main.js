@@ -32,6 +32,7 @@ var issueSchema = new Schema({
 	logo: String,
 	background: String,
 	style: {
+		accent: String,
 		background: {
 			position: String,
 			size: String,

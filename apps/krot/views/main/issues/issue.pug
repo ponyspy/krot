@@ -15,9 +15,10 @@ block params
 	- var parse = function(prefix, style) { return Object.keys(style).map(function(name) { return prefix + name + ':' + style[name] + ';'; }).join(''); };
 	- var bg_image = issue.background ? 'background-image: url(' + issue.background + ');' + parse('background-', issue.style.background.toObject()) : ''
 	- var sg_issue = issue._id
+	- var accent = issue.style.accent
 
 block logo
-	img(src=issue.logo || '/stuff/' + __app_name + '/icons/logo/krot_b.svg')
+	img(src=issue.logo || '/stuff/' + __app_name + '/icons/logo/' + (issue.style.accent == 'white' ? 'krot_w.svg' : 'krot_b.svg'))
 
 block content
 	.issue_columns.swiper-container

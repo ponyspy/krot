@@ -43,6 +43,8 @@ block content
 			span= ' | '
 			span Повторение:
 			+form_style(['background', 'repeat'], {'no-repeat': 'Выкл.', 'repeat': 'Вкл.' }, issue.style.background.repeat)
+			.form_title Акцент:
+			+form_style(['accent'], {'black': 'Черный', 'white': 'Белый' }, issue.style.accent)
 			.form_title Карта обложки:
 			+form_map(issue.columns)
 			.form_title Статус:
