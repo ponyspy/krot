@@ -28,9 +28,9 @@ block content
 			.form_title Описание:
 			+form_text_multi('description')
 			.form_title Логотип:
-			+form_single_file('logo')(accept='image/jpeg,image/png,image/svg+xml')
+			+form_single_file('logo')(accept='image/jpeg,image/png,image/gif,image/svg+xml')
 			.form_title Фон:
-			+form_single_file('background')(accept='image/jpeg,image/png,image/svg+xml')
+			+form_single_file('background')(accept='image/jpeg,image/png,image/gif,image/svg+xml')
 			.form_title Стиль фона:
 			span Позиция:
 			+form_style(['background', 'position'], {'top': 'Сверху', 'center': 'По центру', 'bottom': 'Снизу' })
