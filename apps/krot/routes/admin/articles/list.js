@@ -38,6 +38,10 @@ module.exports = function(Model) {
 			Query.where('status').equals('hidden');
 		}
 
+		if (post.context.status && post.context.status == 'special') {
+			Query.where('status').equals('special');
+		}
+
 		Query.count(function(err, count) {
 			if (err) return next(err);
 
