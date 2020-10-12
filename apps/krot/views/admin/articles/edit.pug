@@ -12,6 +12,7 @@ block header_include
 
 block sub_menu
 	a.sub_item.back_link(href='/admin/articles') Назад
+	a.sub_item(href='/articles/' + (article.sym ? article.sym : article._short_id), target='_blank') Превью
 	.sub_right_block
 		input.form_cancel(type='submit', value='Отменить')
 		input.form_submit(type='submit', value='Сохранить')
