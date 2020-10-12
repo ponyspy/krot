@@ -29,5 +29,8 @@ module.exports = (function() {
 	router.route('/t/:name')
 		.get(main.options.link);
 
+	router.route('/sitemap.xml')
+		.get(main.options.sitemap);
+
 	return router;
 })();
