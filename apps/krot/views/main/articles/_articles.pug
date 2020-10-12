@@ -12,5 +12,5 @@ each article in articles
 
 		.article_categorys
 			each category in article.categorys
-				a.category_item(class=category.status == 'hidden' ? 'hidden' : '', href='#' + category._short_id)!= category.title.replace(' ', '<br>')
+				a.category_item(class=category._short_id, href='#' + category._short_id)!= category.title.replace(' ', '<br>')
 
