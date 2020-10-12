@@ -42,6 +42,7 @@ module.exports = function(Model, Params) {
 			if (err) return next(err);
 
 			article.status = post.status;
+			article.hole = post.hole;
 			article.categorys = post.categorys.filter(function(category) { return category != 'none'; });
 			article.date = moment(post.date.date + 'T' + post.date.time.hours + ':' + post.date.time.minutes);
 			article.title = post.title;

@@ -22,7 +22,7 @@ module.exports = function(Model) {
 			var hole_rank = req.session.hole_rank;
 			var hole_right = req.session.hole_right || [];
 
-			if (article.status == 'special' && (!hole_rank || hole_rank <= 5)) {
+			if (article.hole && (!hole_rank || hole_rank <= 5)) {
 				var hole_right = req.cookies.hole ? hole_right.concat(req.cookies.hole) : hole_right;
 
 				Question.aggregate().match({'status': {'$ne': 'hidden'}, '_short_id': {'$nin': hole_right}}).sample(1).exec(function(err, question) {

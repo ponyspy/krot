@@ -7,5 +7,9 @@ block header_include
 	- var include_css = ['articles.css']
 	- var include_js = ['articles.js']
 
+block logo
+	img(src='/stuff/' + __app_name + '/icons/logo/krot_b.svg')
+
 block content
-	h1 МАТЕРИАЛЫ!
+	.articles_block
+		include _articles.pug

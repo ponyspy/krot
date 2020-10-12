@@ -11,7 +11,8 @@ module.exports = (function() {
 	var router = express.Router();
 
 	router.route('/')
-		.get(articles.index.index);
+		.get(articles.index.index)
+		.post(articles.index.get_articles);
 
 	router.route('/:article_id')
 		.get(articles.article.index)

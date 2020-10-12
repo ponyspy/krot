@@ -1,0 +1,16 @@
+each article in articles
+	.article_item
+		a.article_header(href='/articles/' + (article.sym || article._short_id))
+			.article_title= article.title
+			if article.base
+				.article_cover
+					.cover.base(style='background-image: url(' + article.base + ')')
+					if article.hover
+						.cover.hover(style='background-image: url(' + article.hover + ')')
+
+		.article_intro!= article.intro
+
+		.article_categorys
+			each category in article.categorys
+				a.category_item(class=category.status == 'hidden' ? 'hidden' : '', href='#' + category._short_id)!= category.title.replace(' ', '<br>')
+

@@ -61,6 +61,7 @@ var articleSchema = new Schema({
 		desc: String
 	}],
 	categorys: [{ type: ObjectId, ref: 'Category' }],
+	hole: Boolean,
 	status: String,	// hidden
 	sym: { type: String, trim: true, index: true, unique: true, sparse: true },
 	_short_id: { type: String, unique: true, index: true, sparse: true },

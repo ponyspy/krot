@@ -38,6 +38,10 @@ block content
 			+form_multiple_files('attach')(accept='application/pdf,application/zip')
 			.form_title Категории:
 			+form_multiple_select('categorys', categorys)
+			.form_title Нора:
+			select(name='hole')
+				option(value='false') нет
+				option(value='true') да
 			.form_title Статус:
 			select(name='status')
 				option(value='base') Обычный
