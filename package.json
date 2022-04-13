@@ -4,7 +4,7 @@
   "description": "krot ====",
   "main": "app.js",
   "dependencies": {
-    "async": "^3.2.0",
+    "async": "^3.2.2",
     "body-parser": "^1.18.2",
     "cheerio": "^1.0.0-rc.2",
     "connect-mongo": "^3.2.0",
